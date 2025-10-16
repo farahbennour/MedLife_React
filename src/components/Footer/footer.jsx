@@ -14,9 +14,9 @@ export default function Footer(){
           <h4 className="reseau">Réseaux Sociaux</h4>
           <div className="flex gap-3 mt-2">
            <img src="/src/assets/facebook.png" alt="Facebook" className="h-8 w-8"/>
-              <img src="/src/assets/instagram.png" alt="Instagram" className="h-8 w-8"/>
-                <img src="/src/assets/youtube.png" alt="YouTube" className="h-8 w-8"/>
-                    <img src="/src/assets/linkedin.png" alt="LinkedIn" className="h-8 w-8"/>
+            <img src="/src/assets/instagram.png" alt="Instagram" className="h-8 w-8"/>
+            <img src="/src/assets/linkedin.png" alt="LinkedIn" className="h-8 w-8"/>
+            <img src="/src/assets/youtube.png" alt="YouTube" className="h-8 w-8"/>
           </div>
         </div>
       </div>

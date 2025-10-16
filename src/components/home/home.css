@@ -11,7 +11,7 @@ html, body {
 .home-section {
   position: relative;
   width: 100%;
-  height: 60vh; /* hauteur limitée pour ne pas créer de scroll */
+  height: 70vh; /* hauteur limitée pour ne pas créer de scroll */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@ html, body {
       rgba(132, 191, 255, 0.53),
       rgba(102, 132, 163, 0.53)
     ),
-    url("/src/assets/cover.png") center center / cover no-repeat;
+    url("/src/assets/image.png") center center / cover no-repeat;
   padding: 20px;
   box-sizing: border-box;
 }
