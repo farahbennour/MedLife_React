@@ -1,17 +1,22 @@
-import React from "react";
-import { FaHeartbeat, FaUserMd, FaPills, FaHospital, FaShieldAlt, FaClock, FaSmile } from "react-icons/fa";
+import { FaClock, FaShieldAlt, FaSmile } from "react-icons/fa";
+
 import "./home.css";
 
 // Import des images des services
-import patientImg from "/src/assets/patient.png";
 import agendaImg from "/src/assets/agenda.png";
 import consultationImg from "/src/assets/consultation.png";
 import factureImg from "/src/assets/facturation.png";
+import patientImg from "/src/assets/patient.png";
 import portailImg from "/src/assets/portail.png";
+import Header from "../header/header";
+import Footer from "../Footer/footer";
 
 export default function Home() {
   return (
     <div className="home">
+      {/* --- HEADER --- */}
+      <Header />
+
       {/* --- SECTION HERO --- */}
       <section className="home-section">
         <div className="content">
@@ -57,36 +62,38 @@ export default function Home() {
         </div>
       </section>
 
-    
+      {/* --- SECTION POURQUOI NOUS --- */}
+      <section className="why-us">
+        <h2>Pourquoi choisir MedLife ?</h2>
+        <div className="why-card-single">
+          <div className="why-card">
+            <FaShieldAlt className="icon" />
+            <div>
+              <h3>Sécurité</h3>
+              <p>Vos données de santé sont protégées et confidentielles.</p>
+            </div>
+          </div>
 
-     <section className="why-us">
-  <h2>Pourquoi choisir MedLife ?</h2>
-  <div className="why-card-single">
-    <div className="why-card">
-      <FaShieldAlt className="icon" />
-      <div>
-        <h3>Sécurité</h3>
-        <p>Vos données de santé sont protégées et confidentielles.</p>
-      </div>
-    </div>
+          <div className="why-card">
+            <FaClock className="icon" />
+            <div>
+              <h3>Disponibilité 24/7</h3>
+              <p>Accédez à nos services à tout moment, où que vous soyez.</p>
+            </div>
+          </div>
 
-    <div className="why-card">
-      <FaClock className="icon" />
-      <div>
-        <h3>Disponibilité 24/7</h3>
-        <p>Accédez à nos services à tout moment, où que vous soyez.</p>
-      </div>
-    </div>
+          <div className="why-card">
+            <FaSmile className="icon" />
+            <div>
+              <h3>Facilité d'utilisation</h3>
+              <p>Une interface simple et intuitive pour tous les utilisateurs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <div className="why-card">
-      <FaSmile className="icon" />
-      <div>
-        <h3>Facilité d'utilisation</h3>
-        <p>Une interface simple et intuitive pour tous les utilisateurs.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      {/* --- FOOTER --- */}
+      <Footer />
     </div>
   );
 }

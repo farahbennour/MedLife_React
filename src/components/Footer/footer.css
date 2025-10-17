@@ -1,6 +1,6 @@
 /* --- FOOTER ENHANCED --- */
 footer {
-  background: #84bfffa4 ; /* à 53% d’opacité */
+  background: #84bfffa4 ; 
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 4rem 2rem;
@@ -22,7 +22,7 @@ footer .container {
 footer .contact-info h3 {
   margin: 0.5rem 0;
   font-size: 1.2rem;
-  color: #6684a3;
+  color: #475c72;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -31,7 +31,7 @@ footer .contact-info h3 {
   font-size: 1.4rem;
   margin-top: -3%;
   font-weight: 700;
-  color: #6684a3;
+  color: #475c72;
   margin-bottom: 1rem;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;

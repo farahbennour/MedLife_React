@@ -1,24 +1,23 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./sidebar.css";
+import "./sidebarReceptionist.css";
+
 
 // Définition du menu avec les chemins des images
 const menu = [
-  { to: "/admin", label: "Dashboard", img: "/src/assets/dashboard.png" },
-  { to: "/admin/cliniques", label: "Cliniques", img: "/src/assets/cliniques.png" },
-  { to: "/admin/medecins", label: "Médecins", img: "/src/assets/consultation.png" },
-  { to: "/admin/patients", label: "Patients", img: "/src/assets/patient.png" },
-  { to: "/admin/receptionnistes", label: "Réceptionnistes", img: "/src/assets/infermiere.png" },
+  { to: "/receptionist", label: "Dashboard", img: "/src/assets/dashboard.png" },
+  { to: "/receptionist/medecin", label: "Médecin", img: "/src/assets/consultation.png" },
+  { to: "/receptionist/patients", label: "Patients", img: "/src/assets/portail.png" },
+  { to: "/receptionist/rendezvous", label: "Rendez-vous", img: "/src/assets/agenda.png" },
   { to: "/profil", label: "Profil", img: "/src/assets/profil.png" },
  
 
 ];
 
-export default function Sidebar() {
+export default function SidebarReceptionist() {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        {/* Logo de la clinique */}
         <img
           src="/src/assets/logo.png"
           alt="Clinique Logo"
@@ -27,7 +26,7 @@ export default function Sidebar() {
       </div>
 
       <ul className="sidebar-menu">
-        {/* Chaque item du menu doit avoir une clé unique */}
+              {/* Boucle sur le tableau 'menu' pour créer les liens */}
         {menu.map((m) => (
           <li key={m.to}> {/* Chaque item du menu doit avoir une clé unique */}
             <NavLink to={m.to} className="sidebar-link">
@@ -38,7 +37,7 @@ export default function Sidebar() {
             </NavLink>
           </li>
         ))}
-            {/* Bouton de déconnexion */}
+            {/* Lien pour se déconnecter */}
         <li>
           <a href="#" className="sidebar-link logout">
             <img

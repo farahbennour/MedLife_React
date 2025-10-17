@@ -1,14 +1,11 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../sidebar/sidebar";
+import SidebarDoctor from "../sidebarDoctor/sidebarDoctor";
 
 
-
-
-export default function AdminLayout(){
+export default function DoctorLayout(){
   return (
     <div className="flex">
-      <Sidebar />
+      <SidebarDoctor />
       <div className="flex-1 p-8 bg-white min-h-screen">
         <Outlet />
       </div>

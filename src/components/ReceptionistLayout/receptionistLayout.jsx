@@ -1,14 +1,11 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../sidebar/sidebar";
+import SidebarReceptionist from "../sidebarReceptionist/sidebarReceptionist";
 
 
-
-
-export default function AdminLayout(){
+export default function ReceptionistLayout(){
   return (
     <div className="flex">
-      <Sidebar />
+      <SidebarReceptionist />
       <div className="flex-1 p-8 bg-white min-h-screen">
         <Outlet />
       </div>

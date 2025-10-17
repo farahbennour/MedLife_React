@@ -2,7 +2,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* interdit le scroll horizontal */
+  overflow-x: hidden; 
   width: 100%;
   height: 100%;
 }
@@ -11,7 +11,7 @@ html, body {
 .home-section {
   position: relative;
   width: 100%;
-  height: 70vh; /* hauteur limitée pour ne pas créer de scroll */
+  height: 70vh; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,6 +31,8 @@ html, body {
 .home-section .content {
   z-index: 2;
   max-width: 800px;
+ margin-right: 21%;
+ color: #ffffff;
 }
 
 
@@ -40,6 +42,8 @@ html, body {
   font-weight: 700;
   margin-bottom: 20px;
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  color: #ffffff !important;
+  
 }
 
 /* --- SOUS-TITRE --- */
@@ -73,7 +77,7 @@ html, body {
 /* --- SECTION SERVICES --- */
 .services {
   padding: 80px 20px;
-  background-color: rgba(132, 191, 255, 0.1);
+  background-color:  rgb(231, 239, 248);
   text-align: center;
 }
 
@@ -134,17 +138,17 @@ html, body {
   margin-bottom: 15px;
 }
 .service-card .service-img1 {
-  width: 150px;
-  height: 100px;
+  width: 150px !important;
+  height: 100px !important;
   margin-bottom: 15px;
 }
 
 /* --- SECTION POURQUOI --- */
-/* --- SECTION POURQUOI --- */
+
 .why-us {
   padding: 80px 20px;
   text-align: center;
-  background-color: rgba(132, 191, 255, 0.05);
+  background-color:  rgb(231, 239, 248);
 }
 
 .why-us h2 {
@@ -156,23 +160,23 @@ html, body {
 
 /* Carte unique contenant toutes les lignes */
 .why-card-single {
-  max-width: 700px; /* limite la largeur */
-  margin: 0 auto; /* centre horizontalement */
+  max-width: 700px; 
+  margin: 0 auto; 
   background: #ffffff;
   border-radius: 20px;
   padding: 40px 30px;
   box-shadow: 0 4px 20px rgba(132, 191, 255, 0.2);
   display: flex;
-  flex-direction: column; /* empile les lignes verticalement */
-  gap: 25px; /* espace entre les lignes */
-  align-items: center; /* centre le contenu horizontalement */
+  flex-direction: column; 
+  gap: 25px;
+  align-items: center; 
 }
 
 .why-card-single .why-card {
   display: flex;
   align-items: center;
   gap: 15px;
-  text-align: left; /* texte aligné à gauche à l’intérieur de chaque ligne */
+  text-align: left;
 }
 
 .why-card-single .icon {
@@ -222,4 +226,4 @@ html, body {
     flex-direction: column;
     align-items: center;
   }
-}
+}  
