@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./login.css";
 
 export default function Login() {
@@ -46,7 +46,7 @@ export default function Login() {
             <button type="submit">Se connecter</button>
           </form>
           <p className="signup-link">
-            Pas encore inscrit ? <a href="/signup">Créer un compte</a>
+            <a href="/forgot-password">  Mot de passe Oublié ?</a>
           </p>
         </div>
       </div>
