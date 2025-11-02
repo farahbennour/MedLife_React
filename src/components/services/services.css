@@ -1,0 +1,494 @@
+.services-page {
+ padding: 20px 40px;
+  font-family: "Poppins", sans-serif;
+  background-color: #f8f9fb;
+  color: #222;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  margin-left: 320px;
+}
+.add-service-btn {
+  margin-left: auto;
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.add-service-btn:hover {
+  background: #0ea5e9;
+}
+.header h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex;
+  gap: 15px;
+}
+
+.tab {
+  border: none;
+  background: #eaeaea;
+  padding: 8px 15px;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab.active {
+  background: #4a42f4;
+  color: white;
+}
+
+.tab span {
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-section input {
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.filter-btn {
+  border: none;
+  background: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.course-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  border-radius: 20px;
+  color: white;
+  margin-left: 320px;
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.course-info {
+  max-width: 600px;
+}
+
+
+
+
+.avatars {
+  display: flex;
+  align-items: center;
+}
+
+.avatars img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: -8px;
+  border: 2px solid white;
+}
+
+.avatars span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 15px;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+
+
+
+
+/* === Color themes === */
+/* === Color themes updated and hover effects === */
+.course-card.purple {
+  background-color:  #dff1ff; /* White / Ice Blue */
+  color: #222; /* نص داكن على خلفية فاتحة */
+}
+
+.course-card.orange {
+  background-color:  #9CD5FF; /* Sky Mist / Light Sky */
+  color: #222; /* نص داكن */
+}
+
+.course-card.dark {
+ background-color:  #c8f0ff; /* Ocean Blue / Dark */
+  color: #222; /* نص فاتح على الخلفية الغامقة */
+}
+
+/* Hover effect */
+.course-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Course info text */
+.course-info h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.course-info p {
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+/* Course meta */
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+}
+
+/* More button */
+.more-btn {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #6684a3;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.more-btn:hover {
+  background-color: #6684a3;
+}
+
+/* Illustration image */
+.illustration img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+
+
+.services-page {
+  padding: 20px;
+  background: #f9f9ff;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.back-btn {
+  background: #0ea5e9;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.back-btn:hover {
+  background: #0ea5e9;
+}
+
+h2 {
+  text-transform: capitalize;
+  font-size: 24px;
+  color: #333;
+  margin: 0;
+}
+
+.services-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+
+
+
+.course-info {
+  flex: 1;
+}
+
+
+
+
+
+
+.no-services {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 50px;
+}
+/* Form Popup */
+.form-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* خلفية نصف شفافة */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.form-content {
+  background-color: #fff;
+  padding: 2rem;
+  width: 400px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.form-content h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #0ea5e9;
+}
+
+.form-content form input,
+.form-content form textarea,
+.form-content form select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.form-content form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-content form select {
+  cursor: pointer;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 0.75rem;
+  margin: 0 0.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-buttons button[type="submit"] {
+  background-color: #0ea5e9;
+  color: #fff;
+}
+
+.form-buttons button[type="submit"]:hover {
+  background-color: #0284c7;
+}
+
+.form-buttons button[type="button"] {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.form-buttons button[type="button"]:hover {
+  background-color: #d1d5db;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.image-grid img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.image-grid img:hover {
+  transform: scale(1.05);
+}
+
+.image-grid img.selected {
+  border-color: #007bff;
+}
+.service-details-card {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin: 20px 0;
+}
+
+.service-section {
+  margin-top: 40px;
+}
+
+.staff-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.staff-card {
+  background: #f9fbff;
+  border: 1px solid #e0e8ff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 260px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.btn-add {
+  background: #5fa3f7;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-add:hover {
+  background: #408be2;
+}
+
+.btn-delete {
+  background: #6684a3;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-btn,
+.delete-btn,
+.more-btn {
+  
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn {
+  background-color: #0ea5e9;
+  color: white;
+}
+.edit-btn:hover {
+  background-color: #0ea5e9;
+}
+
+.delete-btn {
+  background-color: #6684a3;
+  color: white;
+}
+.delete-btn:hover {
+  background-color: #6684a3;
+}
+
+.more-btn {
+  margin-top: 15px;
+  background-color: #95b8de
+
+;
+  color: white;
+}
+.more-btn:hover {
+  background-color: #b45309;
+}
+
+.btn-delete:hover {
+  background: #6684a3;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .form-content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+
