@@ -5,9 +5,9 @@ import "./sidebarReceptionist.css";
 
 // Définition du menu avec les chemins des images
 const menu = [
-  { to: "/receptionist", label: "Dashboard", img: "/src/assets/dashboard.png" },
+  { to: "/receptionist", label: "dashboard", img: "/src/assets/dashboard.png" },
   { to: "/receptionist/medecin", label: "Médecin", img: "/src/assets/consultation.png" },
-  { to: "/receptionist/patients", label: "Patients", img: "/src/assets/portail.png" },
+  { to: "/receptionist/patient", label: "Patient", img: "/src/assets/portail.png" },
   { to: "/receptionist/rendezvous", label: "Rendez-vous", img: "/src/assets/agenda.png" },
   { to: "/profil", label: "Profil", img: "/src/assets/profil.png" },
  

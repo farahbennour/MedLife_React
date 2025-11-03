@@ -1,0 +1,317 @@
+:root {
+  --primary: #1fa6a3;
+  --accent: #e6f7f6;
+  --card: #ffffff;
+  --muted: #6b7280;
+}
+
+/* RESET & BASE */
+* {
+  box-sizing: border-box;
+}
+.service-card {
+  background: var(--card);
+  padding: 0; /* نحط padding للصورة والـ content منفصل */
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(12, 34, 56, 0.06);
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden; /* باش الـ image-box ما يخرجش */
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  gap: 20px;
+  
+  
+}
+
+.service-image-box {
+  width: 100%; /* يغطي عرض الكارت كامل */
+  height: 120px; /* نقدر نربطه مع ارتفاع الكارت، مثلا 120px */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f6; /* default bg, ممكن تبدلو ديناميك */
+}
+/* Container qui slide down */
+.rendezvous-form-slide {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+}
+
+/* Quand open = true */
+.rendezvous-form-slide.open {
+  max-height: 1000px; /* assez grand pour contenir le form */
+  padding: 20px 0;
+}
+/* Overlay semi-transparent */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+/* Slide Form */
+.rendezvous-form-slide {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  z-index: 20;
+  position: relative;
+}
+
+.rendezvous-form-slide.open {
+  max-height: 1000px; /* Ajuster selon la taille du formulaire */
+  opacity: 1;
+}
+
+.service-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 700px;
+  overflow-y: auto;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  margin: 0;
+  background-color: #f9fafa;
+  overflow-x: hidden;
+}
+
+/* ===============================
+   DASHBOARD ROOT
+================================= */
+.dashboard-root {
+  background: linear-gradient(180deg, #f7fffd 0%, #ffffff 40%);
+  min-height: 100vh;
+  margin-left: 280px;
+  padding: 30px 30px 60px;
+  transition: margin-left 0.3s ease;
+  overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+  .dashboard-root {
+    margin-left: 0;
+    padding: 20px;
+  }
+}
+
+/* ===============================
+   HERO SECTION (تصغير)
+================================= */
+.hero {
+  padding: 40px 20px; /* ↓ قللنا المسافات */
+  max-width: 1100px;
+  margin: 0 auto 40px;
+  position: relative; 
+   z-index: 1
+}
+
+.hero-inner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--accent);
+  padding: 30px 25px; /* ↓ قللنا padding */
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-left h1 {
+  margin: 0;
+  font-size: 26px; /* ↓ كان 34px */
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.hero-features {
+  margin-top: 10px;
+  padding-left: 15px;
+  color: var(--muted);
+  font-size: 14px; /* ↓ كان 15px */
+}
+
+.hero-features li {
+  margin-bottom: 6px;
+}
+
+/* ===============================
+   HERO RIGHT SIDE
+================================= */
+.hero-right {
+  width: 180px; /* ↓ كان 220px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doctor-card {
+  width: 120px; /* ↓ كان 160px */
+  height: 120px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, #e9fffc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #0f172a;
+  box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
+}
+
+/* ===============================
+   SEARCH BAR
+================================= */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 18px; /* ↓ كان 25px */
+  padding: 0 4px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px 18px; /* ↓ صغّرنا */
+  border-radius: 30px;
+  border: 2px solid rgba(15, 23, 42, 0.06);
+  outline: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  background: #fff;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-btn {
+  margin-left: 10px;
+  padding: 10px 24px;
+  border-radius: 12px;
+  border: none;
+  background: #083344;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #065f5b;
+}
+
+/* ===============================
+   SERVICES SECTION
+================================= */
+.services-section {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 40px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 24px; /* ↓ كان 26px */
+  margin: 0 0 10px 0;
+  color: #0f172a;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 40px;
+  font-size: 15px; /* ↓ كان 15px */
+}
+
+/* الكروت */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 24px rgba(12, 34, 56, 0.08);
+}
+
+.service-card .icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+/* 
+.service-card h3 {
+  margin: 6px 0;
+  font-size: 17px;
+  color: #0f172a;
+}
+
+.service-card p {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+} */
+.service-card h3,
+.service-card p {
+  margin: 10px 12px;
+  flex: 1;
+}
+.service-card.highlight {
+  border: 2px solid rgba(31, 166, 163, 0.12);
+  box-shadow: 0 12px 26px rgba(31, 166, 163, 0.05);
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+@media (max-width: 800px) {
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-left h1 {
+    font-size: 22px;
+  }
+}

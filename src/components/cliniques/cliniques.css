@@ -1,0 +1,236 @@
+/* 🌿 Container Principal */
+.clinique-container {
+  padding: 40px;
+  background-color: #f9fafb;
+  min-height: auto;
+  margin-left: 300px;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  width: calc(100% - 290px);
+  padding: 20px;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* 🩺 Titre Principal */
+.clinique-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 40px;
+}
+
+/* 🔳 Grille */
+.clinique-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+/* 💎 Carte Clinique */
+.clinique-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.clinique-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* 🏥 Icône Clinique */
+.clinique-icon {
+  font-size: 2rem;
+  width: 55px;
+  height: 55px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+/* ✏️ Boutons Actions */
+.clinique-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.clinique-icon-btn {
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.clinique-icon-btn.edit {
+  color: #0ea5e9;
+}
+
+.clinique-icon-btn.delete {
+  color: #6684a3;
+}
+
+.clinique-icon-btn:hover {
+  transform: scale(1.1);
+}
+
+/* 📝 Texte Carte */
+.clinique-card h3 {
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.clinique-card p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+/* ➡️ Flèche Navigation */
+.clinique-arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  font-size: 1.2rem;
+  color: #94a3b8;
+  transition: color 0.3s;
+}
+
+.clinique-card:hover .clinique-arrow {
+  color: #0ea5e9;
+}
+
+/* 🌈 Bannière */
+.clinique-banner {
+  background: linear-gradient(#a6ccf5, #a6ccf5);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 170px;
+  padding: 25px 40px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.clinique-banner-text h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.clinique-banner-text span {
+  color: #ffffff;
+}
+
+.clinique-banner-text p {
+  font-size: 0.95rem;
+  margin-top: 5px;
+  opacity: 0.9;
+}
+
+.clinique-banner-action {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.clinique-btn-add {
+  background-color: white;
+  color: #0ea5e9;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.clinique-btn-add:hover {
+  background-color: #f3e8ff;
+}
+
+/* 💬 Dialogues (Ajout / Édition) */
+.clinique-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clinique-dialog-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.clinique-dialog-content input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.clinique-dialog-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.clinique-btn-save {
+  background: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  width: 130px;
+  cursor: pointer;
+}
+
+.clinique-btn-cancel {
+  background: #6684a3;
+   color: white;
+  border: none;
+  width: 130px;
+  padding: 0px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* 📱 Responsive */
+@media (max-width: 1024px) {
+  .clinique-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .clinique-container {
+    margin-left: 0;
+    padding: 15px;
+  }
+}

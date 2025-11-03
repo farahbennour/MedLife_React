@@ -4,11 +4,12 @@ import "./sidebar.css";
 
 // Définition du menu avec les chemins des images
 const menu = [
-  { to: "/admin", label: "Dashboard", img: "/src/assets/dashboard.png" },
+
+  { to: "/admin/dashboard", label: "dashboard", img: "/src/assets/dashboard.png" },
   { to: "/admin/cliniques", label: "Cliniques", img: "/src/assets/cliniques.png" },
-  { to: "/admin/medecins", label: "Médecins", img: "/src/assets/consultation.png" },
-  { to: "/admin/patients", label: "Patients", img: "/src/assets/patient.png" },
-  { to: "/admin/receptionnistes", label: "Réceptionnistes", img: "/src/assets/infermiere.png" },
+  { to: "/admin/doctor", label: "Doctor", img: "/src/assets/consultation.png" },
+  { to: "/admin/patient", label: "Patient", img: "/src/assets/patient.png" },
+  { to: "/admin/receptionist", label: "Receptionist", img: "/src/assets/infermiere.png" },
   { to: "/profil", label: "Profil", img: "/src/assets/profil.png" },
  
 
