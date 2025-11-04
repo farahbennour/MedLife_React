@@ -38,6 +38,13 @@ La plateforme permet à chaque acteur d’interagir dans un environnement sécur
 Chaque action clé est accompagnée d’un **email automatique** : confirmation de rendez-vous, création de compte, paiement ou désactivation du compte en cas d’impayé.
 
 ---
+## Logo
+
+<p align="center">
+  <img width="408" height="250" alt="logoFinal" src="https://github.com/user-attachments/assets/be81b10e-ddb5-425f-8c58-04fc2e4e2a10" />
+</p>
+
+
 
 ## 🧩 Fonctionnalités principales
 
@@ -179,7 +186,6 @@ L’objectif est d’appliquer des compétences techniques (React, NestJS, MySQL
 * **Équipe** : BENNOUR Farah, ELKOUT Chayma et MANSOUR Abir
 * **Encadrants** : BEN RHOUMA Mohamed Amine
 
-<img width="612" height="408" alt="logoFinal" src="https://github.com/user-attachments/assets/be81b10e-ddb5-425f-8c58-04fc2e4e2a10" />
 
 ---
 
