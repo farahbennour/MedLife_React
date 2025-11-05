@@ -1,81 +1,59 @@
+import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Hook pour navigation
-import axios from "axios"; // Pour les requêtes HTTP
+import { useNavigate } from "react-router-dom";
+import AlertService from "../../Services/Alert.jsx";
 import "./login.css";
 
 export default function Login() {
-  // ---------------------------
-  // States pour les inputs et messages d'erreur
-  // ---------------------------
-  const [email, setEmail] = useState(""); // Email saisi
-  const [password, setPassword] = useState(""); // Mot de passe saisi
-  const [error, setError] = useState(""); // Message d'erreur affiché à l'utilisateur
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const navigate = useNavigate(); // Hook pour naviguer vers d'autres pages
+  const navigate = useNavigate();
 
-  // ---------------------------
-  // Fonction appelée à la soumission du formulaire
-  // ---------------------------
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
-    setError(""); // Réinitialiser le message d'erreur
+    e.preventDefault();
 
     try {
-      // Appel à l'API pour authentification
       const response = await axios.post("http://localhost:3000/auth/login", {
         email,
         password,
       });
 
-      const token = response.data.token; // Token JWT
-      const user = response.data.user; // Infos utilisateur
+      const token = response.data.token;
+      const user = response.data.user;
 
-      // Vérification si les données sont présentes
       if (!token || !user) {
-        setError("Connexion échouée : données manquantes.");
+        AlertService.error("Connexion échouée : données manquantes.");
         return;
       }
 
-      // Stocker le token et le rôle dans le localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("role", user.role);
+      localStorage.setItem("userId", user.id);
 
-      // Redirection selon le rôle de l'utilisateur
-      if (user.role === "admin") {
-        navigate("/admin");
-      } else if (user.role === "receptionist") {
-        navigate("/receptionist");
-      } else if (user.role === "doctor") {
-        navigate("/doctor");
-      } else if (user.role === "patient") {
-        navigate("/patient"); // Redirection vers dashboard patient
-      } else {
-        setError("Rôle inconnu");
-      }
+      AlertService.success("Succès","Bienvenue dans votre espace patient. ");
 
+      if (user.role === "admin") navigate("/admin");
+      else if (user.role === "receptionist") navigate("/receptionist");
+      else if (user.role === "doctor") navigate("/doctor");
+      else if (user.role === "patient") navigate("/patient");
+      else AlertService.error("Rôle inconnu.");
     } catch (err) {
-      console.error(err); // Log dans la console pour le développeur
-      setError("Email ou mot de passe incorrect."); // Message utilisateur
+      console.error(err);
+      AlertService.error("Erreur","Email ou mot de passe incorrect ");
     }
   };
 
-  // ---------------------------
-  // JSX / Structure de la page de login
-  // ---------------------------
   return (
     <div className="login-page">
-      {/* Décor haut et bas */}
       <img src="/src/assets/patient.png" alt="Décor haut" className="pill-top" />
       <img src="/src/assets/patient.png" alt="Décor bas" className="pill-bottom" />
 
-      {/* Container principal du formulaire */}
       <div className="login-container">
         <div className="login-card">
-          {/* Logo */}
           <img src="/src/assets/logo.png" className="image-login" alt="logo" />
           <h2>Connexion</h2>
 
-          {/* Formulaire */}
           <form onSubmit={handleSubmit}>
             <label>Email</label>
             <input
@@ -95,14 +73,9 @@ export default function Login() {
               required
             />
 
-
-            {/* Affichage du message d'erreur si présent */}
-            {error && <p className="error-message">{error}</p>}
-
             <button type="submit">Se connecter</button>
           </form>
 
-          {/* Lien vers la page de mot de passe oublié */}
           <p className="signup-link">
             <a href="/forgot-password">Mot de passe oublié ?</a>
           </p>

@@ -1,11 +1,10 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./sidebarPatient.css";
 
 const menu = [
   { to: "/patient", label: "dashboard", img: "/src/assets/dashboard.png" },
   { to: "/patient/rendezVousList", label: "RendezVousList", img: "/src/assets/agenda.png" },
-  { to: "/patient/profil", label: "Profil", img: "/src/assets/profil.png" },
+  { to: "/patient/update-profile", label: "Profil", img: "/src/assets/profil.png" },
 ];
 
 export default function SidebarPatient() {

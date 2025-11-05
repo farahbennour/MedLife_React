@@ -9,7 +9,7 @@ const menu = [
   { to: "/receptionist/medecin", label: "Médecin", img: "/src/assets/consultation.png" },
   { to: "/receptionist/patient", label: "Patient", img: "/src/assets/portail.png" },
   { to: "/receptionist/rendezvous", label: "Rendez-vous", img: "/src/assets/agenda.png" },
-  { to: "/profil", label: "Profil", img: "/src/assets/profil.png" },
+  { to: "/receptionist/update-profile-receptionist", label: "Profil", img: "/src/assets/profil.png" },
  
 
 ];

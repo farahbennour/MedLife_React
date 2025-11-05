@@ -10,7 +10,7 @@ const menu = [
   { to: "/admin/doctor", label: "Doctor", img: "/src/assets/consultation.png" },
   { to: "/admin/patient", label: "Patient", img: "/src/assets/patient.png" },
   { to: "/admin/receptionist", label: "Receptionist", img: "/src/assets/infermiere.png" },
-  { to: "/profil", label: "Profil", img: "/src/assets/profil.png" },
+  { to: "/admin/update-profile-admin", label: "Profil", img: "/src/assets/profil.png" },
  
 
 ];
