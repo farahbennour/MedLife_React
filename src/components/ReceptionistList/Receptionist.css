@@ -190,7 +190,7 @@ h4 {
 
 /* ==== ADD NEW CARD ==== */
 .add-card {
-  background-color: #a6ccf5;
+  background-color: #a6ccf5 !important;
   color: white;
   text-align: center;
   cursor: pointer;

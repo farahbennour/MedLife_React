@@ -22,6 +22,7 @@ import UpdateProfileAdmin from "./components/update-profile-admin/update-profile
 import UpdateProfileDoctor from "./components/update-profile-doctor/update-profile-doctor.jsx";
 import UpdateProfileReceptionist from "./components/update-profile-receptionist/update-profile-receptionist.jsx";
 import UpdateProfilePatient from "./components/update-profile-patient/update-profile-patient.jsx";
+import Header from "./components/header/header.jsx";
 
 export default function App() {
   return (
@@ -62,11 +63,17 @@ export default function App() {
           {/* Patient Dashboard */}
          
            {/* Patient */}
-        <Route path="/patient/*" element={<PatientLayout />}>
-          <Route index element={<DashbordPatient />} />
-          <Route path="rendezVousList" element={<RendezVousList />} /> {/* page rendez-vous */}
-          <Route path="update-profile" element={<UpdateProfilePatient/>}/>{/* page de mise à jour de profil pour le patient*/}
-        </Route>
+       
+         <Route path="/" element={<Home />} />
+
+          {/* Patient */}
+          <Route path="/patient" element={<PatientLayout />}>
+            <Route index element={<DashbordPatient />} />           {/* Dashboard par défaut */}
+            <Route path="dashboard" element={<DashbordPatient />} />
+            <Route path="rendezVousList" element={<RendezVousList />} /> {/* Page rendez-vous */}
+            <Route path="update-profile" element={<UpdateProfilePatient />} /> {/* Profil */}
+          </Route>
+
           {/* Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />

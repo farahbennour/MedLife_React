@@ -24,7 +24,7 @@ const ForgotPassword = () => {
     } catch (err) {
       console.error(err);
 
-      // ❌ Alerte d’erreur
+      //  Alerte d’erreur
       Swal.fire({
         icon: "error",
         title: "Erreur",

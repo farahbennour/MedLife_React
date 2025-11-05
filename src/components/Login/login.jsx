@@ -36,7 +36,7 @@ export default function Login() {
       if (user.role === "admin") navigate("/admin");
       else if (user.role === "receptionist") navigate("/receptionist");
       else if (user.role === "doctor") navigate("/doctor");
-      else if (user.role === "patient") navigate("/patient");
+      else if (user.role === "patient") navigate("/");
       else AlertService.error("Rôle inconnu.");
     } catch (err) {
       console.error(err);
