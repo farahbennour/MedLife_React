@@ -1,4 +1,4 @@
-.update-profile-container {
+.update-profileadmin-container {
   max-width: 600px;
   margin: 60px auto;
   padding: 40px 30px;
@@ -7,10 +7,10 @@
   box-shadow: 0 4px 20px rgba(132, 191, 255, 0.25);
   font-family: 'Times New Roman', Times, serif;
   color: #333;
-  margin-right: 20% !important;
+  margin-right: 20% ;
 }
 
-.update-profile-container h2 {
+.update-profileadmin-container h2 {
   text-align: center;
   color: #6684a3;
   font-size: 2rem;
@@ -18,12 +18,7 @@
   margin-bottom: 25px;
 }
 
-.update-profile-message {
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #136DA5;
-}
+
 
 .update-profile-form {
   display: flex;

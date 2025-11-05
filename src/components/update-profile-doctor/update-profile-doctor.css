@@ -1,4 +1,4 @@
-.update-profile-container {
+.update-profiledoctor-container {
   max-width: 600px;
   margin: 60px auto;
   padding: 40px 30px;
@@ -10,7 +10,7 @@
   margin-right: 20% !important;
 }
 
-.update-profile-container h2 {
+.update-profiledoctor-container h2 {
   text-align: center;
   color: #6684a3;
   font-size: 2rem;
@@ -119,12 +119,12 @@
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-  .update-profile-container {
+  .update-profiledoctor-container {
     width: 90%;
     padding: 25px 20px;
   }
 
-  .update-profile-container h2 {
+  .update-profiledoctor-container h2 {
     font-size: 1.6rem;
   }
 }

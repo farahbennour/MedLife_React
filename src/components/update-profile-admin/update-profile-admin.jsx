@@ -123,7 +123,7 @@ const UpdateProfileAdmin = () => {
 
   //  Rendu principal du composant
   return (
-    <div className="update-profile-container">
+    <div className="update-profileadmin-container">
       {/* 🔹 Titre dynamique : affiche "Administrateur" si admin */}
       <h2>Mon profil {isAdmin ? "Administrateur" : "Utilisateur"}</h2>
 

@@ -129,7 +129,7 @@ const UpdateProfileReceptionist = () => {
 
   //  Interface utilisateur
   return (
-    <div className="update-profile-container">
+    <div className="update-profilereceptionist-container">
       <h2>Mon Profil</h2>
 
       <form onSubmit={handleSubmit} className="update-profile-form">

@@ -1,6 +1,5 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import SidebarPatient from "../SidebarPatient/SidebarPatient";
 import Header from "../header/header";
 
 

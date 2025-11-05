@@ -125,7 +125,7 @@ const UpdateProfileDoctor = () => {
 
   //  Rendu principal du composant
   return (
-    <div className="update-profile-container">
+    <div className="update-profiledoctor-container">
       <h2> Mon Profil </h2>
 
       {/* Formulaire de mise à jour */}
