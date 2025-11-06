@@ -110,13 +110,14 @@ body {
 /* ===============================
    DASHBOARD ROOT
 ================================= */
-.dashboard-root {
+.dashboardpatient-root {
   background: linear-gradient(180deg, #f7fffd 0%, #ffffff 40%);
   min-height: 100vh;
-  margin-left: 280px;
+  width: 100% ;
   padding: 30px 30px 60px;
   transition: margin-left 0.3s ease;
   overflow-y: auto;
+  margin-left: 0 !;
 }
 
 @media (max-width: 900px) {
@@ -131,7 +132,7 @@ body {
 ================================= */
 .hero {
   padding: 40px 20px; /* ↓ قللنا المسافات */
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto 40px;
   position: relative; 
    z-index: 1

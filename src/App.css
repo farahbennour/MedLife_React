@@ -94,6 +94,18 @@ body {
   width: 100%;
 }
 
+
+.swal2-popup {
+  border-radius: 15px !important;
+  font-family: 'Poppins', sans-serif !important;
+  padding: 20px !important;
+}
+
+.swal2-title {
+  color: #007BAE !important;
+  font-weight: 600 !important;
+}
+
 /* 📱 Responsive */
 @media (max-width: 768px) {
   .navbar {

@@ -6,12 +6,13 @@ import "./sidebar.css";
 
 // ✅ Définition du menu
 const menu = [
-  { to: "/admin/dashboard", label: "Dashboard", img: "/src/assets/dashboard.png" },
+{ to: "/admin/dashboard", label: "dashboard", img: "/src/assets/dashboard.png" },
   { to: "/admin/cliniques", label: "Cliniques", img: "/src/assets/cliniques.png" },
   { to: "/admin/doctor", label: "Doctor", img: "/src/assets/consultation.png" },
   { to: "/admin/patient", label: "Patient", img: "/src/assets/patient.png" },
   { to: "/admin/receptionist", label: "Receptionist", img: "/src/assets/infermiere.png" },
-  { to: "/profil", label: "Profil", img: "/src/assets/profil.png" },
+  { to: "/admin/update-profile-admin", label: "Profil", img: "/src/assets/profil.png" },
+ 
 ];
 
 export default function Sidebar() {

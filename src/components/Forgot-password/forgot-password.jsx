@@ -1,35 +1,34 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Swal from "sweetalert2"; // ← import SweetAlert2
+import Swal from "sweetalert2";
 import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await axios.post("http://localhost:3000/users/request-password-reset", { email });
 
-      // SweetAlert success
+      // ✅ Alerte de succès
       Swal.fire({
         icon: "success",
-        title: "Email sent!",
-        text: "Check your inbox to reset your password.",
+        title: "Email envoyé",
+        text: "Veuillez vérifier votre boîte mail pour réinitialiser votre mot de passe.",
         confirmButtonColor: "#1fa6a3",
       });
 
-      setEmail(""); // reset email field
+      setEmail(""); // Réinitialiser le champ email
     } catch (err) {
       console.error(err);
 
-      // SweetAlert error
+      //  Alerte d’erreur
       Swal.fire({
         icon: "error",
-        title: "Oops...",
-        text: "Error sending reset request. Please try again.",
+        title: "Erreur",
+        text: "Une erreur est survenue lors de l’envoi de l’email. Veuillez réessayer.",
         confirmButtonColor: "#d33",
       });
     }
@@ -38,29 +37,27 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-page">
       <div className="forgot-card">
-        <h2>Forgot Password</h2>
+        <h2>Mot de passe oublié</h2>
         <p className="instruction">
-          Enter your email address below and we’ll send you a link to reset your password.
+          Saisissez votre adresse e-mail ci-dessous et nous vous enverrons un lien
+          pour réinitialiser votre mot de passe.
         </p>
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Adresse e-mail</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter your email"
+            placeholder="Entrez votre adresse e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <button type="submit">Send Link</button>
+          <button type="submit">Envoyer le lien</button>
         </form>
 
-        {message && <p className="success-msg">{message}</p>}
-        {error && <p className="error-msg">{error}</p>}
-
         <div className="login-link">
-          <a href="/login">Back to login</a>
+          <a href="/login">Retour à la connexion</a>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./dashbordpatient.css";
 import RendezVousForm from "../RendezVousForm/RendezVousForm";
+import AlertService from "../../Services/Alert";
 
 export default function DashbordPatient() {
   // ---------------------------
@@ -62,7 +63,7 @@ export default function DashbordPatient() {
         setFilteredServices(res.data);
       } catch (err) {
         console.error(err);
-        setError("Failed to fetch services.");
+        AlertService.error("Erreur","Erreur lors du parcour des services");
       } finally {
         setLoading(false);
       }
@@ -112,7 +113,7 @@ export default function DashbordPatient() {
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <div className="dashboard-root">
+    <div className="dashboardpatient-root">
 
       {/* ---------------------------
           Header / Hero section avec message et recherche

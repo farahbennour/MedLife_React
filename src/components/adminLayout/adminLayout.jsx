@@ -7,6 +7,7 @@ import Sidebar from "../sidebar/sidebar";
 
 export default function AdminLayout(){
   return (
+
      <div className="flex min-h-screen">
       {/* Sidebar - fixed width */}
       <div className="w-72 fixed left-0 top-0 h-screen z-40">

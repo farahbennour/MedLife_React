@@ -3,7 +3,7 @@
   padding: 30px;
   background: #f8fafc;
   min-height: 100vh;
-  margin-left: 290px; /* ✅ نفس عرض الـ Sidebar */
+  margin-left: 290px !important; /* ✅ نفس عرض الـ Sidebar */
   width: calc(100% - 290px); /* ✅ باش المحتوى ما يتجاوزش الشاشة */
   transition: all 0.3s ease;
 }
