@@ -21,29 +21,59 @@ export default function Cliniques() {
   // ---------------------------
   // Chargement des cliniques au montage du composant
   // ---------------------------
-  useEffect(() => {
-    const fetchClinics = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          Swal.fire("Erreur", "Vous devez être connecté !", "warning");
-          window.location.href = "/login";
-          return;
-        }
+  // useEffect(() => {
+  //   const fetchClinics = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       if (!token) {
+  //         Swal.fire("Erreur", "Vous devez être connecté !", "warning");
+  //         window.location.href = "/login";
+  //         return;
+  //       }
+  //        console.log("Token actuel:", token);
+  //       const response = await axios.get("http://localhost:3000/clinics", {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //       console.log("Data reçue:", response.data);
+  //       setClinics(response.data);
+  //     } catch (err) {
+  //       console.error(err);
+  //       setError("Impossible de charger les cliniques.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchClinics();
+  // }, []);
+   useEffect(() => {
+  const fetchClinics = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      Swal.fire("Erreur", "Vous devez être connecté !", "warning");
+      navigate("/login");
+      return;
+    }
 
-        const response = await axios.get("http://localhost:3000/clinics", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setClinics(response.data);
-      } catch (err) {
-        console.error(err);
-        setError("Impossible de charger les cliniques.");
-      } finally {
-        setLoading(false);
+    try {
+      const response = await axios.get("http://localhost:3000/clinics", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setClinics(response.data);
+    } catch (err) {
+      console.error(err);
+      setError("Impossible de charger les cliniques.");
+      if (err.response && err.response.status === 401) {
+        Swal.fire("Erreur", "Session expirée. Veuillez vous reconnecter.", "error");
+        localStorage.clear();
+        navigate("/login");
       }
-    };
-    fetchClinics();
-  }, []);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchClinics();
+}, [navigate]);
 
   // ---------------------------
   // Suppression d'une clinique

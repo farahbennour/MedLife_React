@@ -11,6 +11,52 @@ const menu = [
 ];
 
 export default function SidebarDoctor() {
+  const handleLogout = async () => {
+    const confirm = await Swal.fire({
+      title: "Déconnexion",
+      text: "Êtes-vous sûr de vouloir vous déconnecter ?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Oui, déconnecter",
+      cancelButtonText: "Annuler",
+      confirmButtonColor: "#0c6d78",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const token = localStorage.getItem("token");
+console.log("Token envoyé :", token);
+      // Appel API pour blacklister le token
+      if (token) {
+        axios.post("http://localhost:3000/auth/logout", {}, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+      }
+
+      // Supprimer les infos du localStorage
+      localStorage.clear();
+
+      // Message de confirmation
+      Swal.fire({
+        title: "Déconnecté",
+        text: "Vous avez été déconnecté avec succès.",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      // Redirection après un court délai
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      console.error("Erreur de déconnexion :", error);
+      Swal.fire("Erreur", "Une erreur est survenue lors de la déconnexion.", "error");
+    }
+  };
   return (
     // Conteneur principal de la sidebar
     <aside className="sidebar">
@@ -41,14 +87,14 @@ export default function SidebarDoctor() {
 
         {/* Lien pour se déconnecter */}
         <li>
-          <a href="#" className="sidebar-link logout">
+          <button onClick={handleLogout} className="sidebar-link logout">
             <img
-              src="/src/assets/deconnexion.png"  
+              src="/src/assets/deconnexion.png"
               alt="Déconnexion"
               className="sidebar-icon"
             />
             <span>Déconnexion</span>
-          </a>
+          </button>
         </li>
       </ul>
     </aside>

@@ -39,6 +39,8 @@ export default function Login() {
       // Stocker le token et le rôle dans le localStorage
       localStorage.setItem("token", token);
       localStorage.setItem("role", user.role);
+      localStorage.setItem("id", user.id);
+      localStorage.setItem("email", user.email);
 
       // Redirection selon le rôle de l'utilisateur
       if (user.role === "admin") {
