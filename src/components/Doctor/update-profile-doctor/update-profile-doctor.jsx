@@ -1,120 +1,116 @@
-// Importation des modules nécessaires
-import axios from "axios"; // pour faire des requêtes HTTP vers le backend
-import { useEffect, useState } from "react"; // hooks React
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // icônes pour afficher/masquer le mot de passe
-import AlertService from "../../Services/Alert.jsx"; // service d’alertes (succès/erreur)
-import "./update-profile-receptionist.css"; // fichier CSS pour le style du composant
+import axios from "axios"; // pour effectuer des requêtes HTTP vers ton backend
+import { useEffect, useState } from "react"; // hooks React pour gérer l’état et les effets
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // icônes pour afficher/masquer les mots de passe
+import AlertService from "../../../Services/Alert.jsx"; // service personnalisé pour afficher des alertes
+import "./update-profile-doctor.css"; // fichier CSS pour le style du composant
 
 //  Composant principal
-const UpdateProfileReceptionist = () => {
-
-  //  État local pour stocker les informations utilisateur
+const UpdateProfileDoctor = () => {
+  //  État local pour stocker les informations de l'utilisateur
   const [user, setUser] = useState({
     id: "",
     username: "",
     email: "",
   });
 
-  //  État local pour gérer les anciens et nouveaux mots de passe
+  //  État local pour les champs de mot de passe
   const [passwords, setPasswords] = useState({
     oldPassword: "",
     newPassword: "",
   });
 
-  // 🧩 État pour afficher ou masquer les champs de mot de passe
+  //  État pour contrôler la visibilité des mots de passe (icône œil)
   const [showPassword, setShowPassword] = useState({
     old: false,
     new: false,
   });
 
-  //  États supplémentaires pour le chargement et le rôle
-  const [isLoading, setIsLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+  //  États de chargement et de rôle
+  const [isLoading, setIsLoading] = useState(true); // indique si les données du profil sont encore en cours de chargement
+  const [isAdmin, setIsAdmin] = useState(false); // utilisé pour gérer l’affichage conditionnel si le user est admin
 
-  //  Récupération des infos depuis le localStorage
+  //  Récupération des infos du user dans le localStorage
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
   const role = localStorage.getItem("role");
 
-  //  Chargement du profil utilisateur au montage du composant
+  //  Hook useEffect : chargé une seule fois au montage du composant
   useEffect(() => {
-    // Vérifie si le rôle est admin
+    // Vérifie si l’utilisateur est un admin
     if (role === "admin") setIsAdmin(true);
 
-    // Fonction interne pour charger les données utilisateur
+    // Fonction pour récupérer les données du profil depuis le backend
     const fetchUser = async () => {
       try {
-        // Appel API GET pour récupérer les infos utilisateur
+        // Requête GET vers l’API pour récupérer le profil utilisateur
         const res = await axios.get(`http://localhost:3000/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        // Si les données existent, les stocker dans l’état local
         const userData = res.data || {};
         console.log("👤 Utilisateur connecté :", userData);
 
-        // Mise à jour du state utilisateur
         setUser({
           id: userData.id || "",
           username: userData.username ?? "",
           email: userData.email ?? "",
-          phone: userData.phone ?? "",
         });
       } catch (err) {
+        // Gestion d’erreur : message si la requête échoue
         console.error("Erreur lors du chargement du profil :", err);
         AlertService.error("Erreur", "Impossible de charger le profil.");
       } finally {
-        // Fin du chargement
+        // Désactive le mode chargement une fois la requête terminée
         setIsLoading(false);
       }
     };
 
-    // Exécution de la requête seulement si le token et l’ID existent
+    // Exécute la récupération seulement si token + userId existent
     if (token && userId) fetchUser();
-  }, [userId, token, role]);
+  }, [userId, token, role]); // dépendances pour relancer l’effet si ces valeurs changent
 
-  //  Gestion des champs de texte (nom, email, téléphone)
+  //  Fonction pour mettre à jour les champs "username" et "email"
   const handleChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  //  Gestion des champs de mot de passe
+  //  Fonction pour mettre à jour les champs "oldPassword" et "newPassword"
   const handlePasswordChange = (e) => {
     setPasswords((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  //  Fonction de soumission du formulaire
+  //  Fonction exécutée lors de la soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault(); // empêche le rechargement de la page
 
     try {
-      // Données à envoyer à l’API
+      // Construction de l’objet à envoyer au backend
       const data = {
         username: user.username,
         email: user.email,
-        phone: user.phone,
         oldPassword: passwords.oldPassword || undefined,
         newPassword: passwords.newPassword || undefined,
       };
 
-      // Appel API PATCH pour mettre à jour le profil
+      // Requête PATCH vers l’API pour mettre à jour le profil
       const res = await axios.patch(
         `http://localhost:3000/users/${user.id}`,
         data,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Afficher une alerte de succès
+      //  Succès : afficher une alerte de confirmation
       AlertService.success(
         "Profil mis à jour",
         res.data.message || "Les informations ont été sauvegardées avec succès !"
       );
 
-      // Réinitialisation des champs de mot de passe
+      // Réinitialiser les champs de mot de passe
       setPasswords({ oldPassword: "", newPassword: "" });
-
     } catch (error) {
+      //  Erreur : afficher une alerte avec le message du backend
       console.error(error);
-      // Afficher une alerte d’erreur
       AlertService.error(
         "Erreur",
         error.response?.data?.message || "Échec de la mise à jour."
@@ -122,19 +118,19 @@ const UpdateProfileReceptionist = () => {
     }
   };
 
-  //  Affichage d’un message de chargement pendant la récupération du profil
+  //  Affiche un message pendant le chargement du profil
   if (isLoading) {
     return <div className="loading">Chargement du profil...</div>;
   }
 
-  //  Interface utilisateur
+  //  Rendu principal du composant
   return (
-    <div className="update-profilereceptionist-container">
-      <h2>Mon Profil</h2>
+    <div className="update-profiledoctor-container">
+      <h2> Mon Profil </h2>
 
+      {/* Formulaire de mise à jour */}
       <form onSubmit={handleSubmit} className="update-profile-form">
-
-        {/* Champ nom d’utilisateur */}
+        {/* Champ Nom d’utilisateur */}
         <label>Nom d’utilisateur</label>
         <input
           type="text"
@@ -144,7 +140,7 @@ const UpdateProfileReceptionist = () => {
           required
         />
 
-        {/* Champ email */}
+        {/* Champ Email */}
         <label>Email</label>
         <input
           type="email"
@@ -154,16 +150,7 @@ const UpdateProfileReceptionist = () => {
           required
         />
 
-        {/* Champ téléphone */}
-        <label>Téléphone</label>
-        <input
-          type="text"
-          name="phone"
-          value={user.phone}
-          onChange={handleChange}
-        />
-
-        {/* 🔐 Section changement du mot de passe */}
+        {/*  Section de changement de mot de passe */}
         <div className="password-section">
           <h3>Changer le mot de passe</h3>
 
@@ -177,13 +164,13 @@ const UpdateProfileReceptionist = () => {
               onChange={handlePasswordChange}
               placeholder="Entrez votre ancien mot de passe"
             />
+            {/* Icône pour afficher/masquer */}
             <span
               className="toggle-password"
               onClick={() =>
                 setShowPassword((prev) => ({ ...prev, old: !prev.old }))
               }
             >
-              {/* Icône afficher/masquer */}
               {showPassword.old ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
@@ -198,23 +185,23 @@ const UpdateProfileReceptionist = () => {
               onChange={handlePasswordChange}
               placeholder="Entrez votre nouveau mot de passe"
             />
+            {/* Icône pour afficher/masquer */}
             <span
               className="toggle-password"
               onClick={() =>
                 setShowPassword((prev) => ({ ...prev, new: !prev.new }))
               }
             >
-              {/* Icône afficher/masquer */}
               {showPassword.new ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
         </div>
 
-        {/* Bouton de soumission */}
-        <button type="submit">Mettre à jour</button>
+        {/* Bouton d’envoi */}
+        <button type="submit"> Mettre à jour</button>
       </form>
     </div>
   );
 };
 
-export default UpdateProfileReceptionist;
+export default UpdateProfileDoctor;

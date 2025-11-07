@@ -2,7 +2,7 @@
 import axios from "axios"; // Pour faire des requêtes HTTP vers l'API
 import { useEffect, useState } from "react"; // Hooks React : useState (état local) et useEffect (effet au chargement)
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Icônes pour afficher/masquer le mot de passe
-import AlertService from "../../Services/Alert.jsx"; // Service personnalisé pour afficher des alertes
+import AlertService from "../../../Services/Alert.jsx"; // Service personnalisé pour afficher des alertes
 import "./update-profile-admin.css"; // Fichier CSS pour le style du composant
 
 //  Définition du composant principal

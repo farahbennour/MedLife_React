@@ -1,16 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../header/header";
+import Sidebar from "../sidebar/sidebar.jsx"
 
 
 
-
-export default function PatientLayout(){
+export default function AdminLayout(){
   return (
+
      <div className="flex min-h-screen">
       {/* Sidebar - fixed width */}
       <div className="w-72 fixed left-0 top-0 h-screen z-40">
-        <Header />
+        <Sidebar />
       </div>
       
       {/* Main Content - offset by sidebar width */}

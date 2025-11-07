@@ -3,14 +3,14 @@ import { FaClock, FaShieldAlt, FaSmile } from "react-icons/fa";
 import "./home.css";
 
 // Import des images des services
+
 import agendaImg from "/src/assets/agenda.png";
 import consultationImg from "/src/assets/consultation.png";
 import factureImg from "/src/assets/facturation.png";
 import patientImg from "/src/assets/patient.png";
 import portailImg from "/src/assets/portail.png";
-import Header from "../header/header";
-import Footer from "../Footer/footer";
-
+import Header from "../header/header.jsx";
+import Footer from "../Footer/footer.jsx"
 export default function Home() {
   return (
     <div className="home">

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import SidebarDoctor from "../sidebarDoctor/sidebarDoctor";
+import SidebarDoctor from "../sidebarDoctor/sidebarDoctor.jsx";
 
 
 export default function DoctorLayout(){

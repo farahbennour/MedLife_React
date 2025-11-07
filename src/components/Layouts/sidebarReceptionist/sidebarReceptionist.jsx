@@ -1,16 +1,24 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import "./sidebarDoctor.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import "./sidebarReceptionist.css";
+import Swal from "sweetalert2";
+import axios from "axios";
 
-// Définition du menu de la sidebar du docteur
+
+// Définition du menu avec les chemins des images
 const menu = [
-  { to: "/doctor", label: "Dashboard", img: "/src/assets/dashboard.png" },
-  { to: "/doctor/patients", label: "Patients", img: "/src/assets/patient.png" },
-  { to: "/doctor/rendezvous", label: "Rendez-vous", img: "/src/assets/agenda.png" },
-  { to: "/doctor/update-profile-doctor", label: "Profil", img: "/src/assets/profil.png" },
+  { to: "/receptionist", label: "dashboard", img: "/src/assets/dashboard.png" },
+  { to: "/receptionist/medecin", label: "Médecin", img: "/src/assets/consultation.png" },
+  { to: "/receptionist/patient", label: "Patient", img: "/src/assets/portail.png" },
+  { to: "/receptionist/rendezvous", label: "Rendez-vous", img: "/src/assets/agenda.png" },
+  { to: "/receptionist/update-profile-receptionist", label: "Profil", img: "/src/assets/profil.png" },
+ 
+
 ];
 
-export default function SidebarDoctor() {
+export default function SidebarReceptionist() {
+    const navigate = useNavigate();
+
   const handleLogout = async () => {
     const confirm = await Swal.fire({
       title: "Déconnexion",
@@ -58,34 +66,28 @@ console.log("Token envoyé :", token);
     }
   };
   return (
-    // Conteneur principal de la sidebar
     <aside className="sidebar">
-
-      {/* --- Header de la sidebar avec logo --- */}
       <div className="sidebar-header">
         <img
-          src="/src/assets/logo.png"      
-          alt="Clinique Logo"             
-          className="sidebar-logo"         
+          src="/src/assets/logo.png"
+          alt="Clinique Logo"
+          className="sidebar-logo"
         />
       </div>
 
-      {/* --- Menu de navigation de la sidebar --- */}
       <ul className="sidebar-menu">
-       
-        {/* Boucle sur le tableau 'menu' pour créer les liens */}
+              {/* Boucle sur le tableau 'menu' pour créer les liens */}
         {menu.map((m) => (
-          <li key={m.to}>  {/* Chaque item du menu doit avoir une clé unique */}
+          <li key={m.to}> {/* Chaque item du menu doit avoir une clé unique */}
             <NavLink to={m.to} className="sidebar-link">
-              {/* Icône du menu */}
+                {/* Icône du menu */}
               <img src={m.img} alt={m.label} className="sidebar-icon" />
-              {/* Texte du menu */}
+                {/* Texte du menu */}
               <span>{m.label}</span>
             </NavLink>
           </li>
         ))}
-
-        {/* Lien pour se déconnecter */}
+            {/* Lien pour se déconnecter */}
         <li>
           <button onClick={handleLogout} className="sidebar-link logout">
             <img
