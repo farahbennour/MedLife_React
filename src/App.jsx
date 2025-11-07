@@ -1,28 +1,26 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./components/DashboardAdmin/dashboardadmin.jsx";
+import UpdateProfileAdmin from "./components/Admin/update-profile-admin/update-profile-admin.jsx";
 import DashboardReceptionist from "./components/DashboardReceptionist/DashboardReceptionist.jsx";
 import DashbordPatient from "./components/DashbordPatient/DashbordPatient.jsx";
-import DoctorLayout from "./components/DoctorLayout/doctorLayout.jsx";
+import UpdateProfileDoctor from "./components/Doctor/update-profile-doctor/update-profile-doctor.jsx";
 import Doctor from "./components/DoctorsList/Doctor.jsx";
 import ForgotPassword from "./components/Forgot-password/forgot-password.jsx";
+import AdminLayout from "./components/Layouts/adminLayout/adminLayout.jsx";
+import PatientLayout from "./components/Layouts/PatientLayout/PatientLayout.jsx";
 import Login from "./components/Login/login.jsx";
-import PatientLayout from "./components/PatientLayout/PatientLayout.jsx";
+import UpdateProfilePatient from "./components/Patient/update-profile-patient/update-profile-patient.jsx";
 import Patient from "./components/PatientList/Patient.jsx";
-import ReceptionistLayout from "./components/ReceptionistLayout/receptionistLayout.jsx";
+import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import Receptionist from "./components/ReceptionistList/Receptionist.jsx";
 import RendezVousList from "./components/RendezVousList/RendezVousList.jsx";
 import ResetPassword from "./components/ResetPassword/resetPassword.jsx";
-import StaffService from "./components/Services-clinique/StaffService.jsx";
-import AdminLayout from "./components/adminLayout/adminLayout.jsx";
-import Cliniques from "./components/cliniques/cliniques.jsx";
-import Home from "./components/home/home.jsx";
 import Services from "./components/Services-clinique/services.jsx";
-
-import UpdateProfileAdmin from "./components/update-profile-admin/update-profile-admin.jsx";
-import UpdateProfileDoctor from "./components/update-profile-doctor/update-profile-doctor.jsx";
-import UpdateProfileReceptionist from "./components/update-profile-receptionist/update-profile-receptionist.jsx";
-import UpdateProfilePatient from "./components/update-profile-patient/update-profile-patient.jsx";
-import Header from "./components/header/header.jsx";
+import StaffService from "./components/Services-clinique/StaffService.jsx";
+import Body from "./components/Home/Body/home.jsx";
+import Dashboard from "./components/DashboardAdmin/dashboardadmin.jsx";
+import Cliniques from "./components/cliniques/cliniques.jsx";
+import DoctorLayout from "./components/Layouts/DoctorLayout/doctorLayout.jsx";
+import ReceptionistLayout from "./components/Layouts/ReceptionistLayout/receptionistLayout.jsx";
 
 export default function App() {
   return (
@@ -30,13 +28,13 @@ export default function App() {
       <main className="flex-1">
         <Routes>
           {/* Page d'accueil */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Body />} />
 
           {/* Section ADMIN */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="cliniques" element={<Cliniques />} />
+            <Route path="cliniques" element={<Cliniques/>} />
             <Route path="cliniques/services" element={<Services />} />
             <Route path="staffservice" element={<StaffService />} />
             <Route path="doctor" element={<Doctor />} />
@@ -64,7 +62,7 @@ export default function App() {
          
            {/* Patient */}
        
-         <Route path="/" element={<Home />} />
+         <Route path="/" element={<Body />} />
 
           {/* Patient */}
           <Route path="/patient" element={<PatientLayout />}>

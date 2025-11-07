@@ -1,0 +1,130 @@
+.update-profiledoctor-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(132, 191, 255, 0.25);
+  font-family: 'Times New Roman', Times, serif;
+  color: #333;
+  margin-right: 20% !important;
+}
+
+.update-profiledoctor-container h2 {
+  text-align: center;
+  color: #6684a3;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.update-profile-message {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #136DA5;
+}
+
+.update-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.update-profile-form label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6684a3;
+}
+
+.update-profile-form input,
+.update-profile-form select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(132, 191, 255, 0.4);
+  border-radius: 10px;
+  background-color: #f5f9ff;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.update-profile-form input:focus {
+  outline: none;
+  border-color: #6684a3;
+  box-shadow: 0 0 6px rgba(132, 191, 255, 0.5);
+}
+
+.update-profile-form button {
+  background-color: #6684a3;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(102, 132, 163, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.update-profile-form button:hover {
+  background-color: #57738f;
+  transform: translateY(-2px);
+}
+
+/* --- SECTION MOT DE PASSE --- */
+.password-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid rgba(132, 191, 255, 0.3);
+}
+
+.password-section h3 {
+  color: #6684a3;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* --- INPUT AVEC ICÔNE EYE --- */
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 3%;
+  margin-bottom: 4%;
+}
+.password-section label{
+  margin-top: 1%;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 40px; /* espace pour l’icône */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  color: #6684a3;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #57738f;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .update-profiledoctor-container {
+    width: 90%;
+    padding: 25px 20px;
+  }
+
+  .update-profiledoctor-container h2 {
+    font-size: 1.6rem;
+  }
+}

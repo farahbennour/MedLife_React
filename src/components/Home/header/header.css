@@ -1,0 +1,377 @@
+/* --- STYLE GÉNÉRAL DU HEADER --- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(132, 191, 255, 0.53); /* #84BFFF à 53% d’opacité */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 4px 25px rgba(0, 123, 174, 0.15);
+  transition: all 0.3s ease-in-out;
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* --- SUPPRIMER TOUT ESPACE ENTRE NAVBAR ET CONTENU --- */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- CONTENEUR PRINCIPAL --- */
+/* --- LOGO À GAUCHE ET ALIGNÉ VERTICALEMENT --- */
+
+
+.header img:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px rgba(0, 123, 174, 0.4));
+}
+.img-container{
+  margin-top: 10%;
+   height: 40px;           /* taille du logo */
+  width: auto;            /* conserve les proportions */
+  max-width: 20%;
+  cursor: pointer;
+  display: block ;
+  margin:0;              /* supprime tout décalage */
+  padding: 0;
+  /* alignement vertical avec les liens */
+  vertical-align: middle;
+  transform: none;        /* plus de translation inutile */
+  transition: transform 0.3s ease, filter 0.3s ease;
+ 
+}
+.img-container img{
+   height: 40px;           /* taille du logo */
+  width: auto; 
+}
+
+/* Container reste flex avec align-items center */
+header .container {
+  display: flex;
+  align-items: center !important;   /* aligne logo et nav au même niveau */
+  justify-content: space-between;
+  padding: 12px 40px;
+  max-width: 100%;
+  margin: 0;
+}
+
+
+/* --- RESPONSIVE LOGO --- */
+@media (max-width: 992px) {
+  header img {
+    height: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  header img {
+    height: 50px;
+  }
+}
+
+
+/* --- NAVIGATION --- */
+header nav {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+header nav a {
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: #0a4d68;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #007bae, #136da5);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+header nav a:hover {
+  color: #007bae;
+  transform: translateY(-2px);
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
+/* --- BOUTON DE CONNEXION --- */
+.header-button {
+  background-color: #6684a3;
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0 4px 10px rgba(102, 132, 163, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.header-button:hover {
+  background-color: #557393;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(102, 132, 163, 0.4);
+}
+/* --- MENU DÉROULANT FONCTIONNALITÉS --- */
+.features-menu {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  color: #0a4d68;
+  transition: color 0.3s ease;
+}
+
+.features-menu > a {
+  text-decoration: none;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.features-menu > a::after {
+
+  font-size: 0.6rem;
+  transition: transform 0.3s ease;
+}
+
+
+
+.features-menu:hover > a {
+  color: #007bae;
+}
+
+/* Dropdown */
+.features-dropdown {
+  display: none;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  min-width: 220px;
+  padding: 10px 0;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.features-menu:hover .features-dropdown {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Liens du dropdown */
+.features-dropdown a {
+  display: block;
+  padding: 10px 20px;
+  font-weight: 500;
+  color: #0a4d68;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.features-dropdown a:hover {
+  background-color: #e0f2ff;
+  color: #007bae;
+}
+
+
+
+/* --- MENU UTILISATEUR --- */
+.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto; 
+  cursor: pointer;
+}
+
+.user-menu img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.user-menu img:hover {
+  transform: scale(1.1);
+}
+
+/* Plus de :hover ici */
+.user-dropdown-menu {
+  position: absolute;
+  right: 10px;
+  top: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+  padding: 10px 0;
+  z-index: 100;
+  opacity: 1; /* géré via React */
+  transform: translateY(0); /* géré via React si besoin */
+  transition: all 0.3s ease;
+}
+/* 
+.user-dropdown-menu a,.user-dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-weight: 500;
+  color: #0a4d68;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  transition: all 0.3s ease;
+} */
+
+.user-dropdown-menu a{
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-weight: bold;
+   font-size: large;
+  color: #0a4d68;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.user-dropdown-menu button{
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: large;
+  color: #0a4d68;
+  text-decoration: none;
+  background: none;
+  border: none;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Couleur au survol et au clic */
+.user-dropdown-menu a:hover,
+.user-dropdown-menu a:active,
+.user-dropdown-menu button:hover,
+.user-dropdown-menu button:active {
+  background-color: #e0f2ff;
+  color: #007bae;
+}
+
+
+
+
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  .features-dropdown,
+  .user-dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+}
+
+
+/* Responsive mobile : menu utilisateur et fonctionnalités */
+@media (max-width: 768px) {
+  .features-menu .features-dropdown,
+  .user-menu .user-dropdown-menu {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  nav {
+    position: static;
+    transform: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+  header .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+  }
+
+  header nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 12px;
+  }
+
+  header img {
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  header button {
+    width: auto;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  header nav a {
+    font-size: 0.95rem;
+  }
+
+  header img {
+    height: 50px;
+  }
+
+  header button {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    padding: 12px 0;
+  }
+}
