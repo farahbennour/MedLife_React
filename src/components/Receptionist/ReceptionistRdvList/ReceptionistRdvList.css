@@ -1,0 +1,133 @@
+/* ------------------ Container ------------------ */
+.receptionist-rdv-container {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 1100px;
+  width: min(96%, 1200px);
+  margin: 5% auto;
+  margin-left: 23%;
+}
+
+.receptionist-rdv-container h1 {
+  color: #0077b6;
+  margin-bottom: 2.5rem;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
+  font-weight: bold;
+}
+
+/* ------------------ Table ------------------ */
+.receptionist-rdv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Times New Roman', Times, serif;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(180deg, #f5faff 0%, #e3f2fd 100%);
+  overflow: hidden;
+}
+
+.receptionist-rdv-table th,
+.receptionist-rdv-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.receptionist-rdv-table thead th {
+  background: #a5d8ff;
+  color: #004080;
+  font-weight: 700;
+  font-size: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.receptionist-rdv-table tbody tr {
+  background: rgba(235, 245, 255, 0.4);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.receptionist-rdv-table tbody tr:nth-child(even) {
+  background: rgba(225, 240, 255, 0.6);
+}
+
+.receptionist-rdv-table tbody tr:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* ------------------ Status badges ------------------ */
+.receptionist-rdv-status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+.receptionist-rdv-status.pending {
+  background: #fff8c2;
+  color: #8a6d00;
+}
+
+.receptionist-rdv-status.cancelled {
+  background: #ffe0e0;
+  color: #a70000;
+}
+
+.receptionist-rdv-status.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* ------------------ Select Dropdown ------------------ */
+
+.receptionist-rdv-table select {
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.receptionist-rdv-table select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ------------------ Messages ------------------ */
+.receptionist-rdv-message {
+  text-align: center;
+  margin-top: 2rem;
+  color: #004080;
+}
+
+.receptionist-rdv-message.error {
+  color: #a70000;
+}
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 900px) {
+  .receptionist-rdv-table th,
+  .receptionist-rdv-table td {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .receptionist-rdv-table th,
+  .receptionist-rdv-table td {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}

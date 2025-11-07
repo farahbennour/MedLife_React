@@ -10,7 +10,6 @@ import PatientLayout from "./components/Layouts/PatientLayout/PatientLayout.jsx"
 import Login from "./components/Login/login.jsx";
 import UpdateProfilePatient from "./components/Patient/update-profile-patient/update-profile-patient.jsx";
 import Patient from "./components/PatientList/Patient.jsx";
-import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import Receptionist from "./components/ReceptionistList/Receptionist.jsx";
 import RendezVousList from "./components/RendezVousList/RendezVousList.jsx";
 import ResetPassword from "./components/ResetPassword/resetPassword.jsx";
@@ -21,6 +20,9 @@ import Dashboard from "./components/DashboardAdmin/dashboardadmin.jsx";
 import Cliniques from "./components/cliniques/cliniques.jsx";
 import DoctorLayout from "./components/Layouts/DoctorLayout/doctorLayout.jsx";
 import ReceptionistLayout from "./components/Layouts/ReceptionistLayout/receptionistLayout.jsx";
+import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
+import ReceptionistRdvList from "./components/Receptionist/ReceptionistRdvList/ReceptionistRdvList.jsx";
+import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/ReceptionistDoctor.jsx";
 
 export default function App() {
   return (
@@ -48,14 +50,15 @@ export default function App() {
              <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
           </Route>
 
-          {/* Réceptionniste */}
+        
          {/* Réceptionniste */}
           <Route path="/receptionist" element={<ReceptionistLayout />}>
             <Route index element={<DashboardReceptionist />} /> {/*  Dashboard par défaut */}
-             <Route path="dashboard" element={<DashbordPatient />} />
+            <Route path="dashboard" element={<DashbordPatient />} />
             <Route path="patient" element={<Patient />} />
             <Route path="update-profile-receptionist" element={<UpdateProfileReceptionist />}/>{/* page de mise à jour de profil pour le:la récéptioniiste*/}
-         
+            <Route path="rdvs" element={<ReceptionistRdvList />} />
+            <Route path="doctors" element={<ReceptionistDoctors/>}/>
           </Route>
 
           {/* Patient Dashboard */}

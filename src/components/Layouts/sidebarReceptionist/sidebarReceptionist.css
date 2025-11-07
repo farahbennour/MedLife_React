@@ -117,6 +117,42 @@
   line-height: 1.6;
 }
 
+/* ---------- Logout Button (same style as links) ---------- */
+.sidebar-link.logout {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #003553;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  background: rgba(132, 191, 255, 0.5);
+  backdrop-filter: blur(5px);
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.2);
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Same icon spacing as links */
+.sidebar-link.logout img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover identical to links */
+.sidebar-link.logout:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(6px) scale(1.01);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
 /* -------- Responsive -------- */
 @media (max-width: 1024px) {
   .sidebar {
