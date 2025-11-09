@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./ReceptionistRdvList.css";
+import AlertService from "../../../Services/Alert";
 
 const ReceptionistRdvList = () => {
   const [rdvs, setRdvs] = useState([]);
@@ -29,6 +30,7 @@ const ReceptionistRdvList = () => {
       } catch (err) {
         console.error(err);
         setError("Erreur lors du chargement des données");
+        AlertService.error("Erreur", "Impossible de charger les rendez-vous et les médecins.");
       } finally {
         setLoading(false);
       }
@@ -45,7 +47,7 @@ const ReceptionistRdvList = () => {
 
       await axios.post(
         `http://localhost:3000/rendezvous/${rdvId}/assign-doctor`,
-        { doctorId: doctorUserId }, // ✅ correct key name
+        { doctorId: doctorUserId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -54,9 +56,11 @@ const ReceptionistRdvList = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRdvs(response.data);
+
+      AlertService.success("Docteur assigné", "Le médecin a été assigné avec succès !");
     } catch (error) {
       console.error(error);
-      alert("❌ Erreur lors de l’assignation du docteur");
+      AlertService.error("Erreur", "Erreur lors de l’assignation du docteur.");
     } finally {
       setUpdatingRdvId(null);
     }
@@ -94,28 +98,25 @@ const ReceptionistRdvList = () => {
                     timeStyle: "short",
                   })}
                 </td>
-
                 <td>
-                    <span
-                        className={`receptionist-rdv-status ${
-                        rdv.status === "pending"
-                            ? "pending"
-                            : rdv.status === "cancelled"
-                            ? "cancelled"
-                            : "confirmed"
-                        }`}
-                    >
-                        {rdv.status === "pending"
-                        ? "En attente"
-                        : rdv.status === "confirmed"
-                        ? "Confirmé"
+                  <span
+                    className={`receptionist-rdv-status ${
+                      rdv.status === "pending"
+                        ? "pending"
                         : rdv.status === "cancelled"
-                        ? "Annulé"
-                        : rdv.status}
-                    </span>
+                        ? "cancelled"
+                        : "confirmed"
+                    }`}
+                  >
+                    {rdv.status === "pending"
+                      ? "En attente"
+                      : rdv.status === "confirmed"
+                      ? "Confirmé"
+                      : rdv.status === "cancelled"
+                      ? "Annulé"
+                      : rdv.status}
+                  </span>
                 </td>
-
-                {/* 🩺 Doctor Dropdown */}
                 <td>
                   <select
                     value={rdv.doctor ? rdv.doctor.user.id : ""}
@@ -128,8 +129,7 @@ const ReceptionistRdvList = () => {
                       <option value="">Sélectionner un docteur</option>
                     ) : (
                       <option value={rdv.doctor.user.id}>
-                        {rdv.doctor.user.username} (
-                        {rdv.doctor.specialty || "Spécialité inconnue"})
+                        {rdv.doctor.user.username} ({rdv.doctor.specialty || "Spécialité inconnue"})
                       </option>
                     )}
 

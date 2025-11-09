@@ -1,131 +1,95 @@
-/* ==== GLOBAL ==== */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #f8fafc;
-}
-
-/* ==== MAIN CONTENT ==== */
+/* ------------------ Container ------------------ */
 .patient-main {
-  margin-left: 320px; /* largeur sidebar */
-  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 1100px;
+  width: min(96%, 1200px);
+  margin: 5% auto;
+  margin-left: 23%;
   transition: all 0.3s ease;
 }
 
-/* ==== BANNER ==== */
+/* Banner */
 .patient-banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(to right, #a6ccf5);
+  background: linear-gradient(to right, #f0f8ff, #e3f2fd);
+  border-radius: 16px;
   padding: 20px 30px;
   height: 170px;
-  border-radius: 16px;
-  color: white;
-  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #004080;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.6);
+  margin-bottom: 2.5rem;
 }
 
+/* Banner text */
 .patient-banner-text h2 {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .patient-banner-text p {
-  font-size: 14px;
-  opacity: 0.9;
-  margin-top: 5px;
+  font-size: 1rem;
+  opacity: 0.85;
 }
 
-/* ==== SEARCH ==== */
-/* ==== SEARCH SECTION ==== */
-.patient-search {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 30px;
-}
-
-.patient-search input {
-  width: 250px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  outline: none;
-}
-
-.patient-search input:focus {
-  border-color: #a6ccf5;
-}
-
-.patient-search button {
-  background-color: #a6ccf5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-}
-
-.patient-search button:hover {
-  background-color: #33b3b0;
-}
-/* ==== GRID ==== */
+/* Grid */
 .patient-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards par ligne */
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
-/* ==== CARD ==== */
+/* Card */
 .patient-card {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  background: linear-gradient(180deg, #f5faff 0%, #e3f2fd 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Times New Roman', Times, serif;
 }
+
 .patient-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 .patient-card h4 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-  text-align: center;
+  color: #004080;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
 }
 
-.patient-card p {
-  font-size: 13px;
-  color: #555;
-  margin-bottom: 8px;
-  text-align: left;
+.patient-attribute {
+  margin: 6px 0;
+  color: #003366;
+  font-size: 0.95rem;
   width: 100%;
+  text-align: left;
 }
 
 .patient-attribute span.title {
   font-weight: 600;
-  color: #000;
-  min-width: 100px;
 }
 
 .patient-attribute span.value {
-  color: #555;
+  color: #003366;
 }
 
-/* ==== ADD CARD ==== */
+/* Add Card */
 .patient-add-card {
-  background-color: #a6ccf5;
+  background: linear-gradient(180deg, #a6ccf5 0%, #33b3b0 100%);
   color: white;
   text-align: center;
   cursor: pointer;
@@ -133,13 +97,13 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  border-radius: 16px;
+  padding: 2rem;
+  border-radius: 18px;
   transition: transform 0.3s ease;
 }
 
 .patient-add-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.02);
 }
 
 .patient-add-card .add-icon {
@@ -147,8 +111,73 @@ body, html {
   margin-bottom: 10px;
 }
 
+/* Messages */
+.patient-message {
+  text-align: center;
+  margin-top: 2rem;
+  color: #004080;
+}
+
+.patient-message.error {
+  color: #a70000;
+}
+
+/* ------------------ Search Bar ------------------ */
+.patient-search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: 'Times New Roman', Times, serif;
+  gap: 8px;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  padding: 10px 15px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
+}
+
+.patient-search input {
+  font-family:  'Times New Roman', Times, serif;
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  outline: none;
+  font-size: 14px;
+  color: #003366;
+  transition: all 0.3s ease;
+}
+
+.patient-search input:focus {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.patient-search button {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(180deg, #a6ccf5 0%, #33b3b0 100%);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.patient-search button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
 /* ==== MODAL ==== */
 .patient-modal-overlay {
+  font-family:  'Times New Roman', Times, serif;
   position: fixed;
   top:0;
   left:0;
@@ -162,6 +191,7 @@ body, html {
 }
 
 .patient-modal {
+  font-family:  'Times New Roman', Times, serif;
   background-color: #fff;
   padding: 30px 35px;
   border-radius: 16px;
@@ -172,6 +202,7 @@ body, html {
 }
 
 .patient-modal h3 {
+  font-family:  'Times New Roman', Times, serif;
   font-size: 20px;
   font-weight: 600;
   color: #a6ccf5;
@@ -180,6 +211,7 @@ body, html {
 
 .patient-modal form input,
 .patient-modal form select {
+  font-family:  'Times New Roman', Times, serif;
   width: 100%;
   padding: 10px 12px;
   margin-bottom: 15px;
@@ -192,67 +224,64 @@ body, html {
 
 .patient-modal form input:focus,
 .patient-modal form select:focus {
+  font-family:  'Times New Roman', Times, serif;
   border-color: #a6ccf5;
 }
 
 /* BUTTONS MODAL */
 .patient-modal-actions {
+  font-family:  'Times New Roman', Times, serif;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 15px;
-  margin-left: 160px;
+  margin-left: -40px;
 }
 
 .patient-modal-actions button {
+  font-family:  'Times New Roman', Times, serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #f3f3f3;
   border: none;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 20px;
+  padding: 10px 75px;
   cursor: pointer;
   width: 70px;
   transition: 0.3s;
+  margin-left: 10%;
 }
 
 .patient-modal-actions .btn-save {
   background-color:#0ea5e9;
   color:white;
+  font-size: medium;
 }
 
 .patient-modal-actions .btn-cancel {
   background-color:#6684a3;
   color:rgb(255, 255, 255);
-  font-size: 11px;
+  font-size: medium;
 }
 
-/* ==== RESPONSIVE ==== */
-@media (max-width: 1024px) {
-  .patient-grid {
-    grid-template-columns: repeat(3, 1fr);
+/* Responsive */
+@media (max-width: 900px) {
+  .patient-card {
+    padding: 1rem;
+  }
+  .patient-card h4 {
+    font-size: 1.2rem;
   }
 }
 
-@media (max-width: 768px) {
-  .patient-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .patient-grid {
     grid-template-columns: 1fr;
   }
 
   .patient-main {
-    margin-left:0;
-    padding:15px;
-  }
-
-  .patient-modal {
-    width:90%;
-    padding:20px;
+    margin-left: 0;
+    padding: 15px;
   }
 }
