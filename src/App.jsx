@@ -23,6 +23,7 @@ import ReceptionistLayout from "./components/Layouts/ReceptionistLayout/receptio
 import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import ReceptionistRdvList from "./components/Receptionist/ReceptionistRdvList/ReceptionistRdvList.jsx";
 import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/ReceptionistDoctor.jsx";
+import DoctorCalendarWithList from "./components/Doctor/DoctorCalendarWithList/DoctorCalendarWithList.jsx";
 
 export default function App() {
   return (
@@ -47,7 +48,8 @@ export default function App() {
 
           {/* Doctor */}
           <Route path="/doctor" element={<DoctorLayout />}>
-             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
+             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>
+             <Route path="rdvs" element={<DoctorCalendarWithList/>}/>{/* page de mise à jour de profil pour le docteur*/}
           </Route>
 
         
