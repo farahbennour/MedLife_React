@@ -1,0 +1,132 @@
+/* ------------------ Container ------------------ */
+.doctor-patient-list {
+  background: #c6d6f7;
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  max-width: 1100px;
+  width: min(96%, 1200px);
+  margin: 3% auto;
+  margin-left: 23%;
+}
+
+/* ------------------ Title ------------------ */
+.doctor-patient-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #1e40af;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid #2563eb;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+  text-align: center;
+  width: 100%;
+}
+
+/* ------------------ Patient Cards Container ------------------ */
+.patient-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ------------------ Patient Card ------------------ */
+.doctor-patient-card {
+  background: linear-gradient(180deg, #f5faff 0%, #e3f2fd 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  text-align: left;
+  font-family: 'Times New Roman', Times, serif;
+  transition: all 0.3s ease;
+  flex: 1 1 300px;
+  max-width: 350px;
+  min-width: 280px;
+}
+
+.doctor-patient-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.doctor-patient-card h3 {
+  color: #004080;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.doctor-patient-card p {
+  color: #003366;
+  font-size: 0.95rem;
+  margin: 4px 0;
+}
+
+/* ------------------ Button ------------------ */
+.voir-dossier-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.voir-dossier-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(90deg, #2563eb 0%, #1e40af 100%);
+}
+
+/* ------------------ Message ------------------ */
+.doctor-patient-list p {
+  color: #004080;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  width: 100%;
+}
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 900px) {
+  .doctor-patient-list {
+    padding: 1.5rem;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  
+  .doctor-patient-card h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .doctor-patient-list {
+    padding: 1rem;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  
+  .doctor-patient-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  
+  .doctor-patient-card h3 {
+    font-size: 1.2rem;
+  }
+  
+  .voir-dossier-btn {
+    width: 100%;
+  }
+}

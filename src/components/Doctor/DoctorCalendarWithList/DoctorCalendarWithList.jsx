@@ -203,6 +203,32 @@ export default function DoctorCalendarWithList() {
 
                           </>
                         )}
+
+                      {rdv.status === "confirmed" && (
+                        <>
+                          <button
+                            className="accept-btn"
+                            onClick={() =>
+                              window.location.href = `/doctor/dossier/${rdv.patient.id}/${rdv.clinic.id}?rendezvousId=${rdv.id}`
+                            }
+                          >
+                            🔍 Consulter
+                          </button>
+                          <button
+                            className="refuse-btn"
+                            onClick={async () => {
+                              const confirmed = await AlertService.confirm(
+                                "Annuler le rendez-vous",
+                                "Voulez-vous vraiment annuler ce rendez-vous confirmé ?"
+                              );
+                              if (confirmed) handleDecision(rdv.id, "refuse");
+                            }}
+                          >
+                            ❌ Annuler
+                          </button>
+                        </>
+                      )}
+
                       </td>
                     </tr>
                   );
