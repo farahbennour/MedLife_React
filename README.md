@@ -7,7 +7,7 @@
 ## 🌍 Vision du projet
 
 Le projet **MedLife** vise à simplifier et automatiser la gestion quotidienne des cliniques, souvent marquée par des tâches administratives chronophages, des erreurs humaines et une faible communication entre les différents services.
-Grâce à MedFlow, toutes les opérations – création de comptes, gestion des patients, rendez-vous, consultations, ordonnances et paiements – sont regroupées dans une plateforme unifiée, intuitive et accessible.
+Grâce à MedLife, toutes les opérations – création de comptes, gestion des patients, rendez-vous, consultations, ordonnances et paiements – sont regroupées dans une plateforme unifiée, intuitive et accessible.
 
 Notre vision : **un environnement de soin connecté, efficace et sans papier.**
 
@@ -22,7 +22,7 @@ Les cliniques rencontrent souvent les problèmes suivants :
 * Manque de visibilité sur les rendez-vous et les paiements.
 * Absence de centralisation des dossiers médicaux et des ordonnances.
 
-**MedFlow** répond à ces défis par une approche numérique intégrée, fiable et évolutive.
+**MedLife** répond à ces défis par une approche numérique intégrée, fiable et évolutive.
 
 ---
 
@@ -175,7 +175,7 @@ Chaque action clé est accompagnée d’un **email automatique** : confirmation 
 
 ## 👥 Équipe projet
 
-Le projet **MedFlow** est développé par une équipe d’étudiants en informatique dans le cadre d’un projet académique.
+Le projet **MedLife** est développé par une équipe d’étudiants en informatique dans le cadre d’un projet académique.
 L’objectif est d’appliquer des compétences techniques (React, NestJS, MySQL, GitHub, modélisation Visual Paradigm) à un cas d’usage réel du domaine médical.
 
 ---
@@ -184,7 +184,7 @@ L’objectif est d’appliquer des compétences techniques (React, NestJS, MySQL
 
 * **Projet** : MedLife — Plateforme de gestion clinique
 * **Équipe** : BENNOUR Farah, ELKOUT Chayma et MANSOUR Abir
-* **Encadrants** : BEN RHOUMA Mohamed Amine
+* **Encadrant** : BEN RHOUMA Mohamed Amine
 
 
 ---
