@@ -1,0 +1,291 @@
+:root {
+  --primary: #79b4f8;
+  --primary-light: #a6ccf5;
+  --primary-dark: #5a9ee6;
+  --accent: #e6f7f6;
+  --card: rgba(255, 255, 255, 0.95);
+  --card-glass: rgba(255, 255, 255, 0.35);
+  --muted: #6b7280;
+  --background: #f9fafa;
+  --gradient: linear-gradient(135deg, #a6ccf5 0%, #79b4f8 100%);
+}
+
+/* ========== PAGE CONTAINER ========== */
+.doctor-calendar-page {
+  padding: 2rem;
+  margin-left: 310px;
+  background: var(--background);
+  font-family: "Inter", system-ui, sans-serif;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.doctor-calendar-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ========== CALENDAR TABLE STYLING ========== */
+.fc {
+  background: var(--card-glass);
+  backdrop-filter: blur(30px);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 15px 40px rgba(30, 64, 175, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fc-toolbar-title {
+  color: var(--primary-dark);
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.fc-daygrid-day {
+  border-radius: 15px !important;
+  padding: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.fc-daygrid-day:hover {
+  background: rgba(121, 180, 248, 0.25);
+  transform: scale(1.05);
+}
+
+.fc-day-today {
+  background: var(--gradient) !important;
+  color: white !important;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+}
+
+.fc-daygrid-event {
+  background: rgba(34, 99, 230, 0.8);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-top: 3px;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.fc-daygrid-event:hover {
+  background: rgba(34, 99, 230, 1);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(34, 99, 230, 0.4);
+}
+
+.fc-scrollgrid {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.fc-col-header-cell {
+  background: var(--primary-light);
+  color: #003366;
+  font-weight: 600;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.fc-daygrid-body {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fc-daygrid-day-number {
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+
+/* ========== RDV LIST CARD ========== */
+.rdv-list-container {
+  margin-top: 2rem;
+  background: var(--card-glass);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 15px 40px rgba(30, 64, 175, 0.15);
+  animation: fadeIn 0.5s ease-in;
+}
+
+.rdv-list-container h3 {
+  color: var(--primary-dark);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ========== RDV TABLE ========== */
+.rdv-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: linear-gradient(180deg, #f5faff 0%, #e3f2fd 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.rdv-table th,
+.rdv-table td {
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #003366;
+}
+
+.rdv-table thead th {
+  background: #a5d8ff;
+  color: #004080;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.rdv-table tbody tr {
+  background: rgba(235, 245, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.rdv-table tbody tr:nth-child(even) {
+  background: rgba(225, 240, 255, 0.6);
+}
+
+.rdv-table tbody tr:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 25px rgba(30, 64, 175, 0.15);
+  background: rgba(225, 240, 255, 0.8);
+}
+
+/* ========== STATUS BADGES ========== */
+.status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 0.7rem;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 22%;
+}
+
+.status.pending {
+  background: #fff8c2;
+  color: #8a6d00;
+}
+
+.status.confirmed {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status.refused {
+  background: #ffe0e0;
+  color: #a70000;
+}
+
+/* ========== ACTION BUTTONS ========== */
+.accept-btn,
+.refuse-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 6px 14px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin: 3px;
+  margin-left: 10%;
+}
+
+.accept-btn {
+  background: #265939;
+  box-shadow: 0 3px 10px rgba(34, 197, 94, 0.3);
+}
+
+.accept-btn:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
+}
+
+.refuse-btn {
+  background: #da3434;
+  box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
+}
+
+.refuse-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* ========== RDV COUNT BADGE ========== */
+.rdv-count-badge {
+  background: #1e40af;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .doctor-calendar-page {
+    margin-left: 0;
+    padding-top: 5rem;
+  }
+
+  .rdv-table th,
+  .rdv-table td {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .rdv-list-container {
+    padding: 1rem;
+  }
+
+  .rdv-table th,
+  .rdv-table td {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  .accept-btn,
+  .refuse-btn {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

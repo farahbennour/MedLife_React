@@ -23,6 +23,9 @@ import ReceptionistLayout from "./components/Layouts/ReceptionistLayout/receptio
 import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import ReceptionistRdvList from "./components/Receptionist/ReceptionistRdvList/ReceptionistRdvList.jsx";
 import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/ReceptionistDoctor.jsx";
+import DoctorCalendarWithList from "./components/Doctor/DoctorCalendarWithList/DoctorCalendarWithList.jsx";
+import DoctorDossier from "./components/Doctor/DoctorDossier/DoctorDossier.jsx";
+import DoctorPatientList from "./components/Doctor/DoctorPatientList/DoctorPatientList.jsx";
 
 
 export default function App() {
@@ -48,7 +51,10 @@ export default function App() {
 
           {/* Doctor */}
           <Route path="/doctor" element={<DoctorLayout />}>
-             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
+             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>
+             <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
+             <Route path="patients" element={<DoctorPatientList/>}/>
+             <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>{/* page de mise à jour de profil pour le docteur*/}
           </Route>
 
         
