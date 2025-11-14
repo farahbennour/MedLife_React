@@ -6,37 +6,39 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
     name.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
 
   const drawHeader = (pdf, pageWidth, margin) => {
-    pdf.setFillColor(238, 244, 255);
-    pdf.rect(margin, 40, pageWidth - margin * 2, 110, "F");
+  const headerHeight = 100; // Hauteur réduite du cadre
+  pdf.setFillColor(238, 244, 255);
+  pdf.rect(margin, 40, pageWidth - margin * 2, headerHeight, "F");
 
-    // Logo réduit
-    try {
-      pdf.addImage(logo, "PNG", margin + 20, 50, 50, 50);
-    } catch (e) {}
+  // Logo
+  try {
+    pdf.addImage(logo, "PNG", margin + 20, 50, 50, 50);
+  } catch (e) {}
 
-    // Infos cabinet dynamiques
-    pdf.setFontSize(10);
-    pdf.setTextColor(80, 90, 115);
+  pdf.setFontSize(10);
+  pdf.setTextColor(80, 90, 115);
 
-    const name = clinicInfo?.name || "Cabinet Médical • Clinique Exemple";
-    const address = clinicInfo?.address || "Adresse: N/A";
-    const phone = clinicInfo?.phone || "Tél: N/A";
-    const rpps = clinicInfo?.rpps || "";
+  // Infos cabinet avec emojis
+  const clinicName = clinicInfo?.name || "Clinique Exemple";
+  const clinicAddress = clinicInfo?.address || "Adresse non disponible";
+  const clinicPhone = clinicInfo?.phone || "Tél: N/A";
+  const clinicRpps = clinicInfo?.rpps || "—";
 
-    pdf.text(name, pageWidth - margin - 10, 60, { align: "right" });
-    pdf.text(address, pageWidth - margin - 10, 76, { align: "right" });
-    pdf.text(`${phone} ${rpps}`, pageWidth - margin - 10, 92, { align: "right" });
+  pdf.text(` Clinique : ${clinicName}`, pageWidth - margin - 10, 55, { align: "right" });
+  pdf.text(` Adresse : ${clinicAddress}`, pageWidth - margin - 10, 70, { align: "right" });
+  pdf.text(` Téléphone : ${clinicPhone}`, pageWidth - margin - 10, 85, { align: "right" });
 
-    // TITRE CENTRAL
-    pdf.setFontSize(24);
-    pdf.setTextColor(30, 50, 90);
-    pdf.setFont(undefined, "bold");
-    pdf.text("ORDONNANCE MÉDICALE", pageWidth / 2, 130, { align: "center" });
+  // TITRE CENTRAL
+  pdf.setFontSize(24);
+  pdf.setTextColor(30, 50, 90);
+  pdf.setFont(undefined, "bold");
+  pdf.text("ORDONNANCE MÉDICALE", pageWidth / 2, 120, { align: "center" });
 
-    pdf.setDrawColor(160, 180, 210);
-    pdf.setLineWidth(1);
-    pdf.line(pageWidth / 2 - 120, 140, pageWidth / 2 + 120, 140);
-  };
+  pdf.setDrawColor(160, 180, 210);
+  pdf.setLineWidth(1);
+  pdf.line(pageWidth / 2 - 120, 160, pageWidth / 2 + 120, 160);
+};
+
 
   const generatePDF = () => {
     const pdf = new jsPDF({ unit: "pt", format: "a4" });
