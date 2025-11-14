@@ -1,0 +1,180 @@
+/* --- GLOBAL PAGE --- */
+.about-page {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f0f9f5; /* soft health-friendly background */
+  line-height: 1.6;
+}
+
+/* --- HERO SECTION --- */
+.about-hero {
+  background: linear-gradient(135deg, #e0f7f1, #ffffff);
+  padding: 100px 20px;
+  border-radius: 25px;
+  max-width: 1100px;
+  margin: 30px auto;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.about-hero h1 {
+  font-size: 3.8rem;
+  color: #499cf5;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.1);
+}
+
+.about-hero p {
+  font-size: 1.3rem;
+  color: #555;
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* Floating soft shapes in hero */
+.about-hero::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: #adb5af33;
+  border-radius: 50%;
+  top: -50px;
+  left: -50px;
+  animation: float 6s ease-in-out infinite;
+}
+.about-hero::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #007bff33;
+  border-radius: 50%;
+  bottom: -30px;
+  right: -30px;
+  animation: float 8s ease-in-out infinite alternate;
+}
+
+/* Floating keyframes */
+@keyframes float {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* --- MISSION / TEAM / VALUES SECTIONS --- */
+.about-mission, 
+.about-values, 
+.about-team {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.about-mission h2,
+.about-values h2,
+.about-team h2 {
+  font-size: 2.8rem;
+  margin-bottom: 30px;
+  color: #0c6f74;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* --- VALUES CARDS --- */
+.values-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.value-card {
+  flex: 1 1 250px;
+  background: linear-gradient(135deg, #ffffff, #d8f0e8);
+  padding: 30px 20px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.1), -10px -10px 30px rgba(255,255,255,0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.value-card:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 12px 12px 40px rgba(0,0,0,0.15), -12px -12px 40px rgba(255,255,255,0.6);
+}
+
+.value-icon {
+  font-size: 3rem;
+  color: #2892a7;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.value-card:hover .value-icon {
+  transform: rotateY(15deg) rotateX(15deg) scale(1.2);
+  color: #007bff;
+}
+
+.value-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.value-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* --- TEAM SECTION --- */
+.about-mission  p {
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+  color: #555;
+ 
+}
+
+.about-team  p {
+  font-size: 1.2rem;
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+  color: #555;
+ 
+}
+.mission-points, .vision-points {
+  list-style: none;
+  padding-left: 0;
+  max-width: 800px;
+  margin: 20px auto 0 auto;
+   margin-left: 30%;
+}
+
+.mission-points li, .vision-points li {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  padding-left: 35px;
+  position: relative;
+  color: #555;
+}
+
+.mission-points li::before, .vision-points li::before {
+  content: "•"; /* tu peux aussi mettre emoji comme dans JSX */
+  position: absolute;
+  left: 0;
+  color: #28a745; /* couleur santé-friendly */
+  font-size: 1.3rem;
+}

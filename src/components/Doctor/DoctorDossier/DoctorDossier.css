@@ -33,8 +33,8 @@
 }
 
 .back-btn {
-  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
-  color: white;
+  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%) !important;
+  color: white !important;
   padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 12px;
@@ -93,6 +93,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.ordonnance-section ul {
+  padding-left: 1.2rem;
+  
+}
+
+.ordonnance-section li {
+  margin-bottom: 0.3rem;
+  color: #1f2937;
+  list-style: none; /* supprime les puces */
 }
 
 /* 🔹 Hover effects */

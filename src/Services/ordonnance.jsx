@@ -1,5 +1,6 @@
 import { jsPDF } from "jspdf";
 import logo from "../assets/logo.png";
+import "../components/Patient/DossiersMedicaux/PatientDossier.css";
 
 export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
   const sanitizeFilename = (name = "patient") =>
@@ -12,7 +13,7 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
 
   // Logo
   try {
-    pdf.addImage(logo, "PNG", margin + 20, 50, 50, 50);
+pdf.addImage(logo, "PNG", margin + 20, 50, 70, 60); 
   } catch (e) {}
 
   pdf.setFontSize(10);
@@ -84,7 +85,7 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
     pdf.setFontSize(13);
     pdf.setTextColor(28, 46, 80);
     pdf.text(ordonnance.patientName || "—", infoX, infoY + 22);
-    pdf.text(ordonnance.doctorName || "—", infoX + 140, infoY + 22);
+    pdf.text("Dr. " + ordonnance.doctorName || "—", infoX + 140, infoY + 22);
 
     // Réajustement de la date pour qu'elle ne dépasse pas
     const dateStr = ordonnance.date
@@ -98,45 +99,54 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
     pdf.setFontSize(18);
     pdf.setFont(undefined, "bold");
     pdf.setTextColor(28, 46, 80);
-    pdf.text("Traitement prescrit", margin + 6, y);
+    pdf.text("Traitement préscrit", margin + 6, y);
     pdf.setDrawColor(170, 190, 215);
     pdf.setLineWidth(1);
     pdf.line(margin + 6, y + 8, margin + 220, y + 8);
     y += 28;
 
-    // Gestion espace pour sauts de page
-    const ensureSpace = (needed) => {
-      if (y + needed > pageHeight - margin - 140) {
-        pdf.addPage();
-        drawHeader(pdf, pageWidth, margin);
-        y = 160;
-      }
-    };
+    // // Gestion espace pour sauts de page
+    // const ensureSpace = (needed) => {
+    //   if (y + needed > pageHeight - margin - 140) {
+    //     pdf.addPage();
+    //     drawHeader(pdf, pageWidth, margin);
+    //     y = 160;
+    //   }
+    // };
 
     // Liste médicaments
     if (ordonnance.items?.length) {
       ordonnance.items.forEach((item, idx) => {
-        ensureSpace(72);
+        // ensureSpace(72);
+        pdf.setGState(new pdf.GState({ opacityFill: 0.2 }));
+
+        // Dessin du rectangle
         pdf.setFillColor(idx % 2 === 0 ? 250 : 245, 248, 255);
-        pdf.setDrawColor(185, 200, 225);
         pdf.roundedRect(margin + 6, y - 6, pageWidth - (margin + 6) * 2, 64, 10, 10, "F");
 
+        // Remettre opacité à 1 pour la suite
+        pdf.setGState(new pdf.GState({ opacityFill: 1 }));
+        pdf.setDrawColor(185, 200, 225);
+
         // Pastille Rx
-        pdf.setDrawColor(70, 90, 150);
-        pdf.setFillColor(70, 90, 150);
-        pdf.circle(margin + 28, y + 22, 10, "F");
-        pdf.setFontSize(9);
-        pdf.setTextColor(255, 255, 255);
-        pdf.setFont(undefined, "bold");
-        pdf.text("Rx", margin + 24, y + 25);
+        // pdf.setDrawColor(70, 90, 150);
+        // pdf.setFillColor(70, 90, 150);
+        // pdf.circle(margin + 28, y + 22, 10, "F");
+        // pdf.setFontSize(9);
+        // pdf.setTextColor(255, 255, 255);
+        // pdf.setFont(undefined, "bold");
+     
 
         // Nom médicament
+   
+        const boxHeight = 64;
+        const textNameY = y - 6 + boxHeight / 2 - 5; 
         pdf.setFontSize(14);
         pdf.setTextColor(28, 46, 80);
         pdf.setFont(undefined, "bold");
-        pdf.text(item.name || "—", margin + 50, y + 10);
+        pdf.text((item.name || "—"), margin + 40, textNameY);
 
-        // Détails
+        // Détails juste en dessous
         pdf.setFontSize(11);
         pdf.setFont(undefined, "normal");
         pdf.setTextColor(95, 100, 120);
@@ -145,7 +155,8 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
         if (item.frequency) details.push(item.frequency);
         if (item.duration) details.push(`Durée: ${item.duration}`);
         if (item.notes) details.push(item.notes);
-        pdf.text(details.join(" • "), margin + 50, y + 28, { maxWidth: pageWidth - (margin + 6) * 2 - 90 });
+        pdf.text(details.join(" • "), margin + 50, textNameY + 18, { maxWidth: pageWidth - (margin + 6) * 2 - 90 });
+
 
         y += 78;
       });
@@ -156,10 +167,10 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
       y += 30;
     }
 
-    y += 40; 
+   
     // Recommandations
     if (ordonnance.instructions) {
-      ensureSpace(110);
+      // ensureSpace(110);
       pdf.setFont(undefined, "bold");
       pdf.setTextColor(28, 46, 80);
       pdf.setFontSize(16);
@@ -173,15 +184,15 @@ export default function OrdonnancePDF({ ordonnance, clinicInfo }) {
       pdf.setTextColor(80, 80, 90);
       const lines = pdf.splitTextToSize(ordonnance.instructions, pageWidth - margin * 2 - 20);
       lines.forEach((l) => {
-        ensureSpace(18);
+        // ensureSpace(18);
         pdf.text(l, margin + 12, y);
-        y += 18;
+        y += 14;
       });
-      y += 6;
+      
     }
 
     // Signature
-    ensureSpace(120);
+    // ensureSpace(120);
     const sigY = pageHeight - 120;
     pdf.setDrawColor(150, 150, 150);
     pdf.setLineWidth(0.8);

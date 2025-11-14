@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import AlertService from "../../../Services/Alert";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import "./DoctorDossier.css";
+import AlertService from "../../../Services/Alert";
+import { FaTrash, FaEdit } from "react-icons/fa";
 
 export default function DoctorDossier() {
   const { patientId, clinicId } = useParams();
@@ -60,66 +60,76 @@ export default function DoctorDossier() {
   };
 
   // 🔹 Handle Add or Update
-const handleSaveConsultation = async () => {
-  if (!newConsultation.diagnostic)
-    return AlertService.warning("Champ manquant", "Veuillez saisir un diagnostic.");
+  const handleSaveConsultation = async () => {
+    if (!newConsultation.diagnostic)
+      return AlertService.warning("Champ manquant", "Veuillez saisir un diagnostic.");
 
-  const dto = {
-    diagnostic: newConsultation.diagnostic,
-    notes: newConsultation.notes,
+    const dto = {
+      diagnostic: newConsultation.diagnostic,
+      notes: newConsultation.notes,
+    };
+
+    if (showOrdonnanceFields) {
+      dto.ordonnance = {
+        items: newOrdonnance.items.filter(
+          (item) => item.name || item.dose || item.duration
+        ),
+        instructions: newOrdonnance.instructions,
+      };
+    }
+
+    try {
+      let res;
+
+      // 🔹 UPDATE (PATCH)
+      if (editingConsultation) {
+        res = await axios.patch(
+          `http://localhost:3000/consultation/${editingConsultation.id}`,
+          dto,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        const updated = res.data.consultation ?? res.data;
+
+        setDossier((prev) =>
+          prev.map((c) => (c.id === updated.id ? updated : c))
+        );
+
+        AlertService.success(
+          "Consultation mise à jour",
+          "Les modifications ont été enregistrées !"
+        );
+      }
+
+      // 🔹 CREATE (POST) — **THIS WAS MISSING**
+      else {
+        res = await axios.post(
+          `http://localhost:3000/consultation/rendezvous/${rendezvousId}`,
+          dto,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        const created = res.data.consultation ?? res.data;
+
+        setDossier((prev) => [created, ...prev]);
+
+        AlertService.success(
+          "Consultation ajoutée",
+          "La consultation a été enregistrée avec succès !"
+        );
+      }
+
+      resetModal();
+    } catch (err) {
+      console.error(err.response?.data || err);
+
+      if (err.response?.status === 403)
+        AlertService.error("Erreur", "Vous n’êtes pas autorisé(e).");
+      else
+        AlertService.error("Erreur", "Une erreur est survenue.");
+    }
   };
 
-  if (showOrdonnanceFields) {
-    dto.ordonnance = {
-      items: newOrdonnance.items.filter((item) => item.name || item.dose || item.duration),
-      instructions: newOrdonnance.instructions,
-    };
-  }
-
-  try {
-    let res;
-    if (editingConsultation) {
-      // PATCH existant
-      res = await axios.patch(
-        `http://localhost:3000/consultation/${editingConsultation.id}`,
-        dto,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-    } else {
-      // Nouvelle consultation
-      res = await axios.post(
-        `http://localhost:3000/consultation/rendezvous/${rendezvousId}`,
-        dto,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-    }
-
-    const savedConsultation = res.data.consultation ?? res.data;
-    setDossier((prev) => {
-      if (editingConsultation) {
-        return prev.map((c) => (c.id === savedConsultation.id ? savedConsultation : c));
-      } else {
-        return [...prev, savedConsultation];
-      }
-    });
-
-    AlertService.success(
-      editingConsultation ? "Consultation mise à jour" : "Nouvelle consultation",
-      "Les modifications ont été enregistrées !"
-    );
-    resetModal();
-  } catch (err) {
-    console.error(err.response?.data || err);
-    if (err.response?.status === 403) {
-      AlertService.error(
-        "Erreur",
-        "Vous n’êtes pas autorisé(e) à créer ou modifier cette consultation."
-      );
-    } else {
-      AlertService.error("Erreur", "Une erreur est survenue lors de l’enregistrement.");
-    }
-  }
-};
 
   // 🔹 Delete consultation
   const handleDeleteConsultation = async (id) => {
@@ -302,7 +312,7 @@ const handleSaveConsultation = async () => {
                 <h4>Ordonnance</h4>
                 <ul>
                   {consultation.ordonnance.items?.map((m, i) => (
-                    <li key={i}>{m.name} - {m.dose} ({m.duration})</li>
+                    <li key={i}>💊 {m.name} - {m.dose} ({m.duration})</li>
                   ))}
                 </ul>
                 {consultation.ordonnance.instructions && <p><em>{consultation.ordonnance.instructions}</em></p>}

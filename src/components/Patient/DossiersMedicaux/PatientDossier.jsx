@@ -42,10 +42,10 @@ export default function PatientDossier() {
   return (
     <div className="patient-dossier-container">
       <div className="dossier-header">
-        <button className="back-btn" onClick={() => window.history.back()}>
+        <button className="patient-back-btn" onClick={() => window.history.back()}>
           ⬅ Retour
         </button>
-        <h2 className="patients-name">Dossier Médical de {patientName}</h2>
+        <h2 className="patients-name">Dossier Médical</h2>
       </div>
 
       {dossier.length === 0 ? (
@@ -59,14 +59,24 @@ export default function PatientDossier() {
               <div key={c.id} className="consultation-card">
                 <h4>Consultation du {new Date(c.createdAt).toLocaleDateString("fr-FR")}</h4>
 
-                <div className="clinic-info">
-                  <p><strong>Clinique :</strong> {c.clinicName || d.clinic?.name || "—"}</p>
-                  <p><strong>Adresse :</strong> {c.clinicAddress || d.clinic?.address || "—"}</p>
-                  <p><strong>Téléphone :</strong> {c.clinicPhone || d.clinic?.phone || "—"}</p>
-                </div>
+           <div className="clinic-info-container">
+              <div className="clinic-info-block">
+                <strong>Clinique :</strong> {c.clinicName || d.clinic?.name || "—"}
+              </div>
+              <div className="clinic-info-block">
+                <strong>Adresse :</strong> {c.clinicAddress || d.clinic?.address || "—"}
+              </div>
+              <div className="clinic-info-block">
+                <strong>Téléphone :</strong> {c.clinicPhone || d.clinic?.phone || "—"}
+              </div>
+                <div className="clinic-info-block">
+                <strong>Docteur :</strong> Dr.  {c.doctorName || c.doctor?.user?.username || "—"}
+              </div>
+                  
+
+            </div>
 
                 <p><strong>Patient :</strong> {d.patient.user.username}</p>
-                <p><strong>Docteur :</strong> {c.doctorName || c.doctor?.user?.username}</p>
 
                 <p><strong>Diagnostic :</strong> {c.diagnostic || "—"}</p>
                 <p><strong>Notes :</strong> {c.notes || "Aucune note"}</p>

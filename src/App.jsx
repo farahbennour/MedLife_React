@@ -11,7 +11,7 @@ import Login from "./components/Login/login.jsx";
 import UpdateProfilePatient from "./components/Patient/update-profile-patient/update-profile-patient.jsx";
 import Patient from "./components/PatientList/Patient.jsx";
 import Receptionist from "./components/ReceptionistList/Receptionist.jsx";
-import RendezVousList from "./components/RendezVousList/RendezVousList.jsx";
+import RendezVousList from "./components/Patient/Rendez-VousList/Rendez-VousList.jsx";
 import ResetPassword from "./components/ResetPassword/resetPassword.jsx";
 import Services from "./components/Services-clinique/services.jsx";
 import StaffService from "./components/Services-clinique/StaffService.jsx";
@@ -81,8 +81,9 @@ export default function App() {
           <Route path="/patient" element={<PatientLayout />}>
             <Route index element={<DashbordPatient />} />           {/* Dashboard par défaut */}
             <Route path="dashboard" element={<DashbordPatient />} />
-            <Route path="rendezVousList" element={<PatientDossier />} /> {/* Page rendez-vous */}
+            <Route path="rendezVousList" element={<RendezVousList />} /> {/* Page rendez-vous */}
             <Route path="update-profile" element={<UpdateProfilePatient />} /> {/* Profil */}
+            <Route path="dossier-medical" element={<PatientDossier />} /> {/* Dossier Médical */}
           </Route>
 
           {/* Auth */}
