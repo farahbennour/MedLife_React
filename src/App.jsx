@@ -26,6 +26,8 @@ import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/Re
 import DoctorCalendarWithList from "./components/Doctor/DoctorCalendarWithList/DoctorCalendarWithList.jsx";
 import DoctorDossier from "./components/Doctor/DoctorDossier/DoctorDossier.jsx";
 import DoctorPatientList from "./components/Doctor/DoctorPatientList/DoctorPatientList.jsx";
+import PatientDossier from "./components/Patient/DossiersMedicaux/PatientDossier.jsx";
+import PatientsDossiers from "./components/Admin/PatientsDossiers/PatientsDossiers.jsx";
 
 
 export default function App() {
@@ -47,14 +49,15 @@ export default function App() {
             <Route path="receptionist" element={<Receptionist />} />
             <Route path="patient" element={<Patient />} />
             <Route path="update-profile-admin" element={<UpdateProfileAdmin/>}/>{/* page de mise à jour de profil pour l'admin*/}
+            <Route path="DossiersList" element={<PatientsDossiers />} />
           </Route>
 
           {/* Doctor */}
           <Route path="/doctor" element={<DoctorLayout />}>
-             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>
+             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
              <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
              <Route path="patients" element={<DoctorPatientList/>}/>
-             <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>{/* page de mise à jour de profil pour le docteur*/}
+             <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>
           </Route>
 
         
@@ -78,7 +81,7 @@ export default function App() {
           <Route path="/patient" element={<PatientLayout />}>
             <Route index element={<DashbordPatient />} />           {/* Dashboard par défaut */}
             <Route path="dashboard" element={<DashbordPatient />} />
-            <Route path="rendezVousList" element={<RendezVousList />} /> {/* Page rendez-vous */}
+            <Route path="rendezVousList" element={<PatientDossier />} /> {/* Page rendez-vous */}
             <Route path="update-profile" element={<UpdateProfilePatient />} /> {/* Profil */}
           </Route>
 

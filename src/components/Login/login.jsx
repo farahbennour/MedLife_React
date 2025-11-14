@@ -29,9 +29,9 @@ export default function Login() {
 
       localStorage.setItem("token", token);
       localStorage.setItem("role", user.role);
-      localStorage.setItem("id", user.id);
       localStorage.setItem("email", user.email);
       localStorage.setItem("userId", user.id);
+      localStorage.setItem("patientId", user.patientId || "");
 
       AlertService.success("Succès","Bienvenue dans votre espace patient. ");
 
