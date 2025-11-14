@@ -55,6 +55,7 @@
 }
 
 .doctor-patient-card h3 {
+  font-family: 'Times New Roman', Times, serif;
   color: #004080;
   font-size: clamp(1.2rem, 2vw, 1.6rem);
   margin-bottom: 0.5rem;
@@ -62,7 +63,8 @@
 }
 
 .doctor-patient-card p {
-  color: #003366;
+  color: #004080;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 0.95rem;
   margin: 4px 0;
 }
@@ -74,6 +76,7 @@
   background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
   color: white;
   font-weight: 700;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 1rem;
   border: none;
   border-radius: 12px;
@@ -90,7 +93,8 @@
 
 /* ------------------ Message ------------------ */
 .doctor-patient-list p {
-  color: #004080;
+  font-family: 'Times New Roman', Times, serif;
+  color: #000000;
   text-align: center;
   font-weight: 500;
   font-size: 1rem;

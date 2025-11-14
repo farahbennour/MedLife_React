@@ -71,38 +71,65 @@ export default function DoctorDossier() {
 
     if (showOrdonnanceFields) {
       dto.ordonnance = {
-        items: newOrdonnance.items.filter((item) => item.name || item.dose || item.duration),
+        items: newOrdonnance.items.filter(
+          (item) => item.name || item.dose || item.duration
+        ),
         instructions: newOrdonnance.instructions,
       };
     }
 
     try {
-  let res;
-  if (editingConsultation) {
-    res = await axios.patch(
-      `http://localhost:3000/consultation/${editingConsultation.id}`,
-      dto,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    const updated = res.data.consultation ?? res.data;
-    setDossier((prev) =>
-      prev.map((c) => (c.id === updated.id ? updated : c))
-    );
-    AlertService.success("Consultation mise à jour", "Les modifications ont été enregistrées !");
-  }
-} catch (err) {
-  console.error(err.response?.data || err);
-  if (err.response?.status === 403) {
-    AlertService.error(
-      "Erreur",
-      "Vous n’êtes pas autorisé(e) à modifier cette fiche de consultation."
-    );
-  } else {
-    AlertService.error("Erreur", "Une erreur est survenue lors de l’enregistrement.");
-  }
-}
+      let res;
 
+      // 🔹 UPDATE (PATCH)
+      if (editingConsultation) {
+        res = await axios.patch(
+          `http://localhost:3000/consultation/${editingConsultation.id}`,
+          dto,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        const updated = res.data.consultation ?? res.data;
+
+        setDossier((prev) =>
+          prev.map((c) => (c.id === updated.id ? updated : c))
+        );
+
+        AlertService.success(
+          "Consultation mise à jour",
+          "Les modifications ont été enregistrées !"
+        );
+      }
+
+      // 🔹 CREATE (POST) — **THIS WAS MISSING**
+      else {
+        res = await axios.post(
+          `http://localhost:3000/consultation/rendezvous/${rendezvousId}`,
+          dto,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        const created = res.data.consultation ?? res.data;
+
+        setDossier((prev) => [created, ...prev]);
+
+        AlertService.success(
+          "Consultation ajoutée",
+          "La consultation a été enregistrée avec succès !"
+        );
+      }
+
+      resetModal();
+    } catch (err) {
+      console.error(err.response?.data || err);
+
+      if (err.response?.status === 403)
+        AlertService.error("Erreur", "Vous n’êtes pas autorisé(e).");
+      else
+        AlertService.error("Erreur", "Une erreur est survenue.");
+    }
   };
+
 
   // 🔹 Delete consultation
   const handleDeleteConsultation = async (id) => {
