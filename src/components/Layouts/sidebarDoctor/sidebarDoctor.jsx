@@ -6,7 +6,7 @@ import axios from "axios";
 
 // Définition du menu de la sidebar du docteur
 const menu = [
-  { to: "/doctor", label: "Dashboard", img: "/src/assets/dashboard.png" },
+  { to: "/doctor/dashboard", label: "Dashboard", img: "/src/assets/dashboard.png" },
   { to: "/doctor/patients", label: "Patients", img: "/src/assets/patient.png" },
   { to: "/doctor/rdvs", label: "Rendez-vous", img: "/src/assets/agenda.png" },
   { to: "/doctor/update-profile-doctor", label: "Profil", img: "/src/assets/profil.png" },

@@ -26,6 +26,8 @@ import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/Re
 import DoctorCalendarWithList from "./components/Doctor/DoctorCalendarWithList/DoctorCalendarWithList.jsx";
 import DoctorDossier from "./components/Doctor/DoctorDossier/DoctorDossier.jsx";
 import DoctorPatientList from "./components/Doctor/DoctorPatientList/DoctorPatientList.jsx";
+import DoctorDashboard from "./components/Doctor/DoctorDashboard/DoctorDashboard.jsx";
+
 
 export default function App() {
   return (
@@ -53,6 +55,7 @@ export default function App() {
              <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>
              <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
              <Route path="patients" element={<DoctorPatientList/>}/>
+             <Route path="dashboard" element={<DoctorDashboard/>}/>
              <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>{/* page de mise à jour de profil pour le docteur*/}
           </Route>
 
