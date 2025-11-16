@@ -16,6 +16,7 @@ export default function DashboardReceptionist() {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
+  const clinicId = localStorage.getItem("clinicId");
 
   const localImages = {
     cardiologie: cardiologie,
@@ -29,21 +30,21 @@ export default function DashboardReceptionist() {
       try {
         // Services for the receptionist's clinic
         const servicesRes = await axios.get(
-          "http://localhost:3000/services/clinic/1", // Replace 1 with clinic_id dynamically
+          `http://localhost:3000/services/clinic/${clinicId}`, // Replace 1 with clinic_id dynamically
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setServices(servicesRes.data);
 
         // Patients for the receptionist
         const patientsRes = await axios.get(
-          "http://localhost:3000/users/patients/all",
+          `http://localhost:3000/users/patients/all`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPatients(patientsRes.data);
 
         // Doctors for receptionist
         const doctorsRes = await axios.get(
-          "http://localhost:3000/rendezvous/receptionist/doctors",
+          `http://localhost:3000/rendezvous/receptionist/doctors`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setDoctors(doctorsRes.data);
