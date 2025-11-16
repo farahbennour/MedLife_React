@@ -28,6 +28,8 @@ import DoctorDossier from "./components/Doctor/DoctorDossier/DoctorDossier.jsx";
 import DoctorPatientList from "./components/Doctor/DoctorPatientList/DoctorPatientList.jsx";
 import PatientDossier from "./components/Patient/DossiersMedicaux/PatientDossier.jsx";
 import PatientsDossiers from "./components/Admin/PatientsDossiers/PatientsDossiers.jsx";
+import EmitFactureView from "./components/Receptionist/Facture/EmitFacture.jsx";
+import PatientPayments from "./components/Patient/My-payments/my-payments.jsx";
 
 
 export default function App() {
@@ -69,6 +71,7 @@ export default function App() {
             <Route path="update-profile-receptionist" element={<UpdateProfileReceptionist />}/>{/* page de mise à jour de profil pour le:la récéptioniiste*/}
             <Route path="rdvs" element={<ReceptionistRdvList />} />
             <Route path="doctors" element={<ReceptionistDoctors/>}/>
+            <Route path="emit-facture" element={<EmitFactureView/>}/>
           </Route>
 
           {/* Patient Dashboard */}
@@ -84,6 +87,7 @@ export default function App() {
             <Route path="rendezVousList" element={<RendezVousList />} /> {/* Page rendez-vous */}
             <Route path="update-profile" element={<UpdateProfilePatient />} /> {/* Profil */}
             <Route path="dossier-medical" element={<PatientDossier />} /> {/* Dossier Médical */}
+            <Route path="my-payments" element={<PatientPayments/>} /> {/* Mes Paiements */ }
           </Route>
 
           {/* Auth */}

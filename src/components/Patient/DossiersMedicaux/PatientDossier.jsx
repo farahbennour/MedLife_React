@@ -72,11 +72,14 @@ export default function PatientDossier() {
                 <div className="clinic-info-block">
                 <strong>Docteur :</strong> Dr.  {c.doctorName || c.doctor?.user?.username || "—"}
               </div>
+                <div className="clinic-info-block">
+                <strong>Montant :</strong>  {c.totalAmount || "—"} TND
+              </div>
                   
 
             </div>
 
-                <p><strong>Patient :</strong> {d.patient.user.username}</p>
+                <p><strong>Patient :</strong> {d.patient?.user?.username}</p>
 
                 <p><strong>Diagnostic :</strong> {c.diagnostic || "—"}</p>
                 <p><strong>Notes :</strong> {c.notes || "Aucune note"}</p>

@@ -65,6 +65,7 @@ export default function Header() {
                 <NavLink to="/patient/rendezVousList" onClick={() => setFeaturesOpen(false)}>Rendez-Vous</NavLink>
                 <NavLink to="/patient/dashboard" onClick={() => setFeaturesOpen(false)}>Tableau de bord</NavLink>
                 <NavLink to="/patient/dossier-medical" onClick={() => setFeaturesOpen(false)}>Dossier Médical</NavLink>
+                <NavLink to="/patient/my-payments" onClick={() => setFeaturesOpen(false)}>Mes Paiements</NavLink>
               </div>
             )}
           </div>

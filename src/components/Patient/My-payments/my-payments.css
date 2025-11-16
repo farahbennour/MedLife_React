@@ -1,0 +1,169 @@
+/* ====================== Container principal ====================== */
+.payments-container {
+  background: linear-gradient(135deg, #f0f4ff 0%, #d9e4fb 100%);
+  border-radius: 30px;
+  padding: clamp(1rem, 2vw, 2rem);
+  max-width: 1000px;
+  margin: 3% auto 5%;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 25px 50px rgba(100, 149, 237, 0.15), 
+              0 8px 18px rgba(66, 165, 245, 0.05) inset;
+  border: 1px solid #90caf9;
+  transition: all 0.3s ease;
+}
+
+/* ====================== Titre principal ====================== */
+.payments-container h2 {
+  text-align: center;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 2.5rem;
+    color: #256ad1;
+}
+
+/* ====================== Liste des cartes ====================== */
+.payments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+/* ====================== Carte ====================== */
+.invoice-card {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #e6f0ff);
+  border-radius: 25px;
+  padding: 0.7rem 1.3rem;
+  box-shadow: 0 20px 50px rgba(100, 149, 237, 0.2),
+              0 10px 25px rgba(66, 165, 245, 0.1) inset;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #90caf9d9;
+}
+
+/* ---------------------- Hover carte ---------------------- */
+.invoice-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(100, 149, 237, 0.3),
+              0 15px 30px rgba(66, 165, 245, 0.15) inset;
+}
+
+/* ---------------------- Bandeau de statut ---------------------- */
+.status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 0.4rem 1.4rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #fff;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(33, 150, 243, 0.3);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  font-family: 'Times New Roman', Times, serif !important;
+}
+
+/* Couleurs statuts */
+.status-badge.payé { background: linear-gradient(135deg, #1ea117, #1ea117); }
+.status-badge.en-attente { background: linear-gradient(135deg, #ffe082, #ffc107); color: #333; }
+.status-badge.annulé { background: linear-gradient(135deg, #ef5350, #e53935); }
+.status-badge.non-émi { background: linear-gradient(135deg, #90caf9, #64b5f6); }
+
+/* ====================== Header carte ====================== */
+.invoice-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.invoice-header h3 {
+  font-size: 1.3rem;
+  color: #1565c0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ====================== Corps carte ====================== */
+
+.invoice-body {
+  overflow: hidden;        
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  max-height: 1000px;       
+  padding-bottom: 0.8rem;
+}
+
+.invoice-body.collapsed {
+  max-height: 0;
+  padding-bottom: 0;
+}
+
+.invoice-body p {
+  font-size: 0.9rem;
+  color: #0d47a1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(144, 202, 249, 0.3);
+  transition: all 0.3s ease;
+}
+
+.invoice-body p:last-child { border-bottom: none; }
+
+.invoice-body strong { font-weight: 600; }
+
+.invoice-body i {
+  margin-right: 0.5rem;
+  color: #42a5f5;
+  transition: transform 0.3s ease;
+}
+
+.invoice-body p:hover i {
+  transform: scale(1.15);
+}
+
+/* ====================== Footer carte ====================== */
+.invoice-footer {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+.invoice-footer button {
+  padding: 0.65rem 1.6rem;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(66, 165, 245, 0.35);
+}
+
+.invoice-footer button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(66, 165, 245, 0.5);
+  background: linear-gradient(135deg, #64b5f6, #1e88e5);
+}
+
+/* ====================== Responsive ====================== */
+@media (max-width: 768px) {
+  .payments-list { grid-template-columns: 1fr; gap: 1.5rem; }
+  .invoice-card { width: 90%; margin: 0 auto; }
+  .payments-container h2 { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .invoice-card { padding: 1.2rem; border-radius: 20px; }
+  .invoice-footer button { width: 100%; padding: 0.9rem; font-size: 0.9rem; }
+}

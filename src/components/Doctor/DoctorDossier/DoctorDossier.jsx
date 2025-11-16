@@ -26,24 +26,26 @@ export default function DoctorDossier() {
   const rendezvousId = queryParams.get("rendezvousId");
 
   // 🔹 Fetch dossier
-  useEffect(() => {
-    const fetchDossier = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:3000/consultation/dossier?patientId=${patientId}&clinicId=${clinicId}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setDossier(res.data.consultations || []);
-        if (res.data.patient?.user?.username) setPatientName(res.data.patient.user.username);
-      } catch (err) {
-        console.error(err);
-        AlertService.error("Erreur", "Impossible de charger le dossier du patient.");
-      } finally {
-        setLoading(false);
+useEffect(() => {
+  const fetchDossier = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/consultation/dossier?patientId=${patientId}&clinicId=${clinicId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setDossier(res.data); // tableau de dossiers
+      if (res.data.length > 0 && res.data[0].patient?.user?.username) {
+        setPatientName(res.data[0].patient.user.username);
       }
-    };
-    fetchDossier();
-  }, [patientId, clinicId]);
+    } catch (err) {
+      console.error(err);
+      AlertService.error("Erreur", "Impossible de charger le dossier du patient.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchDossier();
+}, [patientId, clinicId]);
 
   // 🔹 Handle change in ordonnance items
   const handleOrdonnanceItemChange = (index, field, value) => {
@@ -281,48 +283,34 @@ export default function DoctorDossier() {
       )}
 
       {/* Consultations list */}
-      {dossier.length === 0 ? (
+    {dossier.length === 0 ? (
         <p>Aucune consultation enregistrée.</p>
       ) : (
-        dossier.map((consultation) => (
-          <div key={consultation.id} className="consultation-card">
-            <div className="consultation-actions">
-              <button
-                className="edit-btn"
-                onClick={() => handleEditConsultation(consultation)}
-                title="Modifier"
-              >
-                <FaEdit />
-              </button>
-              <button
-                className="delete-btn"
-                onClick={() => handleDeleteConsultation(consultation.id)}
-                title="Supprimer"
-              >
-                <FaTrash />
-              </button>
+        dossier.map((dossierItem) => 
+          dossierItem.consultations.map((consultation) => (
+            <div key={consultation.id} className="consultation-card">
+              <h3>Consultation du {new Date(consultation.createdAt).toLocaleDateString("fr-FR")}</h3>
+              <p><strong>Diagnostic :</strong> {consultation.diagnostic}</p>
+              <p><strong>Notes :</strong> {consultation.notes || "Aucune note"}</p>
+
+              {consultation.ordonnance ? (
+                <div className="ordonnance-section">
+                  <h4>Ordonnance</h4>
+                  <ul>
+                    {consultation.ordonnance.items?.map((m, i) => (
+                      <li key={i}>💊 {m.name} - {m.dose} ({m.duration})</li>
+                    ))}
+                  </ul>
+                  {consultation.ordonnance.instructions && <p><em>{consultation.ordonnance.instructions}</em></p>}
+                </div>
+              ) : (
+                <p>Pas d’ordonnance associée.</p>
+              )}
             </div>
-
-            <h3>Consultation du {new Date(consultation.createdAt).toLocaleDateString("fr-FR")}</h3>
-            <p><strong>Diagnostic :</strong> {consultation.diagnostic}</p>
-            <p><strong>Notes :</strong> {consultation.notes || "Aucune note"}</p>
-
-            {consultation.ordonnance ? (
-              <div className="ordonnance-section">
-                <h4>Ordonnance</h4>
-                <ul>
-                  {consultation.ordonnance.items?.map((m, i) => (
-                    <li key={i}>💊 {m.name} - {m.dose} ({m.duration})</li>
-                  ))}
-                </ul>
-                {consultation.ordonnance.instructions && <p><em>{consultation.ordonnance.instructions}</em></p>}
-              </div>
-            ) : (
-              <p>Pas d’ordonnance associée.</p>
-            )}
-          </div>
-        ))
+          ))
+        )
       )}
+
     </div>
   );
 }

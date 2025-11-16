@@ -27,7 +27,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: auto; /* scroll si nécessaire */
+  overflow-y: hidden; /* scroll si nécessaire */
   z-index: 1000;
 }
 
@@ -38,14 +38,14 @@
 /* --- Header Sidebar --- */
 .sidebar-header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .sidebar-header img {
   height: 50px;
   border-radius: 15px;
   margin-top: 3%;
-  margin-bottom: 15px;
+  margin-bottom: 2px;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -60,7 +60,7 @@
 
 .sidebar-menu li {
  
-  margin-top: 10%;
+  margin-top: 7%;
 }
 
 .sidebar-menu a {
