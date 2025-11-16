@@ -30,6 +30,7 @@ import PatientDossier from "./components/Patient/DossiersMedicaux/PatientDossier
 import PatientsDossiers from "./components/Admin/PatientsDossiers/PatientsDossiers.jsx";
 import EmitFactureView from "./components/Receptionist/Facture/EmitFacture.jsx";
 import PatientPayments from "./components/Patient/My-payments/my-payments.jsx";
+import DoctorDashboard from "./components/Doctor/DoctorDashboard/DoctorDashboard.jsx";
 
 
 export default function App() {
@@ -59,6 +60,7 @@ export default function App() {
              <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
              <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
              <Route path="patients" element={<DoctorPatientList/>}/>
+               <Route path="dashboard" element={<DoctorDashboard/>}/>
              <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>
           </Route>
 

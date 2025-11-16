@@ -6,6 +6,7 @@ import "./PatientsDossiers.css";
 export default function PatientsDossiers() {
   const [dossiers, setDossiers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [collapsed, setCollapsed] = useState({}); // état des consultations repliées
 
   const token = localStorage.getItem("token");
 
@@ -26,6 +27,13 @@ export default function PatientsDossiers() {
     };
     fetchDossiers();
   }, [token]);
+
+  const toggleCollapse = (consultationId) => {
+    setCollapsed(prev => ({
+      ...prev,
+      [consultationId]: !prev[consultationId],
+    }));
+  };
 
   const handleDelete = async (consultationId) => {
     try {
@@ -60,11 +68,10 @@ export default function PatientsDossiers() {
         `http://localhost:3000/consultation/${consultationId}/generate-ordonnance`,
         {
           headers: { Authorization: `Bearer ${token}` },
-          responseType: "blob" // important pour recevoir un PDF
+          responseType: "blob" 
         }
       );
 
-      // Créer un lien pour télécharger le PDF
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement("a");
       link.href = url;
@@ -72,14 +79,13 @@ export default function PatientsDossiers() {
       document.body.appendChild(link);
       link.click();
       link.remove();
-
     } catch (err) {
       console.error(err);
       AlertService.error("Erreur", "Impossible de générer l'ordonnance.");
     }
   };
 
-  if (loading) return <div className="dossier-loading">Chargement des dossiers...</div>;
+  if (loading) return <div className="admin-dossier-loading">Chargement des dossiers...</div>;
 
   return (
     <div className="admin-dossier-container">
@@ -89,65 +95,56 @@ export default function PatientsDossiers() {
         <p>Aucun dossier trouvé.</p>
       ) : (
         dossiers.map((dossier) => (
-          <div key={dossier.id} className="admin-consultation-card">
+          <div key={dossier.id} className="admin-dossier-card">
+            <div className="admin-dossier-header">
+              <div><strong>Patient:</strong> {dossier.patient?.user?.username || "—"}</div>
+              <div><strong>Clinique:</strong> {dossier.clinic?.name || "—"} | <strong>Service:</strong> {dossier.service?.name || "—"}</div>
+              <div><strong>Dossier créé le:</strong> {new Date(dossier.createdAt).toLocaleDateString("fr-FR")}</div>
+            </div>
+
             {(dossier.consultations || []).length === 0 ? (
               <p>Aucune consultation trouvée.</p>
             ) : (
               dossier.consultations.map((consultation) => (
                 <div key={consultation.id} className="admin-consultation-card">
-                  <p>
-                    <strong>Date de consultation :</strong>{" "}
-                    {new Date(consultation.createdAt).toLocaleDateString("fr-FR")}
-                  </p>
-                  <p>
-                    <strong>Date de création du dossier :</strong>{" "}
-                    {new Date(dossier.createdAt).toLocaleDateString("fr-FR")}
-                  </p>
-                  <p>
-                    <strong>Clinique :</strong> {dossier.clinic?.name || "—"} |{" "}
-                    <strong>Service :</strong> {dossier.service?.name || "—"}
-                  </p>
-                  <p>
-                    <strong>Patient :</strong> {dossier.patient?.user?.username || "—"} |{" "}
-                    <strong>Docteur :</strong> {consultation.doctor?.user?.username || "—"}
-                  </p>
-                  <p>
-                    <strong>Diagnostic :</strong> {consultation.diagnostic || "—"}
-                  </p>
-
-                  {consultation.ordonnance ? (
-                    <div className="admin-ordonnance-section">
-                      <h5>Ordonnance</h5>
-                      {(consultation.ordonnance.items || []).length === 0 ? (
-                        <p>Aucun médicament prescrit.</p>
-                      ) : (
-                        <ul>
-                          {consultation.ordonnance.items.map((med, idx) => (
-                            <li key={idx}>
-                              💊 {med.name} - {med.dose} {med.duration && `(${med.duration})`}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                      {consultation.ordonnance.instructions && (
-                        <p><em>{consultation.ordonnance.instructions}</em></p>
-                      )}
-                    </div>
-                  ) : (
-                    <p>Pas d’ordonnance associée.</p>
-                  )}
-
-                  {/* Boutons d'action */}
-                  <div className="admin-consultation-actions-container">
-                    <button
-                      className="admin-consultation-actions"
-                      onClick={() => handleDelete(consultation.id)}
-                    >
-                      🗑 Supprimer
-                    </button>
-
-                 
+                  <div 
+                    className="admin-consultation-header"
+                    onClick={() => toggleCollapse(consultation.id)}
+                  >
+                    <span>
+                      <strong>Consultation:</strong> {new Date(consultation.createdAt).toLocaleDateString("fr-FR")}
+                    </span>
+                    <span>
+                      Docteur: {consultation.doctor?.user?.username || "—"}
+                      <span className="admin-collapse-icon">{collapsed[consultation.id] ? "+" : "-"}</span>
+                    </span>
                   </div>
+
+                  {!collapsed[consultation.id] && (
+                    <div className="admin-consultation-body">
+                      <p><strong>Diagnostic:</strong> {consultation.diagnostic || "—"}</p>
+
+                      {consultation.ordonnance ? (
+                        <div className="admin-ordonnance-section">
+                          <h5>Ordonnance</h5>
+                          {(consultation.ordonnance.items || []).length === 0 ? (
+                            <p>Aucun médicament prescrit.</p>
+                          ) : (
+                            <ul>
+                              {consultation.ordonnance.items.map((med, idx) => (
+                                <li key={idx}>💊 {med.name} - {med.dose} {med.duration && `(${med.duration})`}</li>
+                              ))}
+                            </ul>
+                          )}
+                          {consultation.ordonnance.instructions && <p><em>{consultation.ordonnance.instructions}</em></p>}
+                        </div>
+                      ) : <p>Pas d’ordonnance associée.</p>}
+
+                      <div className="admin-consultation-actions">
+                        <button onClick={() => handleDelete(consultation.id)}>🗑 Supprimer</button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               ))
             )}
