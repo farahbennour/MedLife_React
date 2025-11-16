@@ -1,0 +1,202 @@
+/* ------------------ Container principal ------------------ */
+.facture-container {
+  background: linear-gradient(135deg, #e0f7ff 0%, #f0f9ff 100%);
+  border-radius: 25px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  max-width: 1000px;
+  margin: 3% auto 5%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  margin-left: 24%;
+}
+
+/* ------------------ Header ------------------ */
+.facture-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.facture-title {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #0f4c81;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+  letter-spacing: 1px;
+}
+
+/* ------------------ Consultation Cards ------------------ */
+.facture-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.facture-card {
+  background: linear-gradient(145deg, #ffffff, #dbe9ff);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  transition: all 0.5s ease;
+  text-align: center;
+  perspective: 1000px;
+}
+
+.facture-card:hover {
+  transform: rotateY(10deg) rotateX(5deg) translateY(-10px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+
+.facture-card h3 {
+  font-size: 1.4rem;
+  color: #0f4c81;
+  margin-bottom: 0.5rem;
+}
+
+.facture-card p {
+  margin: 0.3rem 0;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.facture-select-btn {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #1e90ff, #3399ff);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.facture-select-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+/* ------------------ Modal ------------------ */
+.facture-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: facture-fadeIn 0.3s ease forwards;
+  z-index: 999;
+  margin-left: 10%;
+}
+
+.facture-modal-content {
+  background: linear-gradient(145deg, #ffffff, #e3f2fd);
+  padding: 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  transform: scale(0);
+  animation: facture-scaleUp 0.3s forwards;
+  perspective: 1000px;
+ 
+}
+.facture-modal-content h3 {
+  text-align: center;
+  color: #0f4c81;
+  margin-bottom: 1.5rem;    }
+
+@keyframes facture-fadeIn {
+  from { background: rgba(0,0,0,0); }
+  to { background: rgba(0,0,0,0.5); }
+}
+
+@keyframes facture-scaleUp {
+  from { transform: scale(0.8) rotateX(-10deg); opacity: 0; }
+  to { transform: scale(1) rotateX(0deg); opacity: 1; }
+}
+
+/* ------------------ Items dans Modal ------------------ */
+.facture-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.facture-item input[type="text"],
+.facture-item input[type="number"],
+.facture-item input[type="date"] {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 2px solid #cce4ff;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.facture-item input:focus {
+  border-color: #1e60c1;
+  box-shadow: 0 0 10px rgba(30,96,193,0.5);
+  outline: none;
+}
+
+/* ------------------ Modal Actions ------------------ */
+.facture-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.facture-submit-btn {
+  background: linear-gradient(145deg, #0f4c81, #1e60c1);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.facture-submit-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+
+.facture-back-btn {
+  background: #e2e2e2;
+  color: #333;
+  border: none;
+  border-radius: 15px;
+  padding: 0.7rem 1.2rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+.facture-back-btn:hover {
+  background: #cfcfcf;
+  transform: translateY(-2px);
+}
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 768px) {
+  .facture-cards-container {
+    grid-template-columns: 1fr;
+  }
+  .facture-item {
+    flex-direction: column;
+  }
+  .facture-modal-content {
+    padding: 1.5rem;
+  }
+}

@@ -113,7 +113,7 @@ export default function RendezVousForm({ onClose }) {
         "http://localhost:3000/rendezvous",
         {
           serviceId: selectedService,
-          doctorId: selectedDoctor,
+          preferredDoctorId: selectedDoctor,
           date,
           motif,
         },

@@ -1,0 +1,149 @@
+/* ------------------ Patient Page Container ------------------ */
+.patient-dossier-container {
+  background: #c6d6f7;
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 1100px;
+  width: min(96%, 1200px);
+  margin-top: 3%;
+  margin-left: 15%;
+}
+
+.patients-name {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #1e40af;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+  border-bottom: 3px solid #2563eb;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+    margin-right: 40%;
+
+}
+.dossier-card h3{
+  color: #162967;
+  margin-bottom: 1rem;
+  margin-right: 5%;
+}
+
+/* ------------------ Consultation Card for Patient ------------------ */
+.consultation-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.consultation-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.consultation-card h4 {
+  color: #004080;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+
+}
+
+/* ------------------ Ordonnance Section ------------------ */
+.patient-ordonnance-section {
+  background: linear-gradient(180deg, #eef2ff 0%, #dbeafe 100%);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 0.8rem;
+}
+
+.patient-ordonnance-section h4 {
+  color: #1e40af;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  margin-right: 10%;
+
+}
+
+.patient-ordonnance-section ul {
+  padding-left: 1.2rem;
+  
+}
+
+.patient-ordonnance-section li {
+  margin-bottom: 0.3rem;
+  color: #1f2937;
+  list-style: none; /* supprime les puces */
+}
+
+.clinic-info-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+
+/* ------------------ Back Button ------------------ */
+.patient-back-btn {
+  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.patient-download-btn {
+  background: #6c89c2;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Times New Roman', Times, serif;
+  transition: all 0.25s ease;
+  margin-left: 80%;
+  margin-top: 1%;
+}
+
+.patient-download-btn:hover {
+  background: #6c89c2;
+  transform: translateY(-2px);
+}
+
+
+.patient-consultation-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.8rem;
+}
+
+
+
+
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 600px) {
+  .patient-dossier-container {
+    width: 95%;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

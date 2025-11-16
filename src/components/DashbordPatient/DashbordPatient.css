@@ -242,13 +242,14 @@ body {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 40px;
+  margin-top: 10%;
 }
 
 .section-title {
   text-align: center;
-  font-size: 24px; /* ↓ كان 26px */
+  font-size: 24px; 
   margin: 0 0 10px 0;
-  color: #0f172a;
+  color: #283d6d !important;
 }
 
 .section-sub {
@@ -258,7 +259,7 @@ body {
   font-size: 15px; /* ↓ كان 15px */
 }
 
-/* الكروت */
+
 .cards-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

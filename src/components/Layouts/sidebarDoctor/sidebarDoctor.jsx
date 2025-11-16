@@ -8,7 +8,7 @@ import axios from "axios";
 const menu = [
   { to: "/doctor", label: "Dashboard", img: "/src/assets/dashboard.png" },
   { to: "/doctor/patients", label: "Patients", img: "/src/assets/patient.png" },
-  { to: "/doctor/rendezvous", label: "Rendez-vous", img: "/src/assets/agenda.png" },
+  { to: "/doctor/rdvs", label: "Rendez-vous", img: "/src/assets/agenda.png" },
   { to: "/doctor/update-profile-doctor", label: "Profil", img: "/src/assets/profil.png" },
 ];
 

@@ -1,0 +1,171 @@
+/* ------------------ Container ------------------ */
+.admin-dossier-container {
+  background: #e2e8f0; /* plus neutre que bleu patient */
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 1200px;
+  width: min(96%, 1200px);
+  margin: 3% auto;
+  margin-left: 20%;
+}
+
+.admin-patient-name {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: #1e3a8a;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1rem;
+  border-bottom: 3px solid #3b82f6;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+  letter-spacing: 0.5px;
+}
+
+/* ------------------ Header / Buttons ------------------ */
+.admin-dossier-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.admin-back-btn,
+.admin-add-btn {
+  background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.admin-back-btn:hover,
+.admin-add-btn:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------------ Consultation Card ------------------ */
+.admin-consultation-card {
+  background: linear-gradient(180deg, #f9fafb 0%, #e5e7eb 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  font-family: 'Times New Roman', Times, serif;
+  transition: all 0.3s ease;
+}
+
+.admin-consultation-card:hover {
+  /* transform: translateY(-5px) scale(1.02); */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.admin-ordonnance-section ul {
+  list-style: none; /* enlève les puces */
+  padding-left: 0;  /* enlève le padding par défaut */
+}
+
+.admin-ordonnance-section li {
+  display: flex;      /* pour aligner icône et texte */
+  align-items: center;
+  margin-bottom: 0.3rem;
+  color: #1f2937;
+}
+.admin-consultation-actions-container {
+  display: flex;
+  justify-content: flex-end; /* pousse le bouton à droite */
+  margin-top: 0.8rem; /* un petit espace au-dessus */
+}
+
+.admin-consultation-actions {
+  background: #6c89c2; /* couleur du bouton */
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem; /* espace entre icône et texte */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.admin-consultation-actions:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+
+
+.admin-consultation-actions:active {
+  transform: scale(0.98);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+
+
+
+.admin-consultation-card h3 {
+  color: #1e40af;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* ------------------ Ordonnance Section ------------------ */
+.admin-ordonnance-section {
+  background: linear-gradient(180deg, #f3f4f6 0%, #e5e7eb 100%);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 0.8rem;
+}
+
+.admin-ordonnance-section h4 {
+  color: #1e3a8a;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-ordonnance-section ul {
+  padding-left: 1.2rem;
+  
+}
+
+.admin-ordonnance-section li {
+  margin-bottom: 0.3rem;
+  color: #1f2937;
+  list-style: none; /* supprime les puces */
+}
+
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 768px) {
+  .admin-admin-dossier-container {
+    padding: 1rem;
+    width: 95%;
+  }
+  .admin-consultation-card h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-dossier-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .admin-back-btn,
+  .admin-add-btn {
+    width: 100%;
+  }
+}
