@@ -30,7 +30,7 @@ export default function DashbordPatient() {
     orthopédie: "/src/assets/orthopédie.png",
     dermatologie: "/src/assets/dermatologie.png",
     pédiatrie: "/src/assets/pediatrie.png",
-    Gastroenterologist: "src/assets/Gastroenterologist.jpeg",
+    gastroentérologie: "/src/assets/Gastro-entérologie.png",
   };
 
   const pastelColors = {

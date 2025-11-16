@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import cardiologie from "/src/assets/cardiologie.png";
 import neurologie from "/src/assets/neurologie.png";
 import orthopédie from "/src/assets/orthopédie.png";
-import Gastroenterologist from "/src/assets/Gastroenterologist.jpeg";
+import Gastroenterologist from "/src/assets/Gastro-entérologie.png";
 
 // Mapping des images locales pour chaque service
 const localImages = {
