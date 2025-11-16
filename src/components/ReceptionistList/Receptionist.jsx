@@ -31,7 +31,12 @@ export default function Receptionist() {
   // ------------------- Charger les réceptionnistes depuis le backend -------------------
   const fetchReceptionists = async () => {
     try {
-      const token = localStorage.getItem("token"); // Récupère le token d'authentification
+      const token = localStorage.getItem("token");
+          if (!token) {
+            Swal.fire("Erreur", "Vous devez être connecté !", "warning");
+            navigate("/login");
+            return;
+          }// Récupère le token d'authentification
       if (!token) {
         alert("Token non trouvé. Veuillez vous reconnecter.");
         navigate("/login"); // Redirige vers la page de login

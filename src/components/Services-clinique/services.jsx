@@ -141,8 +141,13 @@ const Services = () => {
 
   // ------------------- Détails supplémentaires d’un service -------------------
   const handleMoreDetails = (service) => {
-    navigate("/admin/staffservice", { state: { serviceId: service.id } });
-  };
+  navigate("/admin/staffservice", {
+    state: { 
+      serviceId: service.id,
+      clinicId: clinicId   // 🔹 نبعث الـ clinicId معاه
+    },
+  });
+};
 
   // ------------------- Affichage loading / erreur -------------------
   if (loading) return <p>Chargement des services...</p>;
@@ -152,7 +157,7 @@ const Services = () => {
     <div className="services-page">
       {/* ------------------- Header ------------------- */}
       <div className="header">
-        <div className="back-btn" onClick={handleBack}>
+        <div className="service-back-btn" onClick={handleBack}>
           ←
         </div>
         <h2>Services de la Clinique</h2>

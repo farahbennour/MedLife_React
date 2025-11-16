@@ -36,6 +36,11 @@ export default function Doctor() {
   const fetchDoctors = async () => {
     try {
       const token = localStorage.getItem("token");
+          if (!token) {
+            Swal.fire("Erreur", "Vous devez être connecté !", "warning");
+            navigate("/login");
+            return;
+          }
       if (!token) return navigate("/login"); // Redirection si non authentifié
       const res = await axios.get("http://localhost:3000/users/doctors/all", {
         headers: { Authorization: `Bearer ${token}` },
@@ -221,46 +226,36 @@ export default function Doctor() {
       --------------------------- */}
       <div className="doctorlist-grid">
         {filteredDoctors.map(doc => (
-          <div className="doctorlist-card" key={doc.id}>
-            <img src={doc.image || doctorlistImg} alt={doc.username} />
-            <h4>{doc.username}</h4>
-            <p className="doctorlist-role">{doc.email}</p>
+       <div className="doctorlist-card" key={doc.id}>
+  <div className="doctorlist-header">
+    <img src={doc.image || doctorlistImg} alt={doc.username} className="doctor-avatar" />
+    <div>
+      <h3 className="doctor-name">{doc.username || "—"}</h3>
+      <p className="doctor-email">{doc.email || "—"}</p>
+    </div>
+  </div>
 
-            <div className="doctorlist-attributes">
-              <div className="doctorlist-attribute">
-                <span className="title">Téléphone:</span>
-                <span className="value">{doc.phone || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">Spécialité:</span>
-                <span className="value">{doc.doctor?.specialty || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">Clinique:</span>
-                <span className="value">{doc.doctor?.clinic?.name || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">Service:</span>
-                <span className="value">{doc.doctor?.service?.name || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">État:</span>
-                <span className="value">{doc.etat ? "✅ Actif" : "❌ Inactif"}</span>
-              </div>
-            </div>
+  <div className="doctor-info">
+    <p><strong>Téléphone:</strong> {doc.phone || "—"}</p>
+    <p><strong>Spécialité:</strong> {doc.doctor?.specialty || "—"}</p>
+    <p><strong>Clinique:</strong> {doc.doctor?.clinic?.name || "—"}</p>
+    <p><strong>Service:</strong> {doc.doctor?.service?.name || "—"}</p>
+    <p><strong>État:</strong> {doc.etat ? "✅ Actif" : "❌ Inactif"}</p>
+  </div>
 
-            {/* Actions : Modifier / Supprimer */}
-            <div className="doctorlist-actions">
-              <button className="edit-btn-doctor" onClick={() => handleEditDoctor(doc)}>Modifier</button>
-              <button className="delete-btn-doctor" onClick={() => handleDeleteDoctor(doc.id)}>Supprimer</button>
-            </div>
-          </div>
+  <div className="doctor-actions">
+    <button className="edit-btn-doctor" onClick={() => handleEditDoctor(doc)}>Modifier</button>
+    <button className="delete-btn-doctor" onClick={() => handleDeleteDoctor(doc.id)}>Supprimer</button>
+  </div>
+</div>
+
+
         ))}
 
         {/* ---------------------------
             Carte pour ajouter un nouveau docteur
         --------------------------- */}
-        <div className="doctorlist-add-card" onClick={() => setShowModal(true)}>
+        <div className="doctorlist-card add-card" onClick={() => setShowModal(true)}>
           <div className="add-icon">+</div>
           <h4>Ajouter</h4>
           <p>Ajouter un nouveau docteur à votre clinique.</p>
