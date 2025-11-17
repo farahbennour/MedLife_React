@@ -60,7 +60,7 @@ export default function App() {
              <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
              <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
              <Route path="patients" element={<DoctorPatientList/>}/>
-               <Route path="dashboard" element={<DoctorDashboard/>}/>
+             <Route path="dashboard" element={<DoctorDashboard/>}/>
              <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>
           </Route>
 

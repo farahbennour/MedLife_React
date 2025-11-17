@@ -39,7 +39,7 @@ export default function Patient() {
         return;
       }
 
-      const res = await axios.get(`http://localhost:3000/users/patient/clinic/${clinicId}`, {
+      const res = await axios.get(`http://localhost:3000/users/patients/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPatients(res.data); // Stocke les patients

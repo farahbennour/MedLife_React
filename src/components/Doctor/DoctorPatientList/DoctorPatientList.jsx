@@ -54,7 +54,8 @@ export default function DoctorPatientList() {
       {patients.length === 0 ? (
         <p>Aucun patient dans votre clinique.</p>
       ) : (
-        patients.map((patient) => (
+        <div className="patient-cards-container">
+        {patients.map((patient) => (
           <div key={patient.id} className="doctor-patient-card">
             <h3>{patient.name}</h3>
             {patient.email && <p>Email: {patient.email}</p>}
@@ -66,7 +67,8 @@ export default function DoctorPatientList() {
               Voir Dossier
             </button>
           </div>
-        ))
+        ))}
+        </div>
       )}
     </div>
   </div>

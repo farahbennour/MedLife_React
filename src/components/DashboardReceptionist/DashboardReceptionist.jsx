@@ -105,31 +105,30 @@ export default function DashboardReceptionist() {
 
             <section className="users-section">
               <h2>Patients</h2>
-            <table>
-            <thead>
-              <tr>
-                <th>Nom</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-                <th>Adresse</th>
-                <th>Date de Naissance</th>
-                <th>Clinique</th>
-              </tr>
-            </thead>
-            <tbody>
-              {patients.map((p) => (
-                <tr key={p.id}>
-                  <td>{p.username}</td>
-                  <td>{p.email}</td>
-                  <td>{p.phone || "—"}</td>
-                  <td>{p.address || "—"}</td>
-                  <td>{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</td>
-                  <td>{p.clinic}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Date de Naissance</th>
+                    <th>Clinique</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {patients.map((p) => (
+                    <tr key={p.id}>
+                      <td>{p.username}</td>
+                      <td>{p.email}</td>
+                      <td>{p.phone || "—"}</td>
+                      <td>{p.address || "—"}</td>
+                      <td>{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</td>
+                      <td>{p.clinic}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
         </div>
 
