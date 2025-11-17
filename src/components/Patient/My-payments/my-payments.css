@@ -91,6 +91,130 @@
   gap: 0.5rem;
 }
 
+/* ====================== Overlay ====================== */
+.facture-patient-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  perspective: 1200px;
+}
+
+/* ====================== Modal ====================== */
+.facture-patient-modal-content {
+  background: linear-gradient(145deg, #ffffff, #e6f0ff);
+  border-radius: 25px;
+  padding: 30px 25px;
+  max-width: 520px;
+  width: 90%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  box-shadow: 0 20px 50px rgba(0,123,174,0.3), 0 10px 25px rgba(66,165,245,0.1) inset;
+  transform: rotateX(1deg) rotateY(-1deg);
+  border: 2px solid #007BAE;
+  animation: facture-patient-fadeIn 0.6s ease;
+}
+
+/* ====================== Header ====================== */
+.facture-patient-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.facture-patient-modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #007BAE;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/* ====================== Message ====================== */
+.facture-patient-modal-message {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.facture-patient-modal-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #0d47a1;
+  background: linear-gradient(120deg, #ffffff, #f0f6ff);
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,123,174,0.15);
+  transition: transform 0.2s;
+}
+
+.facture-patient-modal-line:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.facture-patient-modal-line-icon {
+  font-size: 1.2rem;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007BAE, #1e88e5);
+  box-shadow: 0 3px 8px rgba(0,123,174,0.4);
+}
+
+/* ====================== Footer / Boutons ====================== */
+.facture-patient-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.facture-patient-modal-btn {
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 6px 18px rgba(0,123,174,0.4);
+  transition: all 0.3s ease;
+}
+
+.facture-patient-modal-btn-close {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  color: #fff;
+}
+
+.facture-patient-modal-btn-close:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(66,165,245,0.6);
+}
+
+/* ====================== Animation ====================== */
+@keyframes facture-patient-fadeIn {
+  from { opacity: 0; transform: translateY(25px) rotateX(5deg); }
+  to { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+
+
 /* ====================== Corps carte ====================== */
 
 .invoice-body {
@@ -148,6 +272,9 @@
   background: linear-gradient(135deg, #42a5f5, #1e88e5);
   transition: all 0.3s ease;
   box-shadow: 0 10px 25px rgba(66, 165, 245, 0.35);
+ 
+ 
+margin-left: 2%;
 }
 
 .invoice-footer button:hover {

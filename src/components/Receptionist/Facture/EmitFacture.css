@@ -188,6 +188,7 @@
   transform: translateY(-2px);
 }
 
+
 /* ------------------ Responsive ------------------ */
 @media (max-width: 768px) {
   .facture-cards-container {

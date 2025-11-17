@@ -2,7 +2,7 @@ import { jsPDF } from "jspdf";
 import logo from "../assets/logo.png";
 import "../components/Patient/DossiersMedicaux/PatientDossier.css";
 
-export const generateInvoicePDF = (payment, clinicInfo) => {
+export const generateInvoicePDFReceptionist = (payment, clinicInfo) => {
   const sanitizeFilename = (name = "patient") =>
     name.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
 
@@ -71,22 +71,20 @@ pdf.setTextColor(50, 50, 60);
 const lineHeight = 20; // espace entre les lignes
 let lineY = y + 25; // point de départ
 
-pdf.text(`ID Facture: ${payment.paymentId}`, margin + 15, lineY);
-lineY += lineHeight;
-
-pdf.text(`Patient: ${payment.patientName || "—"}`, margin + 15, lineY);
+pdf.text(`ID Facture: ${payment.id ?? '—'}`, margin + 15, lineY);
 lineY += lineHeight;
 
 pdf.text(
   `Date de consultation: ${
-    payment.rendezvousDate
-      ? new Date(payment.rendezvousDate).toLocaleDateString()
+    payment.consultationDate
+      ? new Date(payment.consultationDate).toLocaleDateString()
       : "N/A"
   }`,
   margin + 15,
   lineY
 );
 lineY += lineHeight;
+
 
 pdf.text(`Montant: ${payment.totalAmount} TND`, margin + 15, lineY);
 lineY += lineHeight;
@@ -140,8 +138,7 @@ pdf.text(
 );
 
 // Enregistrement PDF
-const filename = `facture_Patient_${payment.paymentId}_${sanitizeFilename(
-  payment.patientName || "patient"
-)}.pdf`;
+const filename = `facture_Receptionniste_${payment.id}_${
+  payment.patientName }.pdf`;
 pdf.save(filename);
 };

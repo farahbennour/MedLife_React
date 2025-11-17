@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import RendezVousForm from "../RendezVousForm/RendezVousForm";
+import { useEffect, useState } from "react";
+import RendezVousForm from "../../Patient/RendezVousForm/RendezVousForm";
 import "./DashboardReceptionist.css";
 import cardiologie from "/src/assets/cardiologie.png";
+import Gastroenterologist from "/src/assets/Gastroenterologist.jpeg";
 import neurologie from "/src/assets/neurologie.png";
 import orthopédie from "/src/assets/orthopédie.png";
-import Gastroenterologist from "/src/assets/Gastroenterologist.jpeg";
-import { CaseLower } from "lucide-react";
 
 export default function DashboardReceptionist() {
   const [selectedService, setSelectedService] = useState(null);

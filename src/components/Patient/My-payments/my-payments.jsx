@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AlertService from "../../../Services/Alert.jsx";
-import { generateInvoicePDF } from "../../../Services/facture.jsx"; 
+import { generateInvoicePDF } from "../../../Services/facture.jsx";
 import "./my-payments.css";
 
 export default function PatientPayments() {
@@ -12,6 +12,26 @@ export default function PatientPayments() {
   const patientId = localStorage.getItem("patientId");
   const token = localStorage.getItem("token");
   const userEmail = localStorage.getItem("email");
+   const [modalData, setModalData] = useState(null);
+
+  // Fonction pour ouvrir le modal de paiement en espèces
+  const showCashPaymentModal = (payment) => {
+    setModalData({
+      title: "💵 Paiement en espèces",
+      message: `
+            🆔 Facture ID      : ${payment.paymentId}
+            👤 Patient         : ${payment.patientName || "—"}
+            🏥 Clinique        : ${payment.clinicName || "Clinique Exemple"}
+            📍 Adresse         : ${payment.clinicAddress || "Adresse N/A"}
+            📞 Téléphone       : ${payment.clinicPhone || "Tél N/A"}
+            📅 Date Consultation: ${payment.rendezvousDate ? new Date(payment.rendezvousDate).toLocaleDateString() : "N/A"}
+            💰 Montant         : ${payment.totalAmount} TND
+            ⏰ Date d'échéance : ${payment.dueDate ? new Date(payment.dueDate).toLocaleDateString() : "N/A"}
+            📝 Créé le         : ${new Date(payment.createdAt).toLocaleDateString()}
+
+            💵 Merci de présenter cette facture lors du paiement en espèces.`,
+    });
+  };
 
   useEffect(() => {
     if (!patientId || !token) return;
@@ -105,27 +125,72 @@ export default function PatientPayments() {
 
 
             <div className="invoice-footer">
-              {p.status === "Payé" ? (
-                <button
-                  className="download-btn"
-                  onClick={() =>
-                    generateInvoicePDF(p, {
-                      name: p.clinicName,
-                      address: p.clinicAddress,
-                      phone: p.clinicPhone,
-                      patientName: p.patientName,
-                    })
-                  }
-                >
-                  📄 Télécharger la facture
-                </button>
-               
-              ) : (
-                <button onClick={() => handlePayment(p)}>💳 Payer maintenant</button>
-              )}
-            </div>
+  {p.status === "Payé" ? (
+    <button
+      className="download-btn"
+      onClick={() =>
+        generateInvoicePDF(p, {
+          id: p.payment,
+          name: p.clinicName,
+          address: p.clinicAddress,
+          phone: p.clinicPhone,
+          patientName: p.patientName,
+        })
+      }
+    >
+      📄 Télécharger la facture
+    </button>
+  ) : (
+    <>
+      <button onClick={() => handlePayment(p)}>💳 Payer En Ligne</button>
+      <button
+  onClick={() => showCashPaymentModal(p)}
+
+>
+  💵 Payer en espèces
+</button>
+
+    </>
+  )}
+</div>
+
           </div>
         ))}
+         {/* Modal personnalisé */}
+      {/* Modal personnalisé 3D avec icônes */}
+{modalData && (
+  <div
+    className="facture-patient-modal-overlay"
+    onClick={() => setModalData(null)}
+  >
+    <div
+      className="facture-patient-modal-content"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header avec icône */}
+      <div style={{ display: "flex", alignItems: "center", marginBottom: "15px" }}>
+        <h2>
+           {modalData.title}
+        </h2>
+      </div>
+
+      {/* Contenu texte du modal */}
+      <pre>{modalData.message}</pre>
+
+      {/* Footer avec bouton fermer */}
+     <div className="facture-patient-modal-footer">
+        <button
+          className="facture-patient-modal-btn facture-patient-modal-btn-close"
+          onClick={() => setModalData(null)}
+        >
+          ✅ <span>Fermer</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+)}
+
       </div>
     </div>
   );
