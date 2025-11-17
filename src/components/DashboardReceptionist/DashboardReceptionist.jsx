@@ -37,7 +37,7 @@ export default function DashboardReceptionist() {
 
         // Patients for the receptionist
         const patientsRes = await axios.get(
-          `http://localhost:3000/users/patients/all`,
+          `http://localhost:3000/users/patient/clinic/${clinicId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPatients(patientsRes.data);
@@ -105,24 +105,31 @@ export default function DashboardReceptionist() {
 
             <section className="users-section">
               <h2>Patients</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Clinique</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {patients.map((p) => (
-                    <tr key={p.id}>
-                      <td>{p.user?.username}</td>
-                      <td>{p.user?.email}</td>
-                      <td>{p.clinic?.name}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Date de Naissance</th>
+                <th>Clinique</th>
+              </tr>
+            </thead>
+            <tbody>
+              {patients.map((p) => (
+                <tr key={p.id}>
+                  <td>{p.username}</td>
+                  <td>{p.email}</td>
+                  <td>{p.phone || "—"}</td>
+                  <td>{p.address || "—"}</td>
+                  <td>{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</td>
+                  <td>{p.clinic}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
             </section>
         </div>
 

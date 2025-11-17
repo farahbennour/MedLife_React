@@ -17,6 +17,7 @@ export default function Patient() {
   const [showModal, setShowModal] = useState(false); // Affichage modal ajout/modification
   const [editPatientId, setEditPatientId] = useState(null); // Id patient pour modification
 
+  const clinicId = localStorage.getItem("clinicId"); // Récupération de l'ID de la clinique pour la réceptionniste
   // Formulaire pour ajout/modification
   const [formData, setFormData] = useState({
     username: "",
@@ -38,7 +39,7 @@ export default function Patient() {
         return;
       }
 
-      const res = await axios.get("http://localhost:3000/users/patients/all", {
+      const res = await axios.get(`http://localhost:3000/users/patient/clinic/${clinicId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setPatients(res.data); // Stocke les patients
@@ -194,13 +195,22 @@ export default function Patient() {
         <div className="patient-grid">
           {filteredPatients.map((p) => (
             <div className="patient-card" key={p.id}>
-              <h4>{p.user?.username}</h4>
-              <p className="patient-attribute"><span className="title">Email:</span> <span className="value">{p.user?.email}</span></p>
-              <p className="patient-attribute"><span className="title">Téléphone:</span> <span className="value">{p.user?.phone || "—"}</span></p>
-              <p className="patient-attribute"><span className="title">Adresse:</span> <span className="value">{p.address || "—"}</span></p>
-              <p className="patient-attribute"><span className="title">Date de naissance:</span> <span className="value">{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</span></p>
-              <p className="patient-attribute"><span className="title">Clinique:</span> <span className="value">{p.clinic?.name || "—"}</span></p>
-
+               <h4>{p.username}</h4>
+                <p className="patient-attribute">
+                  <span className="title">Email:</span> <span className="value">{p.email}</span>
+                </p>
+                <p className="patient-attribute">
+                  <span className="title">Téléphone:</span> <span className="value">{p.phone || "—"}</span>
+                </p>
+                <p className="patient-attribute">
+                  <span className="title">Adresse:</span> <span className="value">{p.address || "—"}</span>
+                </p>
+                <p className="patient-attribute">
+                  <span className="title">Date de naissance:</span> <span className="value">{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</span>
+                </p>
+                <p className="patient-attribute">
+                  <span className="title">Clinique:</span> <span className="value">{p.clinic || "—"}</span>
+                </p>
               {/* Bouton supprimer pour admin */}
               <div className="patient-modal-actions">
                 {role === "admin" && (
