@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import RendezVousForm from "../../Patient/RendezVousForm/RendezVousForm";
 import "./DashboardReceptionist.css";
 import cardiologie from "/src/assets/cardiologie.png";
-import Gastroenterologist from "/src/assets/Gastroenterologist.jpeg";
 import neurologie from "/src/assets/neurologie.png";
 import orthopédie from "/src/assets/orthopédie.png";
 import Gastroenterologist from "/src/assets/Gastro-entérologie.png";

@@ -112,7 +112,24 @@ const Services = () => {
   };
 
   // ------------------- Supprimer un service -------------------
-  const handleDelete = async (id) => {
+  const handleDelete = async (service) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const canDeleteResponse = await axios.get(
+      `http://localhost:3000/services/${service.id}/can-delete`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (!canDeleteResponse.data.canDelete) {
+      Swal.fire(
+        "Impossible",
+        "Ce service contient des médecins ou des réceptionnistes. Impossible de supprimer.",
+        "error"
+      );
+      return;
+    }
+
     const confirmResult = await Swal.fire({
       title: "Êtes-vous sûr ?",
       text: "Cette action supprimera le service définitivement.",
@@ -125,19 +142,19 @@ const Services = () => {
     });
 
     if (confirmResult.isConfirmed) {
-      try {
-        const token = localStorage.getItem("token");
-        await axios.delete(`http://localhost:3000/services/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setServices(services.filter((s) => s.id !== id)); // Retirer le service de la liste
-        Swal.fire("Supprimé !", "Le service a été supprimé ✅", "success");
-      } catch (err) {
-        console.error(err);
-        Swal.fire("Erreur", "Impossible de supprimer le service ❌", "error");
-      }
+      await axios.delete(`http://localhost:3000/services/${service.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setServices(services.filter((s) => s.id !== service.id));
+      Swal.fire("Supprimé !", "Le service a été supprimé ✅", "success");
     }
-  };
+  } catch (err) {
+    console.error(err);
+    Swal.fire("Erreur", "Une erreur est survenue ❌", "error");
+  }
+};
+
 
   // ------------------- Détails supplémentaires d’un service -------------------
   const handleMoreDetails = (service) => {
