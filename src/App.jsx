@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import Cliniques from "./components/Admin/cliniques/cliniques.jsx";
 import Dashboard from "./components/Admin/DashboardAdmin/dashboardadmin.jsx";
 import Doctor from "./components/Admin/DoctorsList/Doctor.jsx";
-import PatientListAdmin from "./components/Admin/PatientListAdmin/PatientListAdmin.jsx";
 import PatientsDossiers from "./components/Admin/PatientsDossiers/PatientsDossiers.jsx";
 import Receptionist from "./components/Admin/ReceptionistList/Receptionist.jsx";
 import Services from "./components/Admin/Services-clinique/services.jsx";
@@ -25,19 +24,27 @@ import PatientDossier from "./components/Patient/DossiersMedicaux/PatientDossier
 import PatientPayments from "./components/Patient/My-payments/my-payments.jsx";
 import RendezVousList from "./components/Patient/Rendez-VousList/Rendez-VousList.jsx";
 import UpdateProfilePatient from "./components/Patient/update-profile-patient/update-profile-patient.jsx";
-import Patient from "./components/PatientList/Patient.jsx";
 import DashboardReceptionist from "./components/Receptionist/DashboardReceptionist/DashboardReceptionist.jsx";
 import EmitFactureView from "./components/Receptionist/Facture/EmitFacture.jsx";
 import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/ReceptionistDoctor.jsx";
 import ReceptionistRdvList from "./components/Receptionist/ReceptionistRdvList/ReceptionistRdvList.jsx";
 import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import ResetPassword from "./components/ResetPassword/resetPassword.jsx";
-
+import Patient from "./components/PatientList/Patient.jsx";
+import PatientListAdmin from "./components/Admin/PatientListAdmin/PatientListAdmin.jsx";
+import { useEffect } from "react";
+import ReactivateSuccess from "./components/Patient/reactivate-account/reactivate-account.jsx";
+import About from "./components/à-propos/about.jsx";
 
 export default function App() {
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  }, []);
+
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-1">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-1 overflow-auto">
         <Routes>
           {/* Page d'accueil */}
           <Route path="/" element={<Body />} />
@@ -46,58 +53,54 @@ export default function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="cliniques" element={<Cliniques/>} />
+            <Route path="cliniques" element={<Cliniques />} />
             <Route path="cliniques/services" element={<Services />} />
             <Route path="staffservice" element={<StaffService />} />
             <Route path="doctor" element={<Doctor />} />
             <Route path="receptionist" element={<Receptionist />} />
             <Route path="patientList" element={<PatientListAdmin />} />
-            <Route path="update-profile-admin" element={<UpdateProfileAdmin/>}/>{/* page de mise à jour de profil pour l'admin*/}
+            <Route path="update-profile-admin" element={<UpdateProfileAdmin />} />
             <Route path="DossiersList" element={<PatientsDossiers />} />
           </Route>
 
           {/* Doctor */}
           <Route path="/doctor" element={<DoctorLayout />}>
-             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
-             <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
-             <Route path="patients" element={<DoctorPatientList/>}/>
-             <Route path="dashboard" element={<DoctorDashboard/>}/>
-             <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>
+            <Route path="update-profile-doctor" element={<UpdateProfileDoctor />} />
+            <Route path="rdvs" element={<DoctorCalendarWithList />} />
+            <Route path="patients" element={<DoctorPatientList />} />
+            <Route path="dashboard" element={<DoctorDashboard />} />
+            <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier />} />
           </Route>
 
-        
-         {/* Réceptionniste */}
+          {/* Réceptionniste */}
           <Route path="/receptionist" element={<ReceptionistLayout />}>
-            <Route index element={<DashboardReceptionist />} /> {/*  Dashboard par défaut */}
+            <Route index element={<DashboardReceptionist />} />
             <Route path="dashboard" element={<DashbordPatient />} />
             <Route path="patient" element={<Patient />} />
-            <Route path="update-profile-receptionist" element={<UpdateProfileReceptionist />}/>{/* page de mise à jour de profil pour le:la récéptioniiste*/}
+            <Route path="update-profile-receptionist" element={<UpdateProfileReceptionist />} />
             <Route path="rdvs" element={<ReceptionistRdvList />} />
-            <Route path="doctors" element={<ReceptionistDoctors/>}/>
-            <Route path="emit-facture" element={<EmitFactureView/>}/>
+            <Route path="doctors" element={<ReceptionistDoctors />} />
+            <Route path="emit-facture" element={<EmitFactureView />} />
           </Route>
-
-          {/* Patient Dashboard */}
-         
-           {/* Patient */}
-       
-         <Route path="/" element={<Body />} />
 
           {/* Patient */}
           <Route path="/patient" element={<PatientLayout />}>
-            <Route index element={<DashbordPatient />} />           {/* Dashboard par défaut */}
+            <Route index element={<DashbordPatient />} />
             <Route path="dashboard" element={<DashbordPatient />} />
-            <Route path="rendezVousList" element={<RendezVousList />} /> {/* Page rendez-vous */}
-            <Route path="update-profile" element={<UpdateProfilePatient />} /> {/* Profil */}
-            <Route path="dossier-medical" element={<PatientDossier />} /> {/* Dossier Médical */}
-            <Route path="my-payments" element={<PatientPayments/>} /> {/* Mes Paiements */ }
+            <Route path="rendezVousList" element={<RendezVousList />} />
+            <Route path="update-profile" element={<UpdateProfilePatient />} />
+            <Route path="dossier-medical" element={<PatientDossier />} />
+            <Route path="my-payments" element={<PatientPayments />} />
+                  <Route path="a-propos" element={<About/>}/>
           </Route>
+      
 
           {/* Auth */}
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-      
+          <Route path="/reactivate-account" element= {<ReactivateSuccess/>}/>
+          <Route path="/a-propos" element={<About/>}/>
         </Routes>
       </main>
     </div>

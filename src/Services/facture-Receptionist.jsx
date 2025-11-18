@@ -1,12 +1,16 @@
 import { jsPDF } from "jspdf";
 import logo from "../assets/logo.png";
 import "../components/Patient/DossiersMedicaux/PatientDossier.css";
+import autoTable from "jspdf-autotable";
 
 export const generateInvoicePDFReceptionist = (payment, clinicInfo) => {
   const sanitizeFilename = (name = "patient") =>
     name.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
 
   const pdf = new jsPDF({ unit: "pt", format: "a4" });
+   pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(12);
+
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
   const margin = 40;
@@ -103,28 +107,21 @@ pdf.text(
 
 
 
+
 // Tableau des items
 if (payment.items?.length) {
-  const tableData = payment.items.map(
-    (item, i) => [`${i + 1}. ${item.description} — ${item.amount} TND`]
-  );
-
-  pdf.autoTable({
-    startY: y,
-    head: [["Liste des prestations / articles"]],
-    body: tableData,
+  const startY = y + 20;
+  autoTable(pdf, {
+    startY,
+   
     theme: "grid",
-    headStyles: {
-      fillColor: [238, 244, 255],
-      textColor: [30, 50, 90],
-      fontStyle: "bold",
-    },
+    headStyles: { fillColor: [238, 244, 255], textColor: [30, 50, 90], fontStyle: "bold" },
     bodyStyles: { textColor: [50, 50, 60], fontSize: 11 },
     margin: { left: margin, right: margin },
     styles: { cellPadding: 6 },
   });
 
-  y = pdf.lastAutoTable.finalY + 20;
+  y = pdf.lastAutoTable?.finalY + 20 || startY + 20;
 }
 
 // Footer

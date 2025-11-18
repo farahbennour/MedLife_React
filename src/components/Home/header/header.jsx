@@ -8,6 +8,7 @@ export default function Header() {
 
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const featuresRef = useRef(null); // 🔹 Ref pour le menu fonctionnalités
   const userRef = useRef(null);     // 🔹 Ref pour le menu utilisateur
@@ -49,7 +50,8 @@ export default function Header() {
         </div>
 
         {/* Menu principal */}
-        <nav className="hidden md:flex gap-6 text-sky-800 items-center relative">
+     <nav className={`nav-links ${mobileOpen ? 'show' : ''} md:flex gap-6 items-center`}>
+
           <Link to="/" className="hover:underline">Accueil</Link>
 
           {/* Menu déroulant Fonctionnalités */}
@@ -61,7 +63,7 @@ export default function Header() {
               Fonctionnalités
             </Link>
             {featuresOpen && (
-              <div className="features-dropdown">
+              <div className="features-dropdown md:absolute">
                 <NavLink to="/patient/rendezVousList" onClick={() => setFeaturesOpen(false)}>Rendez-Vous</NavLink>
                 <NavLink to="/patient/dashboard" onClick={() => setFeaturesOpen(false)}>Tableau de bord</NavLink>
                 <NavLink to="/patient/dossier-medical" onClick={() => setFeaturesOpen(false)}>Dossier Médical</NavLink>
@@ -70,16 +72,27 @@ export default function Header() {
             )}
           </div>
 
-          <Link to="/patient/à-propos" className="hover:underline">À propos</Link>
+          <Link to="/patient/a-propos" className="hover:underline">À propos</Link>
           <Link to="/contact" className="hover:underline">Contact</Link>
         </nav>
+
+        {/* Hamburger menu pour mobile */}
+       {/* Hamburger menu mobile */}
+        <button className="menu-toggle md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+          ☰
+        </button>
+
+
 
         {/* Connexion / Profil */}
         <div ref={userRef}>
           {!isLoggedIn ? (
-            <button onClick={() => navigate("/login")} className="header-button">
-              Se connecter
-            </button>
+           <div className="header-container">
+              <button onClick={() => navigate("/login")} className="header-button">
+                Se connecter
+              </button>
+           </div>
+
           ) : (
             <div className="user-menu">
               <img 

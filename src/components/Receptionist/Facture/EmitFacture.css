@@ -71,6 +71,7 @@
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  margin-left: 1%;
 }
 
 .facture-select-btn:hover {
@@ -152,6 +153,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
+  
 }
 
 .facture-submit-btn {
@@ -181,6 +183,7 @@
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+ 
 }
 
 .facture-back-btn:hover {
