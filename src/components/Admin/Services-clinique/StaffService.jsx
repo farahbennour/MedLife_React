@@ -307,11 +307,14 @@ export default function StaffService() {
       }
 
       try {
+
         setLoading(true);
         const res = await axios.get(
           `http://localhost:3000/users/staff?clinicId=${clinicId}&serviceId=${serviceId}`,
+
           { headers: { Authorization: `Bearer ${token}` } }
         );
+
 
         const data = res.data || {};
         setDoctors(data.doctors || []);
@@ -320,6 +323,7 @@ export default function StaffService() {
       } catch (err) {
         console.error("Erreur API:", err);
         setError("Erreur lors du chargement du staff.");
+
       } finally {
         setLoading(false);
       }

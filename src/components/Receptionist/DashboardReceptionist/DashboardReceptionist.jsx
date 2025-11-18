@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import RendezVousForm from "../RendezVousForm/RendezVousForm";
+import { useEffect, useState } from "react";
+import RendezVousForm from "../../Patient/RendezVousForm/RendezVousForm";
 import "./DashboardReceptionist.css";
 import cardiologie from "/src/assets/cardiologie.png";
+import Gastroenterologist from "/src/assets/Gastroenterologist.jpeg";
 import neurologie from "/src/assets/neurologie.png";
 import orthopédie from "/src/assets/orthopédie.png";
 import Gastroenterologist from "/src/assets/Gastro-entérologie.png";
@@ -37,7 +38,7 @@ export default function DashboardReceptionist() {
 
         // Patients for the receptionist
         const patientsRes = await axios.get(
-          `http://localhost:3000/users/patients/all`,
+          `http://localhost:3000/users/patient/clinic/${clinicId}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPatients(patientsRes.data);
@@ -110,15 +111,21 @@ export default function DashboardReceptionist() {
                   <tr>
                     <th>Nom</th>
                     <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Date de Naissance</th>
                     <th>Clinique</th>
                   </tr>
                 </thead>
                 <tbody>
                   {patients.map((p) => (
                     <tr key={p.id}>
-                      <td>{p.user?.username}</td>
-                      <td>{p.user?.email}</td>
-                      <td>{p.clinic?.name}</td>
+                      <td>{p.username}</td>
+                      <td>{p.email}</td>
+                      <td>{p.phone || "—"}</td>
+                      <td>{p.address || "—"}</td>
+                      <td>{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</td>
+                      <td>{p.clinic}</td>
                     </tr>
                   ))}
                 </tbody>

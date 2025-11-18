@@ -1,0 +1,90 @@
+/* ====================== Container global ====================== */
+.payment-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ====================== Card ====================== */
+.payment-status-card {
+  background: linear-gradient(145deg, #ffffff, #e6f0ff);
+  border-radius: 30px;
+  padding: 2.5rem 3rem;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid #90caf9;
+  box-shadow: 0 25px 50px rgba(100,149,237,0.2),
+              0 8px 18px rgba(66,165,245,0.1) inset;
+  animation: fadeIn 0.6s ease;
+  margin-top: 13%;
+}
+
+/* ====================== Titre ====================== */
+.payment-status-card h2 {
+  font-size: 2rem;
+  color: #256ad1;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* ====================== Texte ====================== */
+.payment-status-card p {
+  font-size: 1rem;
+  color: #0d47a1;
+  margin-bottom: 2rem;
+}
+
+/* ====================== Icone ====================== */
+.status-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.8rem;
+  color: white;
+  box-shadow: 0 10px 25px rgba(66,165,245,0.25);
+}
+
+/* Succès */
+.success-icon {
+  background: linear-gradient(135deg, #1ea117, #1ea117);
+}
+
+/* Annulé */
+.cancel-icon {
+  background: linear-gradient(135deg, #ef5350, #e53935);
+}
+
+/* ====================== Bouton ====================== */
+.return-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  box-shadow: 0 10px 25px rgba(66,165,245,0.35);
+  transition: 0.3s ease;
+}
+
+.return-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(135deg, #64b5f6, #1e88e5);
+  box-shadow: 0 15px 30px rgba(66,165,245,0.5);
+}
+
+/* ====================== Animation ====================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

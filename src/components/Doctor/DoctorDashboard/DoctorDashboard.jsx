@@ -39,7 +39,7 @@ export default function DoctorDashboard() {
 
         // Patients for the receptionist
         const patientsRes = await axios.get(
-          `http://localhost:3000/users/patients/all`,
+          `http://localhost:3000/consultation/my-clinic-dossiers`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setPatients(patientsRes.data);
@@ -106,23 +106,34 @@ export default function DoctorDashboard() {
           <section className="doctor-users-section">
             <h2>Patients</h2>
             <table>
-              <thead>
-                <tr>
-                  <th>Nom</th>
-                  <th>Email</th>
-                  <th>Clinique</th>
-                </tr>
-              </thead>
-              <tbody>
-                {patients.map((p) => (
-                  <tr key={p.id}>
-                    <td>{p.user?.username}</td>
-                    <td>{p.user?.email}</td>
-                    <td>{p.clinic?.name}</td>
+                <thead>
+                  <tr>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Date de Naissance</th>
+                    <th>Clinique</th>
+                    <th>Service </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                  <tbody>
+                  {patients.map((dossier) => {
+                    const p = dossier.patient;
+                    return (
+                      <tr key={p.id}>
+                        <td>{p.user?.username}</td>
+                        <td>{p.user?.email}</td>
+                        <td>{p.user?.phone || "—"}</td>
+                        <td>{p.address || "—"}</td>
+                        <td>{p.dateNaissance ? new Date(p.dateNaissance).toLocaleDateString() : "—"}</td>
+                        <td>{p.clinic?.name || "—"}</td>
+                        <td>{p.services?.map((s) => s.name).join(", ") || "—"}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
           </section>
         </div>
 

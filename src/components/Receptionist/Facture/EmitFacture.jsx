@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import AlertService from '../../../Services/Alert';
+import { generateInvoicePDFReceptionist } from '../../../Services/facture-Receptionist';
 import './EmitFacture.css';
 
 export default function EmitFactureView() {
@@ -10,6 +12,7 @@ export default function EmitFactureView() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const token = localStorage.getItem('token');
+console.log("CONSULTATIONS:", consultations);
 
   // 🔹 Récupérer les consultations à l'initialisation
   useEffect(() => {
@@ -38,7 +41,7 @@ export default function EmitFactureView() {
   const handleEmitFacture = async () => {
     if (!selectedConsultation) return alert('Veuillez sélectionner une consultation');
     if (!items.length || items.some(i => !i.description || !i.amount)) {
-      return alert('Veuillez remplir tous les items avec un montant valide');
+      return AlertService.warning('Veuillez remplir tous les items avec un montant valide');
     }
 
     try {
@@ -47,7 +50,7 @@ export default function EmitFactureView() {
         { items, dueDate },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      alert('Facture émise avec succès !');
+      AlertService.success('Facture émise avec succès !');
       console.log(res.data);
 
       // Reset formulaire
@@ -57,7 +60,7 @@ export default function EmitFactureView() {
       setModalOpen(false);
     } catch (err) {
       console.error(err.response?.data || err.message);
-      alert("Erreur lors de l'émission de la facture");
+      AlertService.error("Erreur lors de l'émission de la facture");
     }
   };
   const getStatusColor = (status) => {
@@ -95,16 +98,68 @@ export default function EmitFactureView() {
                 {c.paymentStatus ?? 'Non émise'}
                 </strong>
             </p>
+            <p>Service: {c.serviceName ?? '—'}</p>
+            <p>Clinique: {c.clinicName ?? '—'}</p>
+
             {c.dueDate && <p>Date d'échéance: <strong>{new Date(c.dueDate).toLocaleDateString()}</strong></p>}
-            <button
-                className="facture-select-btn"
-                onClick={() => {
-                setSelectedConsultation(c);
-                setModalOpen(true);
-                }}
-            >
-                Émettre Facture
-            </button>
+          {c.paymentStatus === "Payé" ? (
+  <button
+    className="facture-select-btn"
+    onClick={() => {
+      // 🔹 Log des données pour vérifier
+      console.log('Données PDF:', {
+        id: c.paymentId,
+        consultationDate: c.consultationDate,
+        patientName: c.patientName,
+        totalAmount: c.totalAmount,
+        dueDate: c.dueDate,
+        status: c.paymentStatus,
+        serviceName: c.serviceName,
+        clinicName: c.clinicName,
+        createdAt: c.paymentCreatedAt,
+        items: c.ordonnanceItems,
+      });
+
+      // 🔹 Génération du PDF
+generateInvoicePDFReceptionist(
+  {
+    id: c.paymentId ?? '—',
+    patientName: c.patientName ?? '—',
+    consultationDate: c.consultationDate ? new Date(c.consultationDate) : null,
+    totalAmount: c.totalAmount ?? 0,
+    dueDate: c.dueDate ? new Date(c.dueDate) : null,
+    status: c.paymentStatus ?? 'Non émise',
+    serviceName: c.serviceName ?? '—',
+    createdAt: c.paymentCreatedAt ? new Date(c.paymentCreatedAt) : new Date(),
+    items: c.ordonnanceItems || [],
+  },
+  {
+    name: c.clinicName,
+    address: c.clinicAddress,
+    phone: c.clinicPhone,
+  }
+);
+
+
+
+    }}
+  >
+    Télécharger facture
+  </button>
+) : (
+  <button
+    className="facture-select-btn"
+    onClick={() => {
+      setSelectedConsultation(c);
+      setModalOpen(true);
+    }}
+  >
+    Émettre Facture
+  </button>
+)}
+
+
+
             </div>
         ))}
         </div>

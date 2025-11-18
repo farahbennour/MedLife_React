@@ -5,6 +5,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "./DoctorCalendarWithList.css";
 import AlertService from "../../../Services/Alert";
+import frLocale from "@fullcalendar/core/locales/fr";
+
 
 export default function DoctorCalendarWithList() {
   const [events, setEvents] = useState([]);
@@ -13,6 +15,19 @@ export default function DoctorCalendarWithList() {
   const token = localStorage.getItem("token");
 
   const rdvListRef = useRef(null);
+
+  const translateStatus = (status) => {
+  switch (status) {
+    case "pending":
+      return "En attente";
+    case "confirmed":
+      return "Confirmé";
+    case "refused":
+      return "Refusé";
+    default:
+      return status;
+  }
+};
 
   // Fetch doctor's rendezvous on mount
   useEffect(() => {
@@ -24,11 +39,16 @@ export default function DoctorCalendarWithList() {
 
         // Group RDVs by date to count them
         const rdvsByDate = res.data.reduce((acc, rdv) => {
-          const dateStr = new Date(rdv.date).toDateString();
+        const dateStr = rdv.date.split("T")[0];
           if (!acc[dateStr]) {
             acc[dateStr] = [];
           }
-          acc[dateStr].push(rdv);
+          acc[dateStr].push(
+            {
+              ...rdv,
+              id: rdv._id ?? rdv.id
+            }
+          );
           return acc;
         }, {});
 
@@ -36,7 +56,7 @@ export default function DoctorCalendarWithList() {
         const formatted = Object.entries(rdvsByDate).map(([dateStr, rdvs]) => ({
           id: `event-${dateStr}`,
           title: `${rdvs.length} RDV${rdvs.length > 1 ? 's' : ''}`,
-          start: new Date(dateStr),
+          start: dateStr,
           extendedProps: {
             rdvs: rdvs, // Store all RDVs for this date
             count: rdvs.length
@@ -53,18 +73,15 @@ export default function DoctorCalendarWithList() {
 
   // Handle date click
   const handleDateClick = (info) => {
-    const clickedDate = new Date(info.dateStr);
+    const clickedDateStr = info.dateStr;  
+    const clickedDate = new Date(clickedDateStr); 
     setSelectedDate(clickedDate);
 
-    // Find events for the clicked date
-    const sameDayEvent = events.find((e) => {
-      const d = new Date(e.start);
-      return d.toDateString() === clickedDate.toDateString();
-    });
+    const sameDayEvent = events.find((e) => e.start === clickedDateStr);
 
-    // Set filtered RDVs from the event's extendedProps
     setFilteredRendezvous(sameDayEvent ? sameDayEvent.extendedProps.rdvs : []);
   };
+
 
   // Scroll to RDV list when selectedDate changes
   useEffect(() => {
@@ -124,6 +141,30 @@ export default function DoctorCalendarWithList() {
     }
   };
 
+  const handleCancelConsultation = async (id) => {
+    try {
+      await axios.patch(
+        `http://localhost:3000/rendezvous/${id}/cancelled`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setFilteredRendezvous(prev =>
+        prev.map(rdv =>
+          rdv.id === id
+            ? { ...rdv, consultationStatus: "cancelled" }
+            : rdv
+        )
+      );
+
+      AlertService.success("Succès", "La consultation a été annulée avec succès.");
+    } catch (err) {
+      console.error(err);
+      AlertService.error("Erreur", "Impossible d’annuler la consultation.");
+    }
+  };
+
+
   return (
     <div className="doctor-calendar-page">
       <h2>🩺 Calendrier des Rendez-vous</h2>
@@ -135,6 +176,7 @@ export default function DoctorCalendarWithList() {
         dateClick={handleDateClick}
         eventColor="#1e40af"
         height="auto"
+        locale={frLocale} 
       />
 
       {selectedDate && (
@@ -170,7 +212,7 @@ export default function DoctorCalendarWithList() {
                       <td>{rdv.clinic?.name}</td>
                       <td>{time}</td>
                       <td className={`status ${rdv.status}`}>
-                        {rdv.status}
+                        {translateStatus(rdv.status)}
                       </td>
                       <td>
                         {rdv.status === "pending" && (
@@ -218,14 +260,15 @@ export default function DoctorCalendarWithList() {
                             className="refuse-btn"
                             onClick={async () => {
                               const confirmed = await AlertService.confirm(
-                                "Annuler le rendez-vous",
-                                "Voulez-vous vraiment annuler ce rendez-vous confirmé ?"
+                                "Annuler la consultation",
+                                "Voulez-vous vraiment annuler cette consultation ?"
                               );
-                              if (confirmed) handleDecision(rdv.id, "refuse");
+                              if (confirmed) handleCancelConsultation(rdv.id);  // ✅ CORRECT
                             }}
                           >
                             ❌ Annuler
                           </button>
+
                         </>
                       )}
 
