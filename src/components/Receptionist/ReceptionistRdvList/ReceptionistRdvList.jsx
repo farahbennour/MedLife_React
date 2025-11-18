@@ -96,6 +96,7 @@ const ReceptionistRdvList = () => {
                   {new Date(rdv.date).toLocaleString("fr-FR", {
                     dateStyle: "short",
                     timeStyle: "short",
+                    timeZone: "Africa/Tunis",
                   })}
                 </td>
                 <td>
