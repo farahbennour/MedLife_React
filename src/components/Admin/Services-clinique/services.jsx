@@ -112,7 +112,7 @@ const Services = () => {
   };
 
   // ------------------- Supprimer un service -------------------
-  const handleDelete = async (service) => {
+ const handleDelete = async (service) => {
   try {
     const token = localStorage.getItem("token");
 
@@ -124,7 +124,7 @@ const Services = () => {
     if (!canDeleteResponse.data.canDelete) {
       Swal.fire(
         "Impossible",
-        "Ce service contient des médecins ou des réceptionnistes. Impossible de supprimer.",
+        canDeleteResponse.data.message,
         "error"
       );
       return;
