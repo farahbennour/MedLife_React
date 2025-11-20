@@ -26,24 +26,33 @@ export default function DoctorDossier() {
   const rendezvousId = queryParams.get("rendezvousId");
 
   // 🔹 Fetch dossier
-  useEffect(() => {
-    const fetchDossier = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:3000/consultation/dossier?patientId=${patientId}&clinicId=${clinicId}`,
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        setDossier(res.data.consultations || []);
-        if (res.data.patient?.user?.username) setPatientName(res.data.patient.user.username);
-      } catch (err) {
-        console.error(err);
-        AlertService.error("Erreur", "Impossible de charger le dossier du patient.");
-      } finally {
-        setLoading(false);
+useEffect(() => {
+  const fetchDossier = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3000/consultation/dossier?patientId=${patientId}&clinicId=${clinicId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // 🔥 Aplatir les consultations
+      const consultations = res.data.flatMap(d => d.consultations || []);
+
+      setDossier(consultations);
+
+      if (res.data.length > 0 && res.data[0].patient?.user?.username) {
+        setPatientName(res.data[0].patient.user.username);
       }
-    };
-    fetchDossier();
-  }, [patientId, clinicId]);
+    } catch (err) {
+      console.error(err);
+      AlertService.error("Erreur", "Impossible de charger le dossier du patient.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchDossier();
+}, [patientId, clinicId]);
+
 
   // 🔹 Handle change in ordonnance items
   const handleOrdonnanceItemChange = (index, field, value) => {
@@ -60,14 +69,99 @@ export default function DoctorDossier() {
   };
 
   // 🔹 Handle Add or Update
-  const handleSaveConsultation = async () => {
-    if (!newConsultation.diagnostic)
-      return AlertService.warning("Champ manquant", "Veuillez saisir un diagnostic.");
+  // const handleSaveConsultation = async () => {
+  //   if (!newConsultation.diagnostic)
+  //     return AlertService.warning("Champ manquant", "Veuillez saisir un diagnostic.");
 
-    const dto = {
-      diagnostic: newConsultation.diagnostic,
-      notes: newConsultation.notes,
+  //   const dto = {
+  //     diagnostic: newConsultation.diagnostic,
+  //     notes: newConsultation.notes,
+  //   };
+
+  //   if (showOrdonnanceFields) {
+  //     dto.ordonnance = {
+  //       items: newOrdonnance.items.filter(
+  //         (item) => item.name || item.dose || item.duration
+  //       ),
+  //       instructions: newOrdonnance.instructions,
+  //     };
+  //   }
+
+  //   try {
+  //     let res;
+
+  //     // 🔹 UPDATE (PATCH)
+  //     if (editingConsultation) {
+  //       res = await axios.patch(
+  //         `http://localhost:3000/consultation/${editingConsultation.id}`,
+  //         dto,
+  //         { headers: { Authorization: `Bearer ${token}` } }
+  //       );
+
+  //       const updated = res.data.consultation ?? res.data;
+
+  //       setDossier((prev) =>
+  //         prev.map((c) => (c.id === updated.id ? updated : c))
+  //       );
+
+  //       AlertService.success(
+  //         "Consultation mise à jour",
+  //         "Les modifications ont été enregistrées !"
+  //       );
+  //     }
+
+  //     // 🔹 CREATE (POST) — **THIS WAS MISSING**
+  //     else {
+  //       res = await axios.post(
+  //         `http://localhost:3000/consultation/rendezvous/${rendezvousId}`,
+  //         dto,
+  //         { headers: { Authorization: `Bearer ${token}` } }
+  //       );
+
+  //       const created = res.data.consultation ?? res.data;
+
+  //       setDossier((prev) => [created, ...prev]);
+
+  //       AlertService.success(
+  //         "Consultation ajoutée",
+  //         "La consultation a été enregistrée avec succès !"
+  //       );
+  //     }
+
+  //     resetModal();
+  //   } catch (err) {
+  //     console.error(err.response?.data || err);
+
+  //     if (err.response?.status === 403)
+  //       AlertService.error("Erreur", "Vous n’êtes pas autorisé(e).");
+  //     else
+  //       AlertService.error("Erreur", "Une erreur est survenue.");
+  //   }
+  // };
+
+  const handleSaveConsultation = async () => {
+  if (!newConsultation.diagnostic)
+    return AlertService.warning("Champ manquant", "Veuillez saisir un diagnostic.");
+
+  // Base DTO
+  const dto = {
+    diagnostic: newConsultation.diagnostic,
+    notes: newConsultation.notes,
+  };
+
+  // Inclure l'ordonnance uniquement si on la modifie ou la crée
+  if (showOrdonnanceFields) {
+    dto.ordonnance = {
+      items: newOrdonnance.items.filter(
+        (item) => item.name || item.dose || item.duration
+      ),
+      instructions: newOrdonnance.instructions,
     };
+  } else if (editingConsultation && editingConsultation.ordonnance) {
+    // Conserver l'ordonnance existante si on ne la modifie pas
+    dto.ordonnance = editingConsultation.ordonnance;
+  }
+
 
     if (showOrdonnanceFields) {
       dto.ordonnance = {
@@ -281,7 +375,8 @@ export default function DoctorDossier() {
       )}
 
       {/* Consultations list */}
-      {dossier.length === 0 ? (
+      
+     {dossier.length === 0 ? (
         <p>Aucune consultation enregistrée.</p>
       ) : (
         dossier.map((consultation) => (
@@ -307,22 +402,24 @@ export default function DoctorDossier() {
             <p><strong>Diagnostic :</strong> {consultation.diagnostic}</p>
             <p><strong>Notes :</strong> {consultation.notes || "Aucune note"}</p>
 
-            {consultation.ordonnance ? (
-              <div className="ordonnance-section">
-                <h4>Ordonnance</h4>
-                <ul>
-                  {consultation.ordonnance.items?.map((m, i) => (
-                    <li key={i}>{m.name} - {m.dose} ({m.duration})</li>
-                  ))}
-                </ul>
-                {consultation.ordonnance.instructions && <p><em>{consultation.ordonnance.instructions}</em></p>}
-              </div>
-            ) : (
-              <p>Pas d’ordonnance associée.</p>
-            )}
-          </div>
-        ))
+              {consultation.ordonnance ? (
+                <div className="ordonnance-section">
+                  <h4>Ordonnance</h4>
+                  <ul>
+                    {consultation.ordonnance.items?.map((m, i) => (
+                      <li key={i}>💊 {m.name} - {m.dose} ({m.duration})</li>
+                    ))}
+                  </ul>
+                  {consultation.ordonnance.instructions && <p><em>{consultation.ordonnance.instructions}</em></p>}
+                </div>
+              ) : (
+                <p>Pas d’ordonnance associée.</p>
+              )}
+            </div>
+          ))
+        
       )}
+
     </div>
   );
 }

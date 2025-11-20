@@ -89,6 +89,7 @@ const UpdateProfileDoctor = () => {
       const data = {
         username: user.username,
         email: user.email,
+        phone: user.phone,
         oldPassword: passwords.oldPassword || undefined,
         newPassword: passwords.newPassword || undefined,
       };
@@ -146,6 +147,16 @@ const UpdateProfileDoctor = () => {
           type="email"
           name="email"
           value={user.email || ""}
+          onChange={handleChange}
+          required
+        />
+
+
+<label>Téléphone</label>
+        <input
+          type="text"
+          name="phone"
+          value={user.phone || ""}
           onChange={handleChange}
           required
         />

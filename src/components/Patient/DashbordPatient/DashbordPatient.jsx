@@ -1,9 +1,9 @@
 
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./dashbordpatient.css";
+import { useEffect, useState } from "react";
+import AlertService from "../../../Services/Alert";
 import RendezVousForm from "../RendezVousForm/RendezVousForm";
-import AlertService from "../../Services/Alert";
+import "./dashbordpatient.css";
 
 export default function DashbordPatient() {
   // ---------------------------

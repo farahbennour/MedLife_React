@@ -1,8 +1,7 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import "./sidebarReceptionist.css";
-import Swal from "sweetalert2";
 import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import "./sidebarReceptionist.css";
 
 
 // Définition du menu avec les chemins des images
@@ -12,6 +11,7 @@ const menu = [
   { to: "/receptionist/patient", label: "Patient", img: "/src/assets/portail.png" },
   { to: "/receptionist/rdvs", label: "Rendez-vous", img: "/src/assets/agenda.png" },
   { to: "/receptionist/update-profile-receptionist", label: "Profil", img: "/src/assets/profil.png" },
+  { to: "/receptionist/emit-facture", label: "Paiement", img: "/src/assets/facturation.png" },
  
 
 ];

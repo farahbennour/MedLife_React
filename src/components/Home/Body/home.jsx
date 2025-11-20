@@ -95,7 +95,7 @@ export default function Body() {
       </section>
 
       {/* --- FOOTER --- */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"; // Hooks React
 import axios from "axios"; // Pour les requêtes HTTP
+import { useEffect, useState } from "react"; // Hooks React
 import { FaEye, FaEyeSlash } from "react-icons/fa"; // Icônes pour afficher/masquer le mot de passe
-import "./update-profile-patient.css"; // Fichier CSS pour le style du composant
 import AlertService from "../../../Services/Alert.jsx"; // Service d’alerte (succès/erreur)
+import "./update-profile-patient.css"; // Fichier CSS pour le style du composant
 
 // 🔹 Déclaration du composant principal
 const UpdateProfilePatient = () => {

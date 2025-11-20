@@ -33,8 +33,8 @@
 }
 
 .back-btn {
-  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%);
-  color: white;
+  background: linear-gradient(90deg, #1e40af 0%, #2563eb 100%) !important;
+  color: white !important;
   padding: 0.5rem 1.2rem;
   border: none;
   border-radius: 12px;
@@ -93,6 +93,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.ordonnance-section ul {
+  padding-left: 1.2rem;
+  
+}
+
+.ordonnance-section li {
+  margin-bottom: 0.3rem;
+  color: #1f2937;
+  list-style: none; /* supprime les puces */
 }
 
 /* 🔹 Hover effects */
@@ -209,7 +219,7 @@
   margin-bottom: 0.4rem;
 }
 
-.modal input[type="text"],
+.modal input[type="text"] ,
 .modal textarea {
   display: block;
   width: 100%;
@@ -223,7 +233,19 @@
   margin-bottom: 0.8rem;
   box-sizing: border-box;
 }
-
+.modal input[type="number"]{
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 2px solid #cce4ff;
+  background: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  margin-bottom: 0.6rem;
+  box-sizing: border-box;
+}
 .modal input:focus,
 .modal textarea:focus {
   border-color: #2563eb;

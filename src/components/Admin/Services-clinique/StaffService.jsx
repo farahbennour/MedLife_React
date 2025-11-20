@@ -28,14 +28,14 @@ export default function StaffService() {
       try {
         // 🔹 Fetch doctors
         const doctorsRes = await axios.get(
-          `http://localhost:3000/users/doctors?serviceId=${serviceId}`,
+          `http://localhost:3000/users/${serviceId}/doctors`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setDoctors(doctorsRes.data || []);
 
         // 🔹 Fetch receptionists
         const recepRes = await axios.get(
-          `http://localhost:3000/users/receptionists?serviceId=${serviceId}`,
+          `http://localhost:3000/users/${serviceId}/receptionists`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setReceptionists(recepRes.data || []);
