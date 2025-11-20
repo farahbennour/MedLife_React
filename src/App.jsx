@@ -35,6 +35,7 @@ import PatientListAdmin from "./components/Admin/PatientListAdmin/PatientListAdm
 import { useEffect } from "react";
 import ReactivateSuccess from "./components/Patient/reactivate-account/reactivate-account.jsx";
 import About from "./components/à-propos/about.jsx";
+import ContactForm from "./components/contact/contact.jsx";
 
 export default function App() {
   useEffect(() => {
@@ -91,7 +92,8 @@ export default function App() {
             <Route path="update-profile" element={<UpdateProfilePatient />} />
             <Route path="dossier-medical" element={<PatientDossier />} />
             <Route path="my-payments" element={<PatientPayments />} />
-                  <Route path="a-propos" element={<About/>}/>
+            <Route path="a-propos" element={<About/>}/>
+            <Route path="contact" element={<ContactForm/>}/>
           </Route>
       
 
@@ -101,6 +103,7 @@ export default function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reactivate-account" element= {<ReactivateSuccess/>}/>
           <Route path="/a-propos" element={<About/>}/>
+          
         </Routes>
       </main>
     </div>
