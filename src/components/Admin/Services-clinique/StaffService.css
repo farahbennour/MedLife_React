@@ -1,6 +1,12 @@
 /* --- PAGE --- */
+body, html {
+  height: auto;
+  overflow-y: auto !important;
+}
 .staff-page {
-  min-height: auto;
+   min-height: auto;   
+  height: auto;       
+  overflow-y: visible; 
   margin-left: 300px;
   width: calc(100% - 290px);
   padding: 40px 20px;
@@ -13,7 +19,7 @@
   background: linear-gradient(to right, #a6ccf5, #c6dcff);
   color: white;
   padding: 35px 50px;
-  border-radius: 0 0 25px 25px; /* ← يخليها مسطّحة من فوق وناعمة من تحت */
+  border-radius: 0 0 25px 25px; 
   height: auto;
   display: flex;
   flex-direction: column;
@@ -86,26 +92,26 @@
 /* --- GRID --- */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* ← زدت العرض الأدنى للكارت */
-  gap: 20px; /* ← زدت المسافة باش يرتاح الشكل */
-  padding: 40px 30px; /* ← رجّعنا مسافة متناسقة */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  gap: 20px;
+  padding: 40px 30px;
   justify-items: center;
 }
 
 .staff-card.move-style {
   display: flex;
   align-items: center;
-  gap: 25px; /* ← زيدنا شوية المسافة بين الصورة والنص */
+  gap: 25px;
   background: #ffffff;
   border-radius: 18px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-  padding: 25px 30px; /* ← زيدنا padding باش يكون المحتوى مرتاح */
+  padding: 25px 30px; 
   transition: all 0.3s ease;
   border-left: 6px solid #a6ccf5;
-  min-height: 140px; /* ← زيدنا الطول شوية */
-  width: 100%; /* ← باش يلتزم بعرض العمود المحدد في grid */
-  max-width: 380px; /* ← ما يوليش كبير برشة */
-  word-wrap: break-word; /* ← باش الإيميل ما يخرجش برا */
+  min-height: 140px; 
+  width: 100%; 
+  max-width: 380px;
+  word-wrap: break-word; 
   overflow-wrap: break-word;
 }
 
@@ -166,12 +172,68 @@
 }
 
 /* --- EMPTY MESSAGE --- */
+/* --- EMPTY MESSAGE --- */
 .no-staff {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 18px 28px;
+  font-size: 19px;
+  font-weight: 500;
+  color: #5b8ccf;
+
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+
+  border: 1px solid rgba(91, 140, 207, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
   text-align: center;
-  color: #555;
-  font-size: 16px;
-  margin-top: 30px;
+
+  
+  animation: fadeIn 0.8s ease-out, crazyMove 6s ease-in-out infinite;
 }
+
+/* Animation douce d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+@keyframes crazyMove {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  20% {
+    transform: translate(calc(-50% + 210px), -50%); 
+  }
+  40% {
+    transform: translate(calc(-50% - 210px), -50%); 
+  }
+  60% {
+    transform: translate(-50%, calc(-50% - 130px));
+  }
+  80% {
+    transform: translate(-50%, calc(-50% + 160px)); 
+  }
+  100% {
+    transform: translate(-50%, -50%); 
+  }
+}
+
+
+
+
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {

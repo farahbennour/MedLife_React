@@ -33,6 +33,7 @@ import ReceptionistRdvList from "./components/Receptionist/ReceptionistRdvList/R
 import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import ResetPassword from "./components/ResetPassword/resetPassword.jsx";
 
+import ProtectedRoute from "./components/Guards/ProtectedRoute.jsx";
 
 export default function App() {
   return (
@@ -41,9 +42,15 @@ export default function App() {
         <Routes>
           {/* Page d'accueil */}
           <Route path="/" element={<Body />} />
-
+          <Route path="/login" element={<Login />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           {/* Section ADMIN */}
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route path="/admin" element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="cliniques" element={<Cliniques/>} />
@@ -52,52 +59,51 @@ export default function App() {
             <Route path="doctor" element={<Doctor />} />
             <Route path="receptionist" element={<Receptionist />} />
             <Route path="patientList" element={<PatientListAdmin />} />
-            <Route path="update-profile-admin" element={<UpdateProfileAdmin/>}/>{/* page de mise à jour de profil pour l'admin*/}
+            <Route path="update-profile-admin" element={<UpdateProfileAdmin/>}/>
             <Route path="DossiersList" element={<PatientsDossiers />} />
           </Route>
 
-          {/* Doctor */}
-          <Route path="/doctor" element={<DoctorLayout />}>
-             <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>{/* page de mise à jour de profil pour le docteur*/}
-             <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
-             <Route path="patients" element={<DoctorPatientList/>}/>
-             <Route path="dashboard" element={<DoctorDashboard/>}/>
-             <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>
+          {/* Section DOCTOR */}
+          <Route path="/doctor" element={
+            <ProtectedRoute allowedRoles={['doctor']}>
+              <DoctorLayout />
+            </ProtectedRoute>
+          }>
+            <Route path="update-profile-doctor" element={<UpdateProfileDoctor/>}/>
+            <Route path="rdvs" element={<DoctorCalendarWithList/>}/>
+            <Route path="patients" element={<DoctorPatientList/>}/>
+            <Route path="dashboard" element={<DoctorDashboard/>}/>
+            <Route path="dossier/:patientId/:clinicId" element={<DoctorDossier/>}/>
           </Route>
 
-        
-         {/* Réceptionniste */}
-          <Route path="/receptionist" element={<ReceptionistLayout />}>
-            <Route index element={<DashboardReceptionist />} /> {/*  Dashboard par défaut */}
-            <Route path="dashboard" element={<DashbordPatient />} />
+          {/* Section RECEPTIONIST */}
+          <Route path="/receptionist" element={
+            <ProtectedRoute allowedRoles={['receptionist']}>
+              <ReceptionistLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<DashboardReceptionist />} />
+            <Route path="dashboard" element={<DashboardReceptionist />} />
             <Route path="patient" element={<Patient />} />
-            <Route path="update-profile-receptionist" element={<UpdateProfileReceptionist />}/>{/* page de mise à jour de profil pour le:la récéptioniiste*/}
+            <Route path="update-profile-receptionist" element={<UpdateProfileReceptionist />}/>
             <Route path="rdvs" element={<ReceptionistRdvList />} />
             <Route path="doctors" element={<ReceptionistDoctors/>}/>
             <Route path="emit-facture" element={<EmitFactureView/>}/>
           </Route>
 
-          {/* Patient Dashboard */}
-         
-           {/* Patient */}
-       
-         <Route path="/" element={<Body />} />
-
-          {/* Patient */}
-          <Route path="/patient" element={<PatientLayout />}>
-            <Route index element={<DashbordPatient />} />           {/* Dashboard par défaut */}
+          {/* Section PATIENT */}
+          <Route path="/patient" element={
+            <ProtectedRoute allowedRoles={['patient']}>
+              <PatientLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<DashbordPatient />} />
             <Route path="dashboard" element={<DashbordPatient />} />
-            <Route path="rendezVousList" element={<RendezVousList />} /> {/* Page rendez-vous */}
-            <Route path="update-profile" element={<UpdateProfilePatient />} /> {/* Profil */}
-            <Route path="dossier-medical" element={<PatientDossier />} /> {/* Dossier Médical */}
-            <Route path="my-payments" element={<PatientPayments/>} /> {/* Mes Paiements */ }
+            <Route path="rendezVousList" element={<RendezVousList />} />
+            <Route path="update-profile" element={<UpdateProfilePatient />} />
+            <Route path="dossier-medical" element={<PatientDossier />} />
+            <Route path="my-payments" element={<PatientPayments/>} />
           </Route>
-
-          {/* Auth */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-      
         </Routes>
       </main>
     </div>

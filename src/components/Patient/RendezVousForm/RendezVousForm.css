@@ -29,7 +29,7 @@
   box-sizing: border-box;
 }
 
-/* Container principal avec design premium */
+/* Container principal */
 .rendezvous-form {
   max-width: 900px;
   margin: 40px auto;
@@ -39,9 +39,10 @@
   font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   overflow: hidden;
   border: 1px solid var(--border);
+  animation: formEntrance 0.6s ease-out;
 }
 
-/* En-tête avec dégradé professionnel */
+/* En-tête */
 .rendezvous-form::before {
   content: '';
   position: absolute;
@@ -72,7 +73,7 @@
   gap: 32px;
 }
 
-/* Grille horizontale pour les champs */
+/* Grille pour les champs */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -87,7 +88,7 @@
   position: relative;
 }
 
-/* Labels élégants */
+/* Labels */
 .form-group label {
   margin-bottom: 8px;
   font-weight: 600;
@@ -106,7 +107,7 @@
   font-size: 18px;
 }
 
-/* Champs de formulaire premium */
+/* Champs input & select */
 .form-group input,
 .form-group select {
   padding: 14px 16px;
@@ -134,13 +135,13 @@
   border-color: #cbd5e1;
 }
 
-/* Placeholder stylisé */
+/* Placeholder */
 .form-group input::placeholder {
   color: var(--text-light);
   font-style: italic;
 }
 
-/* Sélecteur de date amélioré */
+/* Date input */
 .form-group input[type="datetime-local"] {
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'%3E%3C/path%3E%3C/svg%3E");
@@ -150,13 +151,7 @@
   padding-right: 44px;
 }
 
-/* Options des selects */
-.form-group select option {
-  padding: 12px;
-  font-size: 15px;
-}
-
-/* Conteneur des boutons */
+/* Boutons */
 .form-actions {
   grid-column: 1 / -1;
   display: flex;
@@ -165,7 +160,7 @@
   margin-top: 16px;
 }
 
-/* Bouton de soumission principal */
+/* Submit Button */
 .submit-btn {
   padding: 16px 32px;
   background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
@@ -183,42 +178,16 @@
   min-width: 200px;
 }
 
-.submit-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.6s;
-}
-
-.submit-btn:hover::before {
-  left: 100%;
-}
-
 .submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-.submit-btn:active {
-  transform: translateY(0);
-}
-
-.submit-btn:disabled {
-  background: #94a3b8;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Bouton Annuler */
+/* Cancel Button - visible et contrasté */
 .cancel-btn {
   padding: 16px 32px;
-  background:#C8E4F7;
-  color: white;
+  background: #afc8ff; /* Bleu foncé visible */
+  color: #ffffff;
   font-weight: 600;
   font-size: 16px;
   border: none;
@@ -232,197 +201,13 @@
   min-width: 200px;
 }
 
-.cancel-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(59, 33, 211, 0.2), transparent);
-  transition: left 0.6s;
-}
-
-.cancel-btn:hover::before {
-  left: 100%;
-}
-
 .cancel-btn:hover {
+  background: #afc8ff; /* bleu plus clair au hover */
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, var(--secondary-dark), #C8E4F7);
 }
 
-.cancel-btn:active {
-  transform: translateY(0);
-}
-
-/* Version alternative du bouton Annuler (style outline) */
-.cancel-btn.outline {
-  background: transparent;
-  color: var(--secondary-dark);
-  border: 2px solid var(--secondary-gray);
-}
-
-.cancel-btn.outline:hover {
-  background: var(--secondary-gray);
-  color: white;
-}
-
-/* Indicateur de chargement */
-.loading {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid transparent;
-  border-top: 2px solid #ffffff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-right: 8px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Messages d'alerte */
-.message {
-  grid-column: 1 / -1;
-  padding: 16px 20px;
-  border-radius: 8px;
-  margin: 0;
-  text-align: center;
-  font-weight: 500;
-  font-size: 15px;
-  border: 1px solid transparent;
-  animation: slideDown 0.3s ease-out;
-}
-
-.message.success {
-  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-  color: var(--success);
-  border-color: #a7f3d0;
-  box-shadow: var(--shadow-sm);
-}
-
-.message.error {
-  background: linear-gradient(135deg, #fef2f2, #fee2e2);
-  color: var(--error);
-  border-color: #fecaca;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Animation des messages */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Icônes décoratives pour les champs */
-.form-group::after {
-  content: '';
-  position: absolute;
-  right: 12px;
-  top: 38px;
-  width: 20px;
-  height: 20px;
-  opacity: 0.6;
-  transition: var(--transition);
-}
-
-.form-group:has(select)::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.form-group:focus-within::after {
-  opacity: 1;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .rendezvous-form {
-    margin: 20px;
-    max-width: calc(100% - 40px);
-  }
-  
-  .rendezvous-form form {
-    padding: 24px;
-    gap: 24px;
-  }
-  
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .rendezvous-form h2 {
-    padding: 24px 20px 20px;
-    font-size: 24px;
-  }
-  
-  .form-actions {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .submit-btn,
-  .cancel-btn {
-    min-width: 100%;
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .rendezvous-form {
-    margin: 10px;
-    max-width: calc(100% - 20px);
-  }
-  
-  .rendezvous-form form {
-    padding: 20px;
-    gap: 20px;
-  }
-  
-  .form-group input,
-  .form-group select {
-    padding: 12px 14px;
-    font-size: 14px;
-    appearance: none;
-  }
-  
-  .submit-btn,
-  .cancel-btn {
-    padding: 14px 20px;
-    font-size: 15px;
-  }
-}
-
-/* Animation d'entrée du formulaire */
-@keyframes formEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.rendezvous-form {
-  animation: formEntrance 0.6s ease-out;
-}
-
-/* Effet de brillance sur les boutons */
+/* Effet brillance pour Cancel & Submit */
 .submit-btn::after,
 .cancel-btn::after {
   content: '';
@@ -440,6 +225,8 @@
 .cancel-btn:hover::after {
   transform: rotate(45deg) translate(50%, 50%);
 }
+
+/* Close Button */
 .close-button {
   position: absolute;
   top: 20px;
@@ -447,7 +234,7 @@
   background: none;
   border: none;
   font-size: 28px;
-  color: #6b7280;
+  color: #79b4f8;
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -460,72 +247,40 @@
 }
 
 .close-button:hover {
-  background-color: #f3f4f6;
-  color: #374151;
-  transform: rotate(90deg);
-}
-/* Ajouts pour le bouton de fermeture */
-.close-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #6b7280;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 10;
+  background-color: #79b4f8;
+  transform: translateY(-2px);
 }
 
-.close-button:hover {
-  background-color: #f3f4f6;
-  color: #374151;
-  transform: rotate(90deg);
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .submit-btn,
+  .cancel-btn {
+    width: 100%;
+  }
 }
 
-.close-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
+@media (max-width: 480px) {
+  .form-group input,
+  .form-group select {
+    padding: 12px 14px;
+  }
+  .submit-btn,
+  .cancel-btn {
+    padding: 14px 20px;
+  }
 }
 
-/* Conteneur de loading */
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 40px;
-  text-align: center;
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e5e7eb;
-  border-top: 4px solid #2563eb;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 16px;
+/* Animations */
+@keyframes formEntrance {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-/* Style pour les champs désactivés */
-.form-group input:disabled,
-.form-group select:disabled {
-  background-color: #f9fafb;
-  color: #9ca3af;
-  cursor: not-allowed;
-  opacity: 0.7;
 }

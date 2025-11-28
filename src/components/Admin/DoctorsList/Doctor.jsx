@@ -127,11 +127,11 @@ export default function Doctor() {
       if (editDoctorId) {
         // Modification
         await axios.patch(`http://localhost:3000/users/${editDoctorId}`, payload, { headers: { Authorization: `Bearer ${token}` } });
-        Swal.fire({ icon: "success", title: "✅ Succès !", text: "Docteur modifié avec succès !", timer: 2000, showConfirmButton: false });
+        Swal.fire({ icon: "success", title: "Modifié", text: "Docteur modifié avec succès !✅", timer: 2200, showConfirmButton: false });
       } else {
         // Ajout
         await axios.post("http://localhost:3000/users/create-account", { ...payload, role: "doctor" }, { headers: { Authorization: `Bearer ${token}` } });
-        Swal.fire({ icon: "success", title: "✅ Succès", text: "Docteur ajouté avec succès !", timer: 2000, showConfirmButton: false });
+        Swal.fire({ icon: "success", title: " Ajouté !", text: "Docteur ajouté avec succès !✅", timer: 2200, showConfirmButton: false });
       }
       setShowModal(false);
       setFormData({ username: "", email: "", password: "", clinic_id: "", service_id: "", phone: "", specialty: "" });
@@ -186,7 +186,8 @@ export default function Doctor() {
         try {
           const token = localStorage.getItem("token");
           await axios.delete(`http://localhost:3000/users/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-          Swal.fire("Supprimé !", "Le docteur a été supprimé avec succès.", "success");
+            Swal.fire({ icon: "success", title: "Supprimé !", text: "Le docteur a été supprimé avec succès !✅", timer: 2200, showConfirmButton: false });
+        
           fetchDoctors();
         } catch (error) {
           Swal.fire("Erreur !", error.response?.data?.message || "Erreur inconnue", "error");
@@ -224,6 +225,7 @@ export default function Doctor() {
       {/* ---------------------------
           Liste des cartes docteurs
       --------------------------- */}
+      <div className="doctor-container-3d">
       <div className="doctorlist-grid">
         {filteredDoctors.map(doc => (
        <div className="doctorlist-card" key={doc.id}>
@@ -261,7 +263,7 @@ export default function Doctor() {
           <p>Ajouter un nouveau docteur à votre clinique.</p>
         </div>
       </div>
-
+</div>
       {/* ---------------------------
           Modal ajout / modification docteur
       --------------------------- */}
@@ -272,6 +274,7 @@ export default function Doctor() {
             <form onSubmit={handleSaveDoctor}>
               <input type="text" name="username" placeholder="Nom d'utilisateur" value={formData.username} onChange={handleChange} required />
               <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                <input type="text" name="phone" placeholder="Téléphone" value={formData.phone} onChange={handleChange} />
             {!editDoctorId && (
             <input
               type="password"

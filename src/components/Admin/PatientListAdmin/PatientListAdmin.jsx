@@ -79,59 +79,9 @@ export default function PatientListAdmin() {
       (p.service?.name || "").toLowerCase().includes(search.toLowerCase())
   );
 
-  // ------------------- Gestion formulaire -------------------
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value }); // Mise à jour dynamique
-  };
+  
+ 
 
-  // ------------------- Ajouter / Modifier un patient -------------------
-const handleSavePatient = async (e) => {
-  e.preventDefault();
-
-  try {
-    const token = localStorage.getItem("token");
-
-    const payload = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password || undefined,
-      phone: formData.phone,
-      clinic_id: Number(formData.clinic_id),
-      address: formData.address,
-      dateNaissance: formData.dateNaissance || null,
-    };
-
-    let response;
-
-    if (editPatientId) {
-      // Modifier
-      response = await axios.put(
-        `http://localhost:3000/users/patient/${editPatientId}`,
-        payload,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      Swal.fire("Succès", "Patient modifié avec succès", "success");
-    } else {
-      // Ajouter
-      response = await axios.post(
-        "http://localhost:3000/users/patient",
-        payload,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      Swal.fire("Succès", "Patient ajouté avec succès", "success");
-    }
-
-    fetchPatients();        // recharger la liste
-    setShowModal(false);    // fermer modal
-    setEditPatientId(null); // reset edit mode
-
-  } catch (error) {
-    console.error("Erreur sauvegarde patient :", error);
-    Swal.fire("Erreur", error.response?.data?.message || "Erreur inconnue", "error");
-  }
-};
 
      
 
@@ -165,7 +115,7 @@ const handleSavePatient = async (e) => {
 
   if (loading) return <p>Chargement des patients...</p>; // Affichage pendant le fetch
 
-  // ------------------- JSX -------------------
+ 
   return (
     <div className="patient-admin-main">
       {/* Banner */}
