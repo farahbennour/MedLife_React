@@ -7,7 +7,8 @@
   margin: 3% auto 5%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  margin-left: 24%;
+  margin-left: 30%;
+  margin-right: auto;
 }
 
 /* ------------------ Header ------------------ */
@@ -71,7 +72,6 @@
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-  margin-left: 1%;
 }
 
 .facture-select-btn:hover {
@@ -92,7 +92,6 @@
   align-items: center;
   animation: facture-fadeIn 0.3s ease forwards;
   z-index: 999;
-  margin-left: 10%;
 }
 
 .facture-modal-content {
@@ -105,12 +104,13 @@
   transform: scale(0);
   animation: facture-scaleUp 0.3s forwards;
   perspective: 1000px;
- 
 }
+
 .facture-modal-content h3 {
   text-align: center;
   color: #0f4c81;
-  margin-bottom: 1.5rem;    }
+  margin-bottom: 1.5rem;
+}
 
 @keyframes facture-fadeIn {
   from { background: rgba(0,0,0,0); }
@@ -153,7 +153,6 @@
   display: flex;
   justify-content: space-between;
   margin-top: 1.5rem;
-  
 }
 
 .facture-submit-btn {
@@ -183,7 +182,6 @@
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 8px 15px rgba(0,0,0,0.2);
- 
 }
 
 .facture-back-btn:hover {
@@ -191,8 +189,15 @@
   transform: translateY(-2px);
 }
 
-
 /* ------------------ Responsive ------------------ */
+@media (max-width: 1024px) {
+  .facture-container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @media (max-width: 768px) {
   .facture-cards-container {
     grid-template-columns: 1fr;
@@ -202,5 +207,34 @@
   }
   .facture-modal-content {
     padding: 1.5rem;
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .facture-title {
+    font-size: 1.8rem;
+  }
+  .facture-card h3 {
+    font-size: 1.2rem;
+  }
+  .facture-card p {
+    font-size: 0.9rem;
+  }
+  .facture-select-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  .facture-modal-content h3 {
+    font-size: 1.3rem;
+  }
+  .facture-item input {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  .facture-submit-btn,
+  .facture-back-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
   }
 }

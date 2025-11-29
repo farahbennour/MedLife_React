@@ -19,7 +19,7 @@ footer .container {
 }
 
 
-footer .contact-info h3 {
+footer .contact-footer-info h3 {
   margin: 0.5rem 0;
   font-size: 1.2rem;
   color: #475c72;
@@ -58,7 +58,7 @@ footer .contact-info h3 {
 }
 
 
-footer .contact-info p span {
+footer .contact-footer-info p span {
   font-weight: 600;
 }
 

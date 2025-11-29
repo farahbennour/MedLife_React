@@ -4,7 +4,7 @@ export default function Footer(){
   return (
     <footer className="bg-sky-100">
       <div className="container mx-auto px-4 py-8 flex justify-between">
-        <div className="contact-info">
+        <div className="contact-footer-info">
           <h3>Email : MedLifeDM@gmail.com</h3>
           <h3>Téléphone : +216 ** *** ***</h3>
           <h3>Copyright © 2025 MedLife</h3>

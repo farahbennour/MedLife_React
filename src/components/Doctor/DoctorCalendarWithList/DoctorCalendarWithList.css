@@ -289,3 +289,92 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ========== ULTRA RESPONSIVE FOR SMALL SCREENS (<480px) ========== */
+@media (max-width: 480px) {
+
+  /* Page container */
+  .doctor-calendar-page {
+    padding: 10px;
+    margin-left: 0;
+  }
+
+  .doctor-calendar-page h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  /* FullCalendar */
+  .fc {
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+  }
+
+  .fc-toolbar-title {
+    font-size: 1.2rem;
+  }
+
+  .fc-col-header-cell {
+    font-size: 0.7rem;
+    padding: 5px 0;
+  }
+
+  .fc-daygrid-day {
+    padding: 5px;
+  }
+
+  .fc-daygrid-day-number {
+    font-size: 0.75rem;
+  }
+
+  .fc-daygrid-event {
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 8px;
+  }
+
+  /* RDV list container */
+  .rdv-list-container {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .rdv-list-container h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* RDV table */
+  .rdv-table th,
+  .rdv-table td {
+    font-size: 0.7rem;
+    padding: 6px 4px;
+  }
+
+  .rdv-table thead th {
+    font-size: 0.75rem;
+  }
+
+  /* Status badges */
+  .status {
+    font-size: 0.6rem;
+    padding: 4px 6px;
+    margin-left: 15%;
+  }
+
+  /* Buttons */
+  .accept-btn,
+  .refuse-btn {
+    padding: 3px 8px;
+    font-size: 0.7rem;
+    margin-left: 5%;
+  }
+
+  /* RDV count badge */
+  .rdv-count-badge {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 0.6rem;
+  }
+}

@@ -1,10 +1,10 @@
-import React from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import "./sidebarDoctor.css";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
+import "./sidebarDoctor.css";
 
-// Définition du menu de la sidebar du docteur
+// Menu de la sidebar du docteur
 const menu = [
   { to: "/doctor/dashboard", label: "Dashboard", img: "/src/assets/dashboard.png" },
   { to: "/doctor/patients", label: "Patients", img: "/src/assets/patient.png" },
@@ -13,7 +13,8 @@ const menu = [
 ];
 
 export default function SidebarDoctor() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false); // état du menu mobile
 
   const handleLogout = async () => {
     const confirm = await Swal.fire({
@@ -30,20 +31,16 @@ export default function SidebarDoctor() {
 
     try {
       const token = localStorage.getItem("token");
-console.log("Token envoyé :", token);
-      // Appel API pour blacklister le token
       if (token) {
-        axios.post("http://localhost:3000/auth/logout", {}, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
+        await axios.post(
+          "http://localhost:3000/auth/logout",
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
       }
 
-      // Supprimer les infos du localStorage
       localStorage.clear();
 
-      // Message de confirmation
       Swal.fire({
         title: "Déconnecté",
         text: "Vous avez été déconnecté avec succès.",
@@ -52,55 +49,54 @@ console.log("Token envoyé :", token);
         showConfirmButton: false,
       });
 
-      // Redirection après un court délai
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
       console.error("Erreur de déconnexion :", error);
       Swal.fire("Erreur", "Une erreur est survenue lors de la déconnexion.", "error");
     }
   };
+
   return (
-    // Conteneur principal de la sidebar
-    <aside className="sidebar">
+    <>
+      {/* Burger button */}
+      <button className="burger-btn" onClick={() => setIsOpen(!isOpen)}>
+        ☰
+      </button>
 
-      {/* --- Header de la sidebar avec logo --- */}
-      <div className="sidebar-header">
-        <img
-          src="/src/assets/logo.png"      
-          alt="Clinique Logo"             
-          className="sidebar-logo"         
-        />
-      </div>
+      {/* Overlay pour mobile */}
+      {isOpen && <div className="overlay" onClick={() => setIsOpen(false)}></div>}
 
-      {/* --- Menu de navigation de la sidebar --- */}
-      <ul className="sidebar-menu">
-       
-        {/* Boucle sur le tableau 'menu' pour créer les liens */}
-        {menu.map((m) => (
-          <li key={m.to}>  {/* Chaque item du menu doit avoir une clé unique */}
-            <NavLink to={m.to} className="sidebar-link">
-              {/* Icône du menu */}
-              <img src={m.img} alt={m.label} className="sidebar-icon" />
-              {/* Texte du menu */}
-              <span>{m.label}</span>
-            </NavLink>
+      {/* Sidebar */}
+      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+        {/* Header */}
+        <div className="sidebar-header">
+          <img src="/src/assets/logo.png" alt="Clinique Logo" className="sidebar-logo" />
+        </div>
+
+        {/* Menu */}
+        <ul className="sidebar-menu">
+          {menu.map((m) => (
+            <li key={m.to}>
+              <NavLink
+                to={m.to}
+                className="sidebar-link"
+                onClick={() => setIsOpen(false)} // ferme menu mobile au clic
+              >
+                <img src={m.img} alt={m.label} className="sidebar-icon" />
+                <span>{m.label}</span>
+              </NavLink>
+            </li>
+          ))}
+
+          {/* Déconnexion */}
+          <li>
+            <button onClick={handleLogout} className="sidebar-link logout">
+              <img src="/src/assets/deconnexion.png" alt="Déconnexion" className="sidebar-icon" />
+              <span>Déconnexion</span>
+            </button>
           </li>
-        ))}
-
-        {/* Lien pour se déconnecter */}
-        <li>
-          <button onClick={handleLogout} className="sidebar-link logout">
-            <img
-              src="/src/assets/deconnexion.png"
-              alt="Déconnexion"
-              className="sidebar-icon"
-            />
-            <span>Déconnexion</span>
-          </button>
-        </li>
-      </ul>
-    </aside>
+        </ul>
+      </aside>
+    </>
   );
 }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./ReceptionistRdvList.css";
+import { useEffect, useState } from "react";
 import AlertService from "../../../Services/Alert";
+import "./ReceptionistRdvList.css";
 
 const ReceptionistRdvList = () => {
   const [rdvs, setRdvs] = useState([]);

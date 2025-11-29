@@ -1,4 +1,21 @@
-/* --- STYLE GÉNÉRAL DU HEADER --- */
+/* ================================
+   RESET GLOBAL
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ================================
+   HEADER
+================================ */
 header {
   position: sticky;
   top: 0;
@@ -8,22 +25,22 @@ header {
   -webkit-backdrop-filter: blur(15px);
   box-shadow: 0 4px 25px rgba(0, 123, 174, 0.15);
   transition: all 0.3s ease-in-out;
-  margin: 0;
-  padding: 0;
 }
 
-/* --- SUPPRIMER TOUT ESPACE ENTRE NAVBAR ET CONTENU --- */
-body {
-  margin: 0;
-  padding: 0;
+/* Container interne */
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  flex-wrap: wrap;
 }
 
-/* --- LOGO --- */
+/* ================================
+   LOGO
+================================ */
 .img-container {
   cursor: pointer;
-  display: block;
-  padding: 0;
-  margin: 0;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -37,34 +54,25 @@ body {
   filter: drop-shadow(0 0 8px rgba(0, 123, 174, 0.4));
 }
 
-/* --- CONTAINER HEADER --- */
-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 40px;
-  max-width: 100%;
-  margin: 0;
-}
-
-/* --- NAVIGATION --- */
-header nav {
+/* ================================
+   NAVIGATION
+================================ */
+nav.nav-links {
   display: flex;
   gap: 2.5rem;
   align-items: center;
 }
 
-header nav a {
-  position: relative;
+nav a {
   text-decoration: none;
   font-weight: 600;
   font-size: 1.3rem;
   color: #0a4d68;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-header nav a::after {
+nav a::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -76,270 +84,292 @@ header nav a::after {
   transition: width 0.3s ease;
 }
 
-header nav a:hover {
+nav a:hover {
   color: #007bae;
   transform: translateY(-2px);
 }
 
-header nav a:hover::after {
+nav a:hover::after {
   width: 100%;
 }
 
-/* --- BOUTON SE CONNECTER --- */
-.header-container{
-    display: flex;
-  justify-content: center; /* centre horizontalement */
-  align-items: center; 
-
- 
-}
-.header-button {
-  background-color: #6684a3;
-  color: #fff;
-  padding: 10px 16px; /* réduit le padding horizontal et vertical */
-  border-radius: 12px; /* moins arrondi */
-  font-weight: 600;
-  font-size: 0.9rem; /* réduit la taille du texte */
-  border: none;
-  box-shadow: 0 3px 8px rgba(102, 132, 163, 0.3); /* plus petit */
-  transition: all 0.3s ease;
-  cursor: pointer;
-  font-family: 'Times New Roman', Times, serif;
- 
-}
-
-/* Hover */
-.header-button:hover {
-  background-color: #557393;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(102, 132, 163, 0.4);
-}
-
-/* --- MENU DÉROULANT FONCTIONNALITÉS --- */
+/* ================================
+   DROPDOWN FEATURES
+================================ */
 .features-menu {
   position: relative;
   cursor: pointer;
-  font-weight: 600;
-  color: #0a4d68;
-  transition: color 0.3s ease;
-}
-
-.features-menu > a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
 }
 
 .features-dropdown {
-  display: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 120%;
   left: 0;
-  background-color: #ffffff;
+  background: #fff;
   border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
   min-width: 220px;
   padding: 10px 0;
-  z-index: 100;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-}
-
-.features-menu:hover .features-dropdown {
-  display: block;
   opacity: 1;
   transform: translateY(0);
+  z-index: 1000;
 }
 
 .features-dropdown a {
-  display: block;
   padding: 10px 20px;
+  display: block;
   font-weight: 500;
   color: #0a4d68;
-  text-decoration: none;
-  transition: all 0.3s ease;
   border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .features-dropdown a:hover {
-  background-color: #e0f2ff;
+  background: #e0f2ff;
   color: #007bae;
 }
 
-/* --- MENU UTILISATEUR --- */
+/* ================================
+   BOUTON CONNEXION
+================================ */
+.header-button {
+  background-color: #6684a3;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.header-button:hover {
+  background-color: #557393;
+  transform: translateY(-2px);
+}
+
+/* ================================
+   DROPDOWN UTILISATEUR
+================================ */
 .user-menu {
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: auto; 
   cursor: pointer;
 }
 
 .user-menu img {
-  width: 60px;
-  height: 60px;
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
+
+
 .user-menu img:hover {
   transform: scale(1.1);
 }
 
-.user-dropdown-menu {
+/* .user-dropdown-menu {
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  right: 10px;
-  top: 100%;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  right: 0;
+  top: 120%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
   min-width: 180px;
   padding: 10px 0;
-  z-index: 100;
-  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 1000;
+}
+  
+*/
+/* ================================
+   DROPDOWN UTILISATEUR — comme Features
+================================ */
+.user-dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* reste absolu */
+  top: 100%; /* en dessous de l'avatar */
+  right: 3%; /* aligné à droite de l'image */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  min-width: 180px;
+  padding: 10px 0;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 1000;
 }
 
 .user-dropdown-menu a,
 .user-dropdown-menu button {
-  display: block;
   width: 100%;
   padding: 10px 20px;
-  font-weight: bold;
-  font-size: large;
-  color: #0a4d68;
-  text-decoration: none;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
+  font-weight:bolder;
+  color: #0a4d68;
   transition: all 0.3s ease;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: large;
 }
 
 .user-dropdown-menu a:hover,
 .user-dropdown-menu button:hover {
-  background-color: #e0f2ff;
+  background: #e0f2ff;
   color: #007bae;
 }
 
-/* --- HAMBURGER MENU --- */
+/* ================================
+   Responsive mobile — tous écrans
+================================ */
+@media (max-width: 992px) {
+  .user-dropdown-menu {
+    right: 10px;
+    top: 120%;
+    min-width: 160px;
+    padding: 8px 0;
+  }
+
+  .user-dropdown-menu a,
+  .user-dropdown-menu button {
+    text-align: center;
+    padding: 12px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-dropdown-menu {
+    right: 5px;
+    top: 110%; /* un peu plus proche de l’avatar */
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .user-dropdown-menu {
+    right: 5px;
+    top: 110%;
+    min-width: 120px;
+  }
+
+  .user-dropdown-menu a,
+  .user-dropdown-menu button {
+    font-size: 0.8rem;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .user-dropdown-menu {
+    right: 2px;
+    top: 105%;
+    min-width: 100px;
+  }
+
+  .user-dropdown-menu a,
+  .user-dropdown-menu button {
+    font-size: 0.75rem;
+    padding: 8px 0;
+  }
+}
+
+
+.user-dropdown-menu a:hover,
+.user-dropdown-menu button:hover {
+  background: #e0f2ff;
+}
+
+/* ================================
+   HAMBURGER MENU
+================================ */
 .menu-toggle {
   display: none;
   background: none;
   border: none;
-  font-size: 2.2rem;
-  cursor: pointer;
-}
-.header-button,
-.user-dropdown-menu button,
-.user-dropdown-menu a {
-  transition: all 0.3s ease;
+  font-size: 2rem;
   cursor: pointer;
 }
 
-/* Largeur automatique sur desktop */
-.header-button {
-  width: auto;
-}
-
-/* --- RESPONSIVE --- */
+/* ================================
+   RESPONSIVE
+================================ */
 @media (max-width: 992px) {
   header .container {
     flex-direction: column;
-    align-items: center;
-    padding: 15px 20px;
+    gap: 10px;
+    padding: 10px 20px;
   }
 
-  header img {
-    height: 60px;
-    margin-bottom: 10px;
+  nav.nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 12px;
+    padding-top: 10px;
   }
 
-  header button {
-    margin-top: 10px;
+  nav.nav-links.show {
+    display: flex;
   }
 
-  header nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 12px;
-  }
-}
-
-@media (max-width: 768px) {
   .menu-toggle {
     display: block;
   }
 
-  nav.nav-links {
-    display: none; /* toggle via React state */
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    text-align: center;
+  nav a {
+    font-size: 1rem;
   }
 
-  .features-dropdown,
-  .user-dropdown-menu {
-    position: static;
-    width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-    opacity: 1;
-    transform: none;
-  }
-
-  nav.nav-links.show {
-    display: flex; /* afficher quand mobileOpen = true */
-  }
-}
-
-@media (max-width: 600px) {
-  header nav a {
-    font-size: 0.95rem;
-  }
-
-  header img {
-    height: 50px;
-  }
-
-  header button.header-button {
-    width: 100%;
-    text-align: center;
-    padding: 16px 10px;
-  }
-  
-}
-@media (max-width: 768px) {
-  /* Tous les boutons prennent 100% de la largeur */
-  .header-button,
-  .user-dropdown-menu button,
-  .user-dropdown-menu a {
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  /* Espacement entre boutons et liens */
-  nav.nav-links {
-    gap: 8px;
-  }
-}
-
-@media (max-width: 600px) {
-  /* Police plus petite sur mobile */
- 
-  .user-dropdown-menu button,
-  .user-dropdown-menu a {
-    font-size: 0.7rem;
-  }
-}
-@media (max-width: 768px) {
   .header-button {
-    padding: 6px 12px;
+    width: 100%;
+    padding: 12px;
+  }
+
+ 
+}
+
+@media (max-width: 600px) {
+  .img-container img {
+    height: 40px;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+
+
+}
+
+@media (max-width: 380px) {
+  header .container {
+    padding: 10px 15px;
+  }
+
+  nav a {
     font-size: 0.85rem;
+  }
+
+  .img-container img {
+    height: 34px;
+  }
+
+  .user-menu img {
+    width: 42px;
+    height: 42px;
   }
 }

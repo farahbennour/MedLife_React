@@ -8,11 +8,11 @@
   width: min(96%, 1200px);
   margin: 3% auto;
   text-align: center;
-  font-family:'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   perspective: 1200px;
-  margin-left: 20%;
 }
 
+/* ===================== Patient Name ===================== */
 .admin-patient-name {
   font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 800;
@@ -30,18 +30,7 @@
   background: linear-gradient(135deg, #ffffff, #f0f4f8);
   border-radius: 25px;
   padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-
-/* ===================== Dossier Header ===================== */
-.admin-dossier-card {
-  background: linear-gradient(135deg, #ffffff, #f0f4f8);
-  border-radius: 25px;
-  padding: 1.5rem;
-  margin-bottom: 3rem; /* augmenté de 2rem à 3rem pour plus d'espace */
+  margin-bottom: 3rem;
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -51,12 +40,11 @@
   background: linear-gradient(145deg, #d7e2ff, #88aad950);
   border-radius: 20px;
   padding: 1rem;
-  margin-top: 1.5rem; /* augmenté de 1rem à 1.5rem */
+  margin-top: 1.5rem;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 
 .admin-consultation-card:hover {
   transform: translateY(-8px) rotateX(1deg) rotateY(1deg);
@@ -84,7 +72,7 @@
   border-top: 1px solid #cbd5e1;
 }
 
-/* ===================== Ordonnance ===================== */
+/* ===================== Ordonnance Section ===================== */
 .admin-ordonnance-section {
   background: linear-gradient(135deg, #f2f7fca8, #f2f7fca8);
   padding: 0.8rem;
@@ -110,9 +98,10 @@
 /* ===================== Buttons ===================== */
 .admin-consultation-actions {
   display: flex;
-margin-left: 90%;
+  justify-content: flex-end;
   gap: 0.5rem;
   margin-top: 0.7rem;
+  flex-wrap: wrap;
 }
 
 .admin-consultation-actions button {
@@ -139,10 +128,23 @@ margin-left: 90%;
 }
 
 /* ===================== Responsive ===================== */
+@media (max-width: 1024px) {
+  .admin-dossier-container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 @media (max-width: 768px) {
-  .admin-dossier-header {
+  .admin-consultation-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: 5px;
+  }
+
+  .admin-consultation-actions {
+    justify-content: center;
   }
 }
 
@@ -158,5 +160,9 @@ margin-left: 90%;
   .admin-consultation-actions button {
     padding: 0.4rem 0.6rem;
     font-size: 0.9rem;
+  }
+
+  .admin-ordonnance-section {
+    padding: 0.6rem;
   }
 }

@@ -55,6 +55,7 @@ body {
   box-shadow: 
     0 8px 32px rgba(30, 64, 175, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    z-index: 1; /
 }
 
 .doctor-card {
@@ -66,6 +67,7 @@ body {
     0 8px 32px rgba(30, 64, 175, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   animation: float 6s ease-in-out infinite;
+
 }
 
 /* HERO SECTION */
@@ -95,12 +97,15 @@ body {
   justify-content: space-between;
 }
 
+
+
 .doctor-hero-left h1 {
   color: white;
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
   text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  
 }
 
 /* DASHBOARD GRID */
@@ -381,5 +386,97 @@ body {
   .doctor-cards-row {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  /* Dashboard root */
+  .doctor-dashboard-root {
+    padding: 10px;
+    margin-left: 0;
+  }
+
+  /* Hero section */
+  .doctor-hero-inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+  }
+  .doctor-hero-left h1 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  /* Dashboard grid */
+  .doctor-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Services cards */
+  .doctor-cards-row {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+  }
+  .doctor-service-card {
+    padding: 10px 8px;
+  }
+  .doctor-service-card h3 { font-size: 0.9rem; }
+  .doctor-service-card p { font-size: 11px; }
+
+  .doctor-service-image-box {
+    height: 60px;
+  }
+  .doctor-service-img {
+    max-width: 70%;
+    max-height: 70%;
+  }
+
+  /* Users section */
+  .doctor-users-section {
+    padding: 10px;
+  }
+  .doctor-users-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .doctor-users-section table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .doctor-users-section th,
+  .doctor-users-section td {
+    padding: 6px 5px;
+    font-size: 11px;
+  }
+
+  /* User card */
+  .doctor-user-card {
+    padding: 15px;
+  }
+  .doctor-user-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Counts / Circles */
+  .doctor-counts-circles {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .doctor-circle-card, .doctor-circle-card1 {
+    padding: 5%;
+    flex: 1 1 100%;
+  }
+  .doctor-circle-card h3, .doctor-circle-card1 h3 { font-size: 1.2rem; }
+  .doctor-circle-card p, .doctor-circle-card1 p { font-size: 1rem; }
+
+  /* Form slide */
+  .doctor-rendezvous-form-slide.open {
+    padding: 15px;
   }
 }

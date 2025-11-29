@@ -32,8 +32,11 @@ import ReceptionistDoctors from "./components/Receptionist/ReceptionistDoctor/Re
 import ReceptionistRdvList from "./components/Receptionist/ReceptionistRdvList/ReceptionistRdvList.jsx";
 import UpdateProfileReceptionist from "./components/Receptionist/update-profile-receptionist/update-profile-receptionist.jsx";
 import ResetPassword from "./components/ResetPassword/resetPassword.jsx";
-
+import ContactForm from "./components/contact/contact.jsx";
 import ProtectedRoute from "./components/Guards/ProtectedRoute.jsx";
+import About from "./components/à-propos/about.jsx";
+import PaymentSuccess from "./components/Patient/payment-status/payment-success.jsx";
+import PaymentCancel from "./components/Patient/payment-status/payment-cancel.jsx";
 
 export default function App() {
   return (
@@ -45,6 +48,10 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/contact" element={<ContactForm/>}/>
+          <Route path="/a-propos" element={<About/>}/>
+                    
+
           {/* Section ADMIN */}
           <Route path="/admin" element={
             <ProtectedRoute allowedRoles={['admin']}>
@@ -103,6 +110,9 @@ export default function App() {
             <Route path="update-profile" element={<UpdateProfilePatient />} />
             <Route path="dossier-medical" element={<PatientDossier />} />
             <Route path="my-payments" element={<PatientPayments/>} />
+            <Route path="payment-success" element={<PaymentSuccess/>}/>
+                    <Route path="payment-cancel" element={<PaymentCancel/>}/>
+            
           </Route>
         </Routes>
       </main>

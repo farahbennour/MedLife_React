@@ -7,7 +7,6 @@
   box-shadow: 0 4px 20px rgba(132, 191, 255, 0.25);
   font-family: 'Times New Roman', Times, serif;
   color: #333;
-  margin-right: 20% !important;
 }
 
 .update-profilereceptionist-container h2 {
@@ -48,7 +47,8 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.update-profile-form input:focus {
+.update-profile-form input:focus,
+.update-profile-form select:focus {
   outline: none;
   border-color: #6684a3;
   box-shadow: 0 0 6px rgba(132, 191, 255, 0.5);
@@ -95,7 +95,8 @@
   margin-top: 3%;
   margin-bottom: 4%;
 }
-.password-section label{
+
+.password-section label {
   margin-top: 1%;
 }
 
@@ -105,11 +106,11 @@
 }
 
 .toggle-password {
-  position: abreceptionistsolute;
+  position: absolute;
   right: 12px;
   cursor: pointer;
   color: #6684a3;
-  font-size: 1.receptionist2rem;
+  font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
@@ -118,6 +119,13 @@
 }
 
 /* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .update-profilereceptionist-container {
+    width: 85%;
+    padding: 35px 25px;
+  }
+}
+
 @media (max-width: 768px) {
   .update-profilereceptionist-container {
     width: 90%;
@@ -126,5 +134,30 @@
 
   .update-profilereceptionist-container h2 {
     font-size: 1.6rem;
+  }
+
+  .password-section h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .update-profilereceptionist-container {
+    padding: 20px 15px;
+  }
+
+  .update-profile-form input,
+  .update-profile-form select {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  .update-profile-form button {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  .toggle-password {
+    font-size: 1rem;
   }
 }

@@ -73,8 +73,8 @@ export default function Header() {
             )}
           </div>
 
-          <Link to="/patient/a-propos" className="hover:underline">À propos</Link>
-          <Link to="/patient/contact" className="hover:underline">Contact</Link>
+          <Link to="/a-propos" className="hover:underline">À propos</Link>
+          <Link to="/contact" className="hover:underline">Contact</Link>
         </nav>
 
         {/* Hamburger menu pour mobile */}
@@ -119,3 +119,4 @@ export default function Header() {
     </header>
   );
 }
+

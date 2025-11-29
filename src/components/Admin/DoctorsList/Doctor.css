@@ -8,15 +8,15 @@ body, html {
 
 /* ==== MAIN CONTENT ==== */
 .doctorlist-main {
-  margin-left: 320px; /* Sidebar width */
+  margin-left: 320px; /* Sidebar width desktop */
   padding: 20px;
   transition: all 0.3s ease;
 }
 
 /* ==== BANNER ==== */
 .doctorlist-banner {
- background: linear-gradient(#a6ccf5, #a6ccf5);
-   backdrop-filter: blur(10px);
+  background: linear-gradient(#a6ccf5, #a6ccf5);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   color: #fff;
   display: flex;
@@ -27,6 +27,7 @@ body, html {
   margin-bottom: 40px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  flex-wrap: wrap;
 }
 
 .doctorlist-banner-text h2 {
@@ -34,7 +35,6 @@ body, html {
   color: #003366;
   text-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
   margin: 0;
-  
 }
 
 .doctorlist-banner-text span {
@@ -42,7 +42,7 @@ body, html {
 }
 
 .doctorlist-banner-text p {
- font-size: 0.95rem;
+  font-size: 0.95rem;
   margin-top: 5px;
   opacity: 0.9;
 }
@@ -50,7 +50,7 @@ body, html {
 /* ==== SEARCH SECTION ==== */
 .doctorlist-search {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   font-family: 'Times New Roman', Times, serif;
   gap: 8px;
@@ -63,16 +63,15 @@ body, html {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  transition: all 0.3s ease;
+  flex-wrap: wrap;
 }
 
 .doctorlist-search input {
-  width: 500px;
-  max-width: 90%;
+  width: 400px;
+  max-width: 100%;
   padding: 10px 15px;
   border-radius: 12px;
-  border: 1px solid #ccc;
-  border-color: #ffffff;
+  border: 1px solid #ffffff;
   font-size: 1rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   transition: 0.3s;
@@ -85,7 +84,7 @@ body, html {
 }
 
 .doctorlist-search button {
-   background-color: #a6ccf5;
+  background-color: #a6ccf5;
   color: white;
   border: none;
   border-radius: 8px;
@@ -98,13 +97,6 @@ body, html {
 .doctorlist-search button:hover {
   transform: scale(1.05);
 }
-.doctor-container-3d {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 40px;
-  border-radius: 35px;
-  margin: 30px 5px;
- box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
 
 /* ==== DOCTOR GRID ==== */
 .doctorlist-grid {
@@ -112,15 +104,14 @@ body, html {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 33px;
   padding: 10px;
-  
   width: 100%;
   box-sizing: border-box;
-  
+  justify-items: center;
 }
 
 /* ==== DOCTOR CARD ==== */
 .doctorlist-card {
- background: #fff;
+  background: #fff;
   border-radius: 18px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
   border-left: 6px solid #a6ccf5;
@@ -129,46 +120,46 @@ body, html {
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  width: 320px;
+  width: 100%;
+  max-width: 320px;
   transition: all 0.3s ease;
 }
-.doctorlist-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
+
+.doctorlist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-.doctor-avatar {
-  width: 60px;
-  height: 60px;
+.doctorlist-card img {
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #a6ccf5;
+  margin-bottom: 10px;
 }
 
-.doctor-name {
-  font-size: 1rem;
-  font-weight: 700;
+.doctorlist-card h4 {
+  font-size: 18px;
+  font-weight: 600;
   color: #333;
-  margin: 0;
+  margin-bottom: 4px;
+  text-align: center;
 }
 
-.doctor-email {
-  font-size: 0.9rem;
-  color: #7ea8d3;
-  margin: 2px 0 0;
+.doctorlist-card p.doctorlist-role {
+  text-align: center;
+  color: #a6ccf5;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-/* Info section */
-.doctor-info p {
-  white-space: normal;       
-  word-wrap: break-word;   
-  overflow-wrap: break-word; 
-  max-width: 100%;  
-  font-size: 1.0rem; color: #444; line-height: 1.9; margin-left: 20px;         
+.doctorlist-card p {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.4;
 }
-
 
 /* Buttons aligned horizontally */
 .doctor-actions {
@@ -201,129 +192,9 @@ body, html {
   opacity: 0.9;
 }
 
-/* Add Card */
-.add-card {
- display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #0ea5e9;
-  border: 2px dashed #0ea5e9;
-  background: rgba(255, 255, 255, 0.3);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.add-card:hover {
-  background: #d9ebff;
-}
-
-.plus-icon {
-  font-size: 2.2rem;
-  color: #0ea5e9;
-  font-weight: bold;
-}
-.doctorlist-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-.doctorlist-card img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #a6ccf5;
-  flex-shrink: 0;
-}
-
-.doctorlist-card h4 {
- font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 2px;
-  text-align: center;
-}
-.doctorlist-card p.doctorlist-role {
-  text-align: center;
-}
-
-.doctorlist-role {
-  color: #a6ccf5;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.doctorlist-desc {
-  color: #777;
-  font-size: 13px;
-  line-height: 1.4;
-  margin-bottom: 15px;
-}
-
-/* ==== CARD ACTIONS ==== */
-.doctorlist-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-left: auto;
-}
-
-.doctorlist-actions button {
-   border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 12px;
-  padding: 6px 10px;
-  transition: 0.3s;
-  width: 90px;
-}
-.doctorlist-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
-}
-
-.doctorlist-info h4 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.doctorlist-info p.doctorlist-role {
-  color: #a6ccf5;
-  font-weight: 600;
-  font-size: 13px;
-  margin: 4px 0 10px;
-}
-.doctorlist-actions .edit-btn-doctor {
-  background-color: #0ea5e9;
-  color: white;
-}
-
-.doctorlist-actions .edit-btn-doctor:hover {
-  background-color: #0ea5e9;
-}
-
-.doctorlist-actions .delete-btn-doctor {
-  background-color: #6684a3;
-  color: white;
-}
-
-.doctorlist-actions .delete-btn-doctor:hover {
-  background-color: #6684a3;
-}
-
 /* ==== ADD CARD ==== */
 .doctorlist-add-card {
   background-color: #a6ccf5;
-  
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.249);
   color: white;
   text-align: center;
@@ -348,7 +219,7 @@ body, html {
 
 /* ==== MODAL ==== */
 .doctorlist-modal-overlay {
-    position: fixed;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -362,7 +233,7 @@ body, html {
 }
 
 .doctorlist-modal {
- background: #ffffff;
+  background: #ffffff;
   padding: 2.2rem;
   width: 430px;
   max-width: 95%;
@@ -373,48 +244,17 @@ body, html {
 }
 
 .doctorlist-modal h3 {
-    text-align: center;
+  text-align: center;
   font-size: 1.6rem;
   color: #0ea5e9;
   font-weight: 700;
   margin-bottom: 1.2rem;
 }
-.doctorlist-attributes {
-  font-size: 13px;
-  color: #555;
-}
-
-.doctorlist-attribute {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-}
-.doctorlist-card p.doctorlist-role {
-  color: #a6ccf5;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 8px;
-  text-align: center;
-}
-
-.doctorlist-attribute span.title {
-  font-weight: 600;
-  color: #909090;
-  min-width: 100px; 
-   padding: 3px;/* largeur fixe pour aligner les valeurs */
-}
-
-.doctorlist-attribute span.value {
-  color: #555;
-  flex: 1;
-  text-align: left;
-  padding: 3px;
-}
 
 .doctorlist-modal form input,
 .doctorlist-modal form select {
-   width: 100%;
-    margin: 8px 0;
+  width: 100%;
+  margin: 8px 0;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #d0d0d0;
@@ -427,81 +267,33 @@ body, html {
 .doctorlist-modal form select:focus {
   border-color: #a6ccf5;
   box-shadow: 0 0 5px rgba(62, 197, 194, 0.3);
-  border-radius: 10px;
-}
-
-.doctorlist-modal-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.doctorlist-modal-actions button {
- color: white;
- font-weight: 600;
-  font-size: 15px;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 8px;
-  width: 150px;
-  margin-left: 3px;
-  margin-right: 3px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(75, 84, 93, 0.393);
-}
-
-.doctorlist-modal-actions button[type="submit"] {
-  background-color: #0ea5e9;
-  color: #fff;
-}
-
-.doctorlist-modal-actions button[type="submit"]:hover {
-  background-color: #0284c7;
-  transform: translateY(-2px);
-}
-
-.doctorlist-modal-actions button[type="button"] {
- background-color: #6684a3;
-   color: #fff;
-}
-
-.doctorlist-modal-actions button[type="button"]:hover {
-    background-color: #57738f;
-  transform: translateY(-2px);
 }
 
 /* ==== RESPONSIVE ==== */
-@media (max-width: 768px) {
-  .doctorlist-grid {
-   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
+@media (max-width: 1024px) {
+  .doctorlist-main { margin-left: 250px; }
 }
+
 @media (max-width: 900px) {
   .doctorlist-grid {
-    display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  padding: 30px;
-  justify-items: center;
-  align-items: start;
-  width: 100%;
-  box-sizing: border-box;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    justify-items: center;
   }
+}
+
+@media (max-width: 768px) {
+  .doctorlist-main { margin-left: 0; padding: 15px; }
+  .doctorlist-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .doctorlist-search input { width: 100%; }
+  .doctorlist-banner { flex-direction: column; height: auto; padding: 20px; text-align: center; }
 }
 
 @media (max-width: 500px) {
-  .doctorlist-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .doctorlist-main {
-    margin-left: 0;
-    padding: 15px;
-  }
-
-  .doctorlist-modal {
-    width: 90%;
-    padding: 20px;
-  }
+  .doctorlist-grid { grid-template-columns: 1fr; gap: 15px; }
+  .doctorlist-banner { padding: 15px; }
+  .doctorlist-modal { width: 90%; padding: 15px; }
+  .doctorlist-search { flex-direction: column; gap: 10px; }
 }
+

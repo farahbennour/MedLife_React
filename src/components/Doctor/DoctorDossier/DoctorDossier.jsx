@@ -302,6 +302,11 @@ useEffect(() => {
 
       {/* Modal for Add / Update */}
       {showModal && (
+        
+         <>
+
+        {/* Overlay */}
+    <div className="modal-overlay-doctor" onClick={resetModal}></div>
         <div className={`modal ${showOrdonnanceFields ? "expanded" : ""}`}>
           <h3>{editingConsultation ? "Modifier Consultation" : "Nouvelle Consultation"}</h3>
 
@@ -372,6 +377,7 @@ useEffect(() => {
             <button onClick={resetModal} className="modal-cancel">Annuler</button>
           </div>
         </div>
+        </>
       )}
 
       {/* Consultations list */}

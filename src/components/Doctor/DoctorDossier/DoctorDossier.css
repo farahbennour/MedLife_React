@@ -173,32 +173,41 @@
 /* 🩺 Doctor Modal — FIXED Layout & Alignment */
 
 
+/* Overlay */
+.modal-overlay-doctor {
+  position: fixed;
+  inset: 0; /* top:0; left:0; right:0; bottom:0; */
+  background: rgba(0, 0, 0, 0.45); /* semi-transparent noir */
+  z-index: 1500; /* en dessous du modal mais au-dessus du reste */
+}
+
+/* Modal */
 .modal {
+  position: fixed; 
+  top: 80%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem 2.5rem;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  animation: scaleIn 0.35s ease;
-  font-family: 'Times New Roman', Times, serif;
-  text-align: left;
+  max-height: 90vh;
   overflow-y: auto;
-  max-height: 1200px;
-  height: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  z-index: 2000; /* toujours au-dessus de l'overlay */
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: max-height 0.3s ease;
-  margin-left: 30%;
-  margin-top: 3%;
+  transition: all 0.3s ease;
 }
 
+
 .modal.expanded {
-  max-height: 2200px;
-  height: 1000px;
+  max-height: 95vh;
 }
+
 
 /* Modal Title */
 .modal h3 {

@@ -9,9 +9,11 @@
   max-width: 1100px;
   width: min(96%, 1200px);
   margin: 5% auto;
-  margin-left: 23%;
+  margin-left: 20%; /* changed for responsiveness */
+  margin-right: auto;
 }
 
+/* ------------------ Title ------------------ */
 .receptionist-doctors-container h1 {
   color: #0077b6;
   margin-bottom: 2.5rem;
@@ -76,6 +78,8 @@
 }
 
 /* ------------------ Responsive ------------------ */
+
+/* Medium screens */
 @media (max-width: 900px) {
   .receptionist-doctor-card {
     padding: 1rem;
@@ -83,10 +87,50 @@
   .receptionist-doctor-header h2 {
     font-size: 1.2rem;
   }
+  .receptionist-doctor-specialty {
+    font-size: 0.95rem;
+  }
+  .receptionist-doctor-body p {
+    font-size: 0.9rem;
+  }
 }
 
+/* Small screens */
 @media (max-width: 600px) {
   .receptionist-doctors-grid {
     grid-template-columns: 1fr;
+  }
+  .receptionist-doctors-container {
+    padding: 1rem 1.2rem;
+    margin: 5% auto;
+  }
+  .receptionist-doctor-header h2 {
+    font-size: 1.1rem;
+  }
+  .receptionist-doctor-specialty {
+    font-size: 0.9rem;
+  }
+  .receptionist-doctor-body p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 400px) {
+  .receptionist-doctors-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+  .receptionist-doctor-card {
+    padding: 0.8rem;
+  }
+  .receptionist-doctor-header h2 {
+    font-size: 1rem;
+  }
+  .receptionist-doctor-specialty {
+    font-size: 0.85rem;
+  }
+  .receptionist-doctor-body p {
+    font-size: 0.8rem;
   }
 }

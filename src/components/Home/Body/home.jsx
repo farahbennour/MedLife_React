@@ -10,10 +10,12 @@ import patientImg from "/src/assets/patient.png";
 import portailImg from "/src/assets/portail.png";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Body() {
+   const navigate = useNavigate();
   return (
     <div className="home">
       {/* --- HEADER --- */}
@@ -24,7 +26,7 @@ export default function Body() {
         <div className="content">
           <h1>Bienvenue sur MedLife</h1>
           <p>Votre plateforme de santé intelligente, simple et rapide.</p>
-          <button>Commencer</button>
+          <button onClick={() => navigate("/login")}>Commencer</button>
         </div>
       </section>
 

@@ -505,3 +505,96 @@ body, html {
     padding: 20px;
   }
 }
+
+/* ==== RESPONSIVE ENHANCEMENTS ==== */
+
+/* Medium screens */
+@media (max-width: 1024px) {
+  .receplist-main {
+    margin-left: 250px; /* smaller sidebar if collapsible */
+    padding: 20px;
+  }
+
+  .receplist-search input {
+    width: 80%;
+  }
+
+  .receplist-grid {
+    gap: 25px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .receplist-main {
+    margin-left: 0; /* sidebar collapses */
+    padding: 15px;
+  }
+
+  .receplist-search {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 15px;
+  }
+
+  .receplist-search input {
+    width: 100%;
+  }
+
+  .receplist-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .doctor-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .receplist-add-card {
+    width: 100%;
+  }
+}
+
+/* Small screens / Mobile */
+@media (max-width: 500px) {
+  .receplist-main {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .receplist-search input {
+    width: 100%;
+  }
+
+  .receplist-search button {
+    width: 100%;
+  }
+
+  .receplist-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .receplist-card,
+  .receplist-add-card {
+    width: 100%;
+  }
+
+  .receplist-modal {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .receplist-modal-actions {
+    flex-direction: column;
+  }
+
+  .receplist-modal-actions button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

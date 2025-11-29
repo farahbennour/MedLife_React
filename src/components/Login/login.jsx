@@ -52,9 +52,9 @@ const handleSubmit = async (e) => {
 
     // Redirection selon le rôle
     const redirectPaths = {
-      admin: "/admin",
-      receptionist: "/receptionist", 
-      doctor: "/doctor",
+      admin: "/admin/dashboard",
+      receptionist: "/receptionist/dashboard", 
+      doctor: "/doctor/dashboard",
       patient: "/patient"
     };
 

@@ -1,6 +1,6 @@
-/* File: RendezVousForm.css */
-
-/* Variables pour une cohérence design */
+/* ==============================
+   Variables globales
+================================= */
 :root {
   --primary-blue: #2563eb;
   --primary-dark: #1e40af;
@@ -17,32 +17,39 @@
   --border-focus: #3b82f6;
   --success: #10b981;
   --error: #ef4444;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
   --radius: 12px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  --font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* Reset et base */
+/* ==============================
+   Reset & base
+================================= */
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
 
-/* Container principal */
 .rendezvous-form {
   max-width: 900px;
+  width: 90%;
   margin: 40px auto;
   background: var(--background);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
   overflow: hidden;
   border: 1px solid var(--border);
+  position: relative;
   animation: formEntrance 0.6s ease-out;
+  padding-top: 6px; /* espace pour le gradient */
 }
 
-/* En-tête */
+/* Gradient header */
 .rendezvous-form::before {
   content: '';
   position: absolute;
@@ -51,13 +58,17 @@
   right: 0;
   height: 6px;
   background: linear-gradient(90deg, var(--primary-blue), var(--accent-teal));
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
 }
 
-/* Titre principal */
+/* ==============================
+   Header / Titre
+================================= */
 .rendezvous-form h2 {
   text-align: center;
   margin: 0;
-  padding: 32px 40px 24px;
+  padding: 32px 20px 24px;
   color: var(--text-dark);
   font-size: 28px;
   font-weight: 700;
@@ -66,14 +77,16 @@
   border-bottom: 1px solid var(--border);
 }
 
-/* Conteneur du formulaire */
+/* ==============================
+   Formulaire
+================================= */
 .rendezvous-form form {
-  padding: 40px;
+  padding: 30px 20px;
   display: grid;
   gap: 32px;
 }
 
-/* Grille pour les champs */
+/* Grille responsive des champs */
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -81,14 +94,28 @@
   align-items: start;
 }
 
-/* Groupes de champs */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    gap: 16px;
+  }
+}
+
+/* ==============================
+   Champs
+================================= */
 .form-group {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-/* Labels */
 .form-group label {
   margin-bottom: 8px;
   font-weight: 600;
@@ -107,7 +134,7 @@
   font-size: 18px;
 }
 
-/* Champs input & select */
+/* Inputs & selects */
 .form-group input,
 .form-group select {
   padding: 14px 16px;
@@ -118,7 +145,6 @@
   transition: var(--transition);
   background: var(--background);
   color: var(--text-dark);
-  font-family: inherit;
 }
 
 .form-group input:focus,
@@ -127,7 +153,6 @@
   border-color: var(--primary-blue);
   box-shadow: 0 0 0 3px var(--primary-light);
   transform: translateY(-1px);
-  appearance: none;
 }
 
 .form-group input:hover,
@@ -135,7 +160,6 @@
   border-color: #cbd5e1;
 }
 
-/* Placeholder */
 .form-group input::placeholder {
   color: var(--text-light);
   font-style: italic;
@@ -151,20 +175,21 @@
   padding-right: 44px;
 }
 
-/* Boutons */
+/* ==============================
+   Buttons
+================================= */
 .form-actions {
   grid-column: 1 / -1;
   display: flex;
   justify-content: center;
   gap: 16px;
   margin-top: 16px;
+  flex-wrap: wrap;
 }
 
-/* Submit Button */
-.submit-btn {
+.submit-btn,
+.cancel-btn {
   padding: 16px 32px;
-  background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
-  color: white;
   font-weight: 600;
   font-size: 16px;
   border: none;
@@ -176,6 +201,11 @@
   position: relative;
   overflow: hidden;
   min-width: 200px;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+  color: white;
 }
 
 .submit-btn:hover {
@@ -183,31 +213,17 @@
   box-shadow: var(--shadow-lg);
 }
 
-/* Cancel Button - visible et contrasté */
 .cancel-btn {
-  padding: 16px 32px;
-  background: #afc8ff; /* Bleu foncé visible */
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: var(--transition);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
-  overflow: hidden;
-  min-width: 200px;
+  background: #afc8ff;
+  color: white;
 }
 
 .cancel-btn:hover {
-  background: #afc8ff; /* bleu plus clair au hover */
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
-/* Effet brillance pour Cancel & Submit */
+/* Effet brillance */
 .submit-btn::after,
 .cancel-btn::after {
   content: '';
@@ -226,7 +242,19 @@
   transform: rotate(45deg) translate(50%, 50%);
 }
 
-/* Close Button */
+/* Responsive buttons */
+@media (max-width: 480px) {
+  .submit-btn,
+  .cancel-btn {
+    width: 100%;
+    min-width: unset;
+    padding: 14px 20px;
+  }
+}
+
+/* ==============================
+   Close Button
+================================= */
 .close-button {
   position: absolute;
   top: 20px;
@@ -251,30 +279,9 @@
   transform: translateY(-2px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .submit-btn,
-  .cancel-btn {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .form-group input,
-  .form-group select {
-    padding: 12px 14px;
-  }
-  .submit-btn,
-  .cancel-btn {
-    padding: 14px 20px;
-  }
-}
-
-/* Animations */
+/* ==============================
+   Animations
+================================= */
 @keyframes formEntrance {
   from { opacity: 0; transform: translateY(30px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }

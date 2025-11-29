@@ -9,9 +9,11 @@
   max-width: 1100px;
   width: min(96%, 1200px);
   margin: 5% auto;
-  margin-left: 23%;
+  margin-left: 25%; /* pour grands écrans */
+  margin-right: auto;
 }
 
+/* ------------------ Title ------------------ */
 .receptionist-rdv-container h1 {
   color: #0077b6;
   margin-bottom: 2.5rem;
@@ -90,7 +92,6 @@
 }
 
 /* ------------------ Select Dropdown ------------------ */
-
 .receptionist-rdv-table select {
   padding: 5px;
   border-radius: 6px;
@@ -116,6 +117,15 @@
 }
 
 /* ------------------ Responsive ------------------ */
+
+/* Medium screens */
+@media (max-width: 1024px) {
+  .receptionist-rdv-container {
+    margin-left: auto;  /* container centré */
+    margin-right: auto;
+  }
+}
+
 @media (max-width: 900px) {
   .receptionist-rdv-table th,
   .receptionist-rdv-table td {
@@ -125,9 +135,32 @@
 }
 
 @media (max-width: 600px) {
+  .receptionist-rdv-container {
+    padding: 1rem 1.2rem;
+  }
+
   .receptionist-rdv-table th,
   .receptionist-rdv-table td {
     font-size: 0.9rem;
     padding: 8px;
+  }
+
+  .receptionist-rdv-table {
+    display: block;
+    overflow-x: auto; /* permet le scroll horizontal */
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .receptionist-rdv-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .receptionist-rdv-table th,
+  .receptionist-rdv-table td {
+    font-size: 0.85rem;
+    padding: 6px 8px;
   }
 }
