@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import './header.css';
 
@@ -68,12 +68,13 @@ export default function Header() {
                 <NavLink to="/patient/dashboard" onClick={() => setFeaturesOpen(false)}>Tableau de bord</NavLink>
                 <NavLink to="/patient/dossier-medical" onClick={() => setFeaturesOpen(false)}>Dossier Médical</NavLink>
                 <NavLink to="/patient/my-payments" onClick={() => setFeaturesOpen(false)}>Mes Paiements</NavLink>
+
               </div>
             )}
           </div>
 
           <Link to="/patient/a-propos" className="hover:underline">À propos</Link>
-          <Link to="/contact" className="hover:underline">Contact</Link>
+          <Link to="/patient/contact" className="hover:underline">Contact</Link>
         </nav>
 
         {/* Hamburger menu pour mobile */}
