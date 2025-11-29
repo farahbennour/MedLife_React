@@ -1,9 +1,17 @@
+body, html {
+  height: auto;
+  overflow-y: auto !important;
+}
+
+
 .services-page {
  padding: 20px 40px;
   font-family: "Poppins", sans-serif;
   background-color: #f8f9fb;
   color: #222;
-  min-height: 100vh;
+  min-height: auto;   
+  height: auto;       
+  overflow-y: visible; 
 }
 
 .header {
@@ -14,6 +22,7 @@
   margin-left: 320px;
 }
 .add-service-btn {
+  box-shadow: 0 4px 12px rgba(75, 84, 93, 0.393);
   margin-left: auto;
   background: #0ea5e9;
   color: white;
@@ -48,7 +57,7 @@
 }
 
 .tab.active {
-  background: #4a42f4;
+  background: #0ea5e9;
   color: white;
 }
 
@@ -91,7 +100,8 @@
   color: white;
   margin-left: 320px;
   margin-right: 20px;
-  overflow: hidden;
+  overflow: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.11);
 }
 
 .course-info {
@@ -137,17 +147,17 @@
 /* === Color themes updated and hover effects === */
 .course-card.purple {
   background-color:  #dff1ff; /* White / Ice Blue */
-  color: #222; /* نص داكن على خلفية فاتحة */
+  color: #222; 
 }
 
 .course-card.orange {
   background-color:  #9CD5FF; /* Sky Mist / Light Sky */
-  color: #222; /* نص داكن */
+  color: #222; 
 }
 
 .course-card.dark {
  background-color:  #c8f0ff; /* Ocean Blue / Dark */
-  color: #222; /* نص فاتح على الخلفية الغامقة */
+  color: #222; 
 }
 
 /* Hover effect */
@@ -216,17 +226,16 @@
   position: relative;
 }
 
-.back-btn {
-  background: #0ea5e9;
-  color: white;
-  border-radius: 50%;
-  padding: 10px;
+.service-back-btn {
+ background: transparent;
+  border: none;
+  color: #0ea5e9;
+  font-size: 27px;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s ease;
 }
-.back-btn:hover {
-  background: #0ea5e9;
-}
+
 
 h2 {
   text-transform: capitalize;
@@ -260,74 +269,178 @@ h2 {
   font-style: italic;
   margin-top: 50px;
 }
-/* Form Popup */
+
 .form-popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* خلفية نصف شفافة */
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999;
 }
+
 
 .form-content {
-  background-color: #fff;
-  padding: 2rem;
-  width: 400px;
-  max-width: 90%;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  position: relative;
-  animation: fadeIn 0.3s ease-in-out;
+  background: #ffffff;
+  padding: 2.2rem;
+  width: 430px;
+  max-width: 95%;
+  border-radius: 14px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
+  animation: popupShow 0.25s ease;
+  border-top: 6px solid #0ea5e9;
 }
+
+/* Animation */
+@keyframes popupShow {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.dropdown {
+  width: 330px;
+  margin: 30px auto;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+}
+
+.dropdown-selected {
+  background: white;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid #1ab1f7;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.dropdown-selected.active {
+  border-color: #0b5fe0;
+  box-shadow: 0 0 8px rgba(0, 119, 255, 0.3);
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 2px solid #1a73e8;
+  border-radius: 15px;
+  padding: 0;
+  margin-top: 6px;
+  list-style: none;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.25s ease;
+  opacity: 0;
+
+ 
+  max-height: 180px;   
+  overflow-y: auto;    
+}
+
+
+.dropdown-list.show {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+
+.dropdown-list li {
+  padding: 12px 18px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s linear;
+}
+
+.dropdown-list li:hover {
+  background: #e9f0ff;
+}
+
 
 .form-content h3 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
   text-align: center;
+  font-size: 1.6rem;
   color: #0ea5e9;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
 }
 
+
+.form-content form select,
 .form-content form input,
-.form-content form textarea,
-.form-content form select {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 0.95rem;
-}
-
 .form-content form textarea {
-  resize: vertical;
-  min-height: 80px;
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 10px;
+  border: 1px solid #d0d0d0;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
 }
 
-.form-content form select {
-  cursor: pointer;
+.form-content form select:hover,
+.form-content form input:focus,
+.form-content form textarea:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
 }
+
 
 .form-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+  gap: 0.7rem;
+  
+
 }
 
 .form-buttons button {
-  flex: 1;
-  padding: 0.75rem;
-  margin: 0 0.25rem;
+ color: white;
+ font-weight: 600;
+  font-size: 15px;
   border: none;
+  padding: 10px 14px;
   border-radius: 8px;
-  font-size: 1rem;
+  width: 150px;
+  margin-left: 15px;
+  margin-right: 15px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(75, 84, 93, 0.393);
 }
+.form-buttons input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+}
+
+.form-buttons button[type="submit"] {
+  background: #0ea5e9;
+  color: #fff;
+  
+}
+
+.form-buttons button[type="submit"]:hover {
+  background: #0284c7;
+}
+
+
+.form-buttons button[type="button"] {
+  background: #e5e7eb;
+   color: #fff;
+}
+
+.form-buttons button[type="button"]:hover {
+  background: #d1d5db;
+}
+
 
 .form-buttons button[type="submit"] {
   background-color: #0ea5e9;
@@ -336,15 +449,17 @@ h2 {
 
 .form-buttons button[type="submit"]:hover {
   background-color: #0284c7;
+  transform: translateY(-2px);
 }
 
 .form-buttons button[type="button"] {
-  background-color: #e5e7eb;
-  color: #111827;
+ background-color: #6684a3;
+   color: #fff;
 }
 
 .form-buttons button[type="button"]:hover {
-  background-color: #d1d5db;
+    background-color: #57738f;
+  transform: translateY(-2px);
 }
 
 /* Animation */
@@ -451,6 +566,7 @@ h2 {
   font-size: 0.9rem;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(75, 84, 93, 0.393);
 }
 
 .edit-btn {

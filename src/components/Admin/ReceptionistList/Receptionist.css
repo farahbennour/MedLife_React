@@ -7,68 +7,85 @@ body, html {
 }
 
 /* ==== MAIN CONTENT ==== */
-.main-content {
-  margin-left: 140px; /* Sidebar width */
+.receplist-main {
+  margin-left: 320px; /* Sidebar width */
   padding: 20px;
   transition: all 0.3s ease;
-  margin-left: 320px;
 }
 
 /* ==== BANNER ==== */
-.banner {
- display: flex;
+.receplist-banner {
+ background: linear-gradient(#a6ccf5, #a6ccf5);
+   backdrop-filter: blur(10px);
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, #a6ccf5);
-  padding: 20px 30px;
-  height: 170px;
-  border-radius: 16px;
-  color: white;
-  margin-bottom: 25px;
+  height: 180px;
+  padding: 30px 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.banner h2 {
-  font-size: 24px;
-  font-weight: 600;
+.receplist-banner-text h2 {
+  font-size: 1.8rem;
+  color: #003366;
+  text-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
+  margin: 0;
+  
 }
 
-.banner span {
-  font-weight: 700;
+.receplist-banner-text span {
+  color: #ffffff;
 }
 
-.banner p {
-  font-size: 14px;
-  opacity: 0.9;
+.receplist-banner-text p {
+ font-size: 0.95rem;
   margin-top: 5px;
+  opacity: 0.9;
 }
-
-
 
 /* ==== SEARCH SECTION ==== */
-
-.search-section {
- display: flex;
+.receplist-search {
+  display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-family: 'Times New Roman', Times, serif;
   gap: 8px;
   margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  padding: 10px 15px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
 }
 
-.search-input {
-  width: 250px;
-  padding: 8px 12px;
-  border-radius: 8px;
+.receplist-search input {
+  width: 500px;
+  max-width: 90%;
+  padding: 10px 15px;
+  border-radius: 12px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  border-color: #ffffff;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.receplist-search input:focus {
   outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 4px 20px rgba(14,165,233,0.3);
 }
 
-.search-input:focus {
-   border-color: #a6ccf5;
-}
-
-.search-btn {
- background-color: #a6ccf5;
+.receplist-search button {
+   background-color: #a6ccf5;
   color: white;
   border: none;
   border-radius: 8px;
@@ -78,308 +95,413 @@ body, html {
   transition: 0.3s;
 }
 
-.search-btn:hover {
- background-color: #a6ccf5;
+.receplist-search button:hover {
+  transform: scale(1.05);
+}
+.doctor-container-3d {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 40px;
+  border-radius: 35px;
+  margin: 30px 5px;
+ box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* ==== STAFF SECTION ==== */
-.staff-section {
-  padding: 40px 0;
-}
-
-.section-title {
-  font-size: 18px;
-  color: #444;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.staff-grid {
+/* ==== DOCTOR GRID ==== */
+.receplist-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 33px;
+  padding: 10px;
+  
+  width: 100%;
+  box-sizing: border-box;
+  
 }
 
-/* ==== STAFF CARD ==== */
-.staff-card {
-  background: white;
-  border-radius: 16px;
+/* ==== DOCTOR CARD ==== */
+.receplist-card {
+ background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #a6ccf5;
   padding: 20px;
-  position: relative;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 320px;
+  transition: all 0.3s ease;
+}
+.receplist-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
-.staff-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+.doctor-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #a6ccf5;
 }
 
-.edit-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
+.doctor-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+}
+
+.doctor-email {
+  font-size: 0.9rem;
+  color: #7ea8d3;
+  margin: 2px 0 0;
+}
+
+/* Info section */
+.doctor-info p {
+  white-space: normal;       
+  word-wrap: break-word;   
+  overflow-wrap: break-word; 
+  max-width: 100%;  
+  font-size: 1.0rem; color: #444; line-height: 1.9; margin-left: 20px;         
+}
+
+
+/* Buttons aligned horizontally */
+.doctor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.doctor-actions button {
+  border: none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 14px;
-  color: #3ec5c2;
+  transition: 0.3s;
 }
 
-.staff-img {
+.edit-btn-doctor {
+  background: #0ea5e9;
+  color: white;
+}
+
+.delete-btn-doctor {
+  background: #6b8bab;
+  color: white;
+}
+
+.doctor-actions button:hover {
+  opacity: 0.9;
+}
+
+/* Add Card */
+.add-card {
+ display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #0ea5e9;
+  border: 2px dashed #0ea5e9;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-card:hover {
+  background: #d9ebff;
+}
+
+.plus-icon {
+  font-size: 2.2rem;
+  color: #0ea5e9;
+  font-weight: bold;
+}
+.receplist-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.receplist-card img {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
+  border: 3px solid #a6ccf5;
+  flex-shrink: 0;
 }
 
-h4 {
-  font-size: 16px;
+.receplist-card h4 {
+ font-size: 18px;
   font-weight: 600;
   color: #333;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  text-align: center;
+}
+.receplist-card p.receplist-role {
+  text-align: center;
 }
 
-.role {
-  color: #3ec5c2;
+.receplist-role {
+  color: #a6ccf5;
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 10px;
 }
 
-.desc {
+.receplist-desc {
   color: #777;
   font-size: 13px;
   line-height: 1.4;
   margin-bottom: 15px;
 }
 
-/* Progress */
-.progress {
-  font-size: 12px;
-  color: #777;
-  margin-bottom: 10px;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 6px;
-  background-color: #eee;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  width: 90%;
-  height: 100%;
-  background-color: #3ec5c2;
-}
-
-/* Stats */
-.stats {
+/* ==== CARD ACTIONS ==== */
+.receplist-actions {
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #444;
-  margin-top: 10px;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: auto;
 }
 
-.stats span {
-  color: #999;
+.receplist-actions button {
+   border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
   font-size: 12px;
+  padding: 6px 10px;
+  transition: 0.3s;
+  width: 90px;
+}
+.receplist-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
-/* ==== ADD NEW CARD ==== */
-.add-card {
-  background-color: #a6ccf5 !important;
+.receplist-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.receplist-info p.receplist-role {
+  color: #a6ccf5;
+  font-weight: 600;
+  font-size: 13px;
+  margin: 4px 0 10px;
+}
+.receplist-actions .edit-btn-doctor {
+  background-color: #0ea5e9;
+  color: white;
+}
+
+.receplist-actions .edit-btn-doctor:hover {
+  background-color: #0ea5e9;
+}
+
+.receplist-actions .delete-btn-doctor {
+  background-color: #6684a3;
+  color: white;
+}
+
+.receplist-actions .delete-btn-doctor:hover {
+  background-color: #6684a3;
+}
+
+/* ==== ADD CARD ==== */
+.receplist-add-card {
+  background-color: #a6ccf5;
+  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.249);
   color: white;
   text-align: center;
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
 }
 
-.add-icon {
+.receplist-add-card:hover {
+  transform: translateY(-5px);
+}
+
+.receplist-add-card .add-icon {
   font-size: 40px;
   margin-bottom: 10px;
 }
 
-.add-card h4 {
-  color: white;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
-
-.add-card p {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 13px;
-  line-height: 1.4;
-}
-
 /* ==== MODAL ==== */
-.modal-overlay {
-  position: fixed;
+.receplist-modal-overlay {
+    position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index:1000;
+  z-index: 9999;
 }
 
-.modal-content {
-  background-color: #fff;
-  padding: 30px 35px;
-  border-radius: 16px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-  font-family: "Poppins", sans-serif;
+.receplist-modal {
+ background: #ffffff;
+  padding: 2.2rem;
+  width: 430px;
+  max-width: 95%;
+  border-radius: 14px;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.25);
+  animation: popupShow 0.25s ease;
+  border-top: 6px solid #0ea5e9;
+}
+
+.receplist-modal h3 {
+    text-align: center;
+  font-size: 1.6rem;
+  color: #0ea5e9;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+.receplist-attributes {
+  font-size: 13px;
+  color: #555;
+}
+
+.receplist-attribute {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+.receplist-card p.receplist-role {
+  color: #a6ccf5;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
   text-align: center;
 }
 
-.modal-content h3 {
-  font-size: 20px;
+.receplist-attribute span.title {
   font-weight: 600;
-  color: #3ec5c2;
-  margin-bottom: 20px;
+  color: #909090;
+  min-width: 100px; 
+   padding: 3px;/* largeur fixe pour aligner les valeurs */
 }
 
-.modal-content form input {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+.receplist-attribute span.value {
+  color: #555;
+  flex: 1;
+  text-align: left;
+  padding: 3px;
+}
+
+.receplist-modal form input,
+.receplist-modal form select {
+   width: 100%;
+    margin: 8px 0;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #d0d0d0;
+  font-size: 1rem;
   outline: none;
-  transition: border 0.3s;
+  transition: 0.2s;
 }
 
-.modal-content form input:focus {
-  border-color: #3ec5c2;
+.receplist-modal form input:focus,
+.receplist-modal form select:focus {
+  border-color: #a6ccf5;
   box-shadow: 0 0 5px rgba(62, 197, 194, 0.3);
+  border-radius: 10px;
 }
 
-.modal-buttons {
+.receplist-modal-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-.modal-buttons button {
-  flex: 1;
-  padding: 10px 0;
+.receplist-modal-actions button {
+ color: white;
+ font-weight: 600;
+  font-size: 15px;
   border: none;
+  padding: 10px 14px;
   border-radius: 8px;
+  width: 150px;
+  margin-left: 3px;
+  margin-right: 3px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(75, 84, 93, 0.393);
 }
 
-.modal-buttons button[type="submit"] {
-  background-color: #3ec5c2;
-  color: white;
-}
-.modal {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 400px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-.modal-buttons button[type="submit"]:hover {
-  background-color: #a6ccf5;
-}
-.modal h3 {
-  margin-bottom: 1.5rem;
-  color: #2c3e50;
-}
-
-.modal form input {
-  width: 100%;
-  margin-bottom: 1rem;
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-}
-
-
-
-.edit-btn-doctor {
+.receplist-modal-actions button[type="submit"] {
   background-color: #0ea5e9;
-  color: white;
+  color: #fff;
 }
 
-.edit-btn-doctor:hover {
-  background-color: #0ea5e9;
-}
-
-.delete-btn-doctor {
-  background-color: #6684a3;
-  color: white;
-}
-
-.delete-btn-doctor:hover {
-  background-color: #6684a3;
-}
-.action-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #f3f3f3;
-  border: none;
-  border-radius: 12px;
-  padding: 10px;
-  cursor: pointer;
-  width: 70px;
-  height: 70px;
-  transition: 0.3s;
-}
-
-.action-btn:hover {
+.receplist-modal-actions button[type="submit"]:hover {
+  background-color: #0284c7;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.action-icon.active {
-  background-color: #0ea5e9; /* bleu pour edit */
-  color: white;
 }
 
-.action-icon.active {
-  background-color: #6684a3; /* rouge pour delete */
-  color: white;
-}
-.btn-doctor-save {
-  background-color: #0ea5e9;
-  color: white;
+.receplist-modal-actions button[type="button"] {
+ background-color: #6684a3;
+   color: #fff;
 }
 
-.btn-doctor-cancel {
-  background-color: #6684a3;
-  color: white;
+.receplist-modal-actions button[type="button"]:hover {
+    background-color: #57738f;
+  transform: translateY(-2px);
 }
 
 /* ==== RESPONSIVE ==== */
+@media (max-width: 768px) {
+  .receplist-grid {
+   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .receplist-grid {
+    display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 30px;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
 @media (max-width: 500px) {
-  .staff-grid {
-    grid-template-columns: 1fr 1fr;
+  .receplist-grid {
+    grid-template-columns: 1fr;
   }
 
-  .modal-content {
+  .receplist-main {
+    margin-left: 0;
+    padding: 15px;
+  }
+
+  .receplist-modal {
     width: 90%;
     padding: 20px;
   }
 }
-

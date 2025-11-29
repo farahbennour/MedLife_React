@@ -1,12 +1,41 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./DoctorDashboard.css";
-import cardiologie from "/src/assets/cardiologie.png";
-import neurologie from "/src/assets/neurologie.png";
-import orthopédie from "/src/assets/orthopédie.png";
-import Gastroenterologist from "/src/assets/Gastroenterologist.jpeg";
-import { CaseLower } from "lucide-react";
 
+import { CaseLower } from "lucide-react";
+const normalize = (name) =>
+  name
+    ?.toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z]/g, "");
+
+// ----------------------------------------
+// Map des images des services
+// ----------------------------------------
+const serviceImages = {
+  cardiologie: "/src/assets/cardiologie.png",
+  dermatologie: "/src/assets/Dermatologie.png",
+  neurologie: "/src/assets/neurologie.png",
+  gynecologie: "/src/assets/Gynécologie.png",
+  orthopedie: "/src/assets/orthopédie.png",
+  ophthalmologie: "/src/assets/Ophthalmologie.png",
+  orlotorhinolaryngologie: "/src/assets/ORL (Oto-Rhino-Laryngologie).png",
+  gastroenterologie: "/src/assets/Gastro-entérologie.png",
+  urologie: "/src/assets/Urologie.png",
+  nephrologie: "/src/assets/Néphrologie.png",
+  endocrinologie: "/src/assets/Endocrinologie.png",
+  oncologie: "/src/assets/Oncologie.png",
+  rhumatologie: "/src/assets/Rhumatologie.png",
+  chirurgiegenerale: "/src/assets/chirurgieGénérale.png",
+  chirurgieplastique: "/src/assets/chirurgiePlastique.png",
+  anesthesiologie: "/src/assets/Anesthésiologie.png",
+  radiologie: "/src/assets/Radiologie.png",
+  pneumologie: "/src/assets/Pneumologie.png",
+  medecineinterne: "/src/assets/Médecine Interne.png",
+  psychiatrie: "/src/assets/Psychiatrie.png",
+  traumatologie: "/src/assets/Traumatologie.png",
+};
 export default function DoctorDashboard() {
   const [selectedService, setSelectedService] = useState(null);
   const [services, setServices] = useState([]);
@@ -20,13 +49,7 @@ export default function DoctorDashboard() {
   const token = localStorage.getItem("token");
   const clinicId = localStorage.getItem("clinicId");
 
-  const localImages = {
-    cardiologie: cardiologie,
-    neurologie: neurologie,
-    orthopédie: orthopédie,
-    gastroenterologist: Gastroenterologist,
-  };
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,7 +113,7 @@ export default function DoctorDashboard() {
                   <div className="doctor-service-card" key={service.id}>
                     <div className="doctor-service-image-box">
                       <img
-                        src={localImages[service.name.toLowerCase()] || "/src/assets/default-service.png"}
+                        src={serviceImages[normalize(service.name)] || "/src/assets/default-service.png"}
                         alt={service.name}
                         className="doctor-service-img"
                       />

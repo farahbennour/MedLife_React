@@ -10,43 +10,62 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ // Dans votre composant Login
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post("http://localhost:3000/auth/login", {
+      email,
+      password,
+    });
 
-    try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
-        email,
-        password,
-      });
+    const token = response.data.token;
+    const user = response.data.user;
 
-      const token = response.data.token;
-      const user = response.data.user;
-
-      if (!token || !user) {
-        AlertService.error("Connexion échouée : données manquantes.");
-        return;
-      }
-
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", user.role);
-      localStorage.setItem("email", user.email);
-      localStorage.setItem("userId", user.id);
-      localStorage.setItem("patientId", user.patientId || "");
-      localStorage.setItem("username", user.username);
-      localStorage.setItem("clinicId", user.clinicId);
-
-      AlertService.success("Succès","Bienvenue dans votre espace patient. ");
-
-      if (user.role === "admin") navigate("/admin");
-      else if (user.role === "receptionist") navigate("/receptionist");
-      else if (user.role === "doctor") navigate("/doctor");
-      else if (user.role === "patient") navigate("/");
-      else AlertService.error("Rôle inconnu.");
-    } catch (err) {
-      console.error(err);
-      AlertService.error("Erreur","Email ou mot de passe incorrect ");
+    if (!token || !user) {
+      AlertService.error("Connexion échouée : données manquantes.");
+      return;
     }
-  };
+
+    // Stockage des informations
+    localStorage.setItem("token", token);
+    localStorage.setItem("role", user.role);
+    localStorage.setItem("email", user.email);
+    localStorage.setItem("userId", user.id);
+    localStorage.setItem("username", user.username);
+    localStorage.setItem("clinicId", user.clinicId || "");
+    localStorage.setItem("serviceId", user.serviceId || "");
+
+    // Stockage des IDs spécifiques selon le rôle
+    const roleIds = {
+      patient: 'patientId',
+      doctor: 'doctorId', 
+      receptionist: 'receptionistId',
+      admin: 'adminId'
+    };
+    
+    if (roleIds[user.role]) {
+      localStorage.setItem(roleIds[user.role], user[roleIds[user.role]] || user.id);
+    }
+
+    AlertService.success("Succès", "Bienvenue dans votre espace.");
+
+    // Redirection selon le rôle
+    const redirectPaths = {
+      admin: "/admin",
+      receptionist: "/receptionist", 
+      doctor: "/doctor",
+      patient: "/patient"
+    };
+
+    navigate(redirectPaths[user.role] || "/");
+    
+  } catch (err) {
+    console.error(err);
+    AlertService.error("Erreur", "Email ou mot de passe incorrect");
+  }
+};
+
 
   return (
     <div className="login-page">

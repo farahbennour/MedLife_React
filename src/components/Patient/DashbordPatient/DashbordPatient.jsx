@@ -17,38 +17,73 @@ export default function DashbordPatient() {
   const [searchTerm, setSearchTerm] = useState(""); // Terme de recherche pour filtrer les services
 
   const token = localStorage.getItem("token"); // Récupération du token pour l'authentification
-
+  const clinicId = localStorage.getItem("clinicId");
+  const emptyMsg ="No services available"
   // ---------------------------
   // Images et couleurs associées aux services
   // ---------------------------
+   const normalize = (name) =>
+    name
+      ?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "") // accents
+      .replace(/[^a-z]/g, ""); // espaces, tirets, (), etc.
+
   const serviceImages = {
     cardiologie: "/src/assets/cardiologie.png",
-    dentisterie: "/src/assets/dentisterie.png",
-    radiologie: "/src/assets/radiologie.png",
+    dermatologie: "/src/assets/Dermatologie.png",
     neurologie: "/src/assets/neurologie.png",
-    ophtalmologie: "/src/assets/ophtalmologie.png",
-    orthopédie: "/src/assets/orthopédie.png",
-    dermatologie: "/src/assets/dermatologie.png",
-    pédiatrie: "/src/assets/pediatrie.png",
-    Gastroenterologist: "src/assets/Gastroenterologist.jpeg",
+    gynecologie: "/src/assets/Gynécologie.png",
+    orthopedie: "/src/assets/orthopédie.png",
+    ophthalmologie: "/src/assets/Ophthalmologie.png",
+    orlotorhinolaryngologie: "/src/assets/ORL (Oto-Rhino-Laryngologie).png",
+    gastroenterologie: "/src/assets/Gastro-entérologie.png",
+    urologie: "/src/assets/Urologie.png",
+    nephrologie: "/src/assets/Néphrologie.png",
+    endocrinologie: "/src/assets/Endocrinologie.png",
+    oncologie: "/src/assets/Oncologie.png",
+    rhumatologie: "/src/assets/Rhumatologie.png",
+    chirurgiegenerale: "/src/assets/chirurgieGénérale.png",
+    chirurgieplastique: "/src/assets/chirurgiePlastique.png",
+    anesthesiologie: "/src/assets/Anesthésiologie.png",
+    radiologie: "/src/assets/Radiologie.png",
+    pneumologie: "/src/assets/Pneumologie.png",
+    medecineinterne: "/src/assets/Médecine Interne.png",
+    psychiatrie: "/src/assets/Psychiatrie.png",
+    traumatologie: "/src/assets/Traumatologie.png",
   };
 
+  // ---------------------------
+  // COLORS — fixed & normalized
+  // ---------------------------
   const pastelColors = {
     cardiologie: "#C8E4F7",
-    dentistry: "#FFD6E0",
-    radiology: "#D8F3DC",
+    dermatologie: "#FEE1B3",
     neurologie: "#EAD7F7",
-    ophthalmology: "#FFF2CC",
-    orthopédie: "#DFF6F0",
-    dermatology: "#FEE1B3",
-    pediatrics: "#F8D7DA",
-    Gastroenterologist: "#E0E7FF",
+    gynecologie: "#F7D6E6",
+    orthopedie: "#DFF6F0",
+    ophthalmologie: "#FFF2CC",
+    orlotorhinolaryngologie: "#E6F4F1",
+    gastroenterologie: "#E0E7FF",
+    urologie: "#D6EAF8",
+    nephrologie: "#E8F1D4",
+    endocrinologie: "#F9E1F2",
+    oncologie: "#F7D9D9",
+    rhumatologie: "#E2F2FF",
+    chirurgiegenerale: "#FFE8D6",
+    chirurgieplastique: "#FDE2FF",
+    anesthesiologie: "#E4F5E7",
+    radiologie: "#D8F3DC",
+    pneumologie: "#D7E9FF",
+    medecineinterne: "#F5EEDC",
+    psychiatrie: "#E8DFFC",
+    traumatologie: "#FFE5DF",
   };
 
   // ---------------------------
   // useEffect pour récupérer les services depuis l'API
   // ---------------------------
-  useEffect(() => {
+ useEffect(() => {
     const fetchServices = async () => {
       try {
         if (!token) {
@@ -56,20 +91,30 @@ export default function DashbordPatient() {
           setLoading(false);
           return;
         }
+        
         const res = await axios.get("http://localhost:3000/users/patient-services", {
           headers: { Authorization: `Bearer ${token}` },
+          params: { clinicId: clinicId } // Envoyer le clinicId comme paramètre
         });
+        
         setServices(res.data);
         setFilteredServices(res.data);
       } catch (err) {
         console.error(err);
-        AlertService.error("Erreur","Erreur lors du parcour des services");
+        AlertService.error("Erreur", "Erreur lors du parcour des services");
       } finally {
         setLoading(false);
       }
     };
-    fetchServices();
-  }, [token]);
+    
+    if (clinicId) {
+      fetchServices();
+    } else {
+      setError("Clinic ID not found, please login again.");
+      setLoading(false);
+    }
+  }, [token, clinicId]);
+
 
   // ---------------------------
   // Filtre des services selon le searchTerm
@@ -80,7 +125,7 @@ export default function DashbordPatient() {
     } else {
       setFilteredServices(
         services.filter((s) =>
-          s.name.toLowerCase().includes(searchTerm.toLowerCase())
+         s?.name?.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
     }
@@ -137,7 +182,7 @@ export default function DashbordPatient() {
         <div className="search-wrapper">
           <input
             className="search-input"
-            placeholder="Search your service..."
+            placeholder="Cherchez votre service..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -146,12 +191,12 @@ export default function DashbordPatient() {
             onClick={() => {
               setFilteredServices(
                 services.filter((s) =>
-                  s.name.toLowerCase().includes(searchTerm.toLowerCase())
+                 s?.name?.toLowerCase().includes(searchTerm.toLowerCase())
                 )
               );
             }}
           >
-            Search
+            Rechercher
           </button>
         </div>
       </header>
@@ -167,14 +212,12 @@ export default function DashbordPatient() {
         </p>
         <div className="cards-row">
           {filteredServices.length === 0 ? (
-            <p>No services available.</p>
+            <p className="no-service">{emptyMsg}</p>
           ) : (
-            filteredServices.map((service) => {
-              const key = service.name.toLowerCase().replace(/\s/g, "");
-              const imageSrc =
-                serviceImages[key] || "/images/default-service.jpg";
+           filteredServices.map((service) => {
+              const key = normalize(service.name);
+              const imageSrc = serviceImages[key] || "/images/default.png";
               const bgColor = pastelColors[key] || "#F3F4F6";
-
               return (
                 <div
                   className="service-card"

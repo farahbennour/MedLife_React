@@ -30,26 +30,96 @@ export default function Patient() {
   });
 
   // ------------------- Charger les patients -------------------
-  const fetchPatients = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        alert("Token non trouvé. Veuillez vous reconnecter.");
-        navigate("/login"); // Redirection vers login si pas de token
-        return;
-      }
+ const fetchPatients = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const clinicId = localStorage.getItem("clinicId");
+    const serviceId = localStorage.getItem("serviceId");
 
-      const res = await axios.get(`http://localhost:3000/users/patient/clinic/${clinicId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setPatients(res.data); // Stocke les patients
-    } catch (error) {
-      console.error("Erreur lors du chargement des patients :", error);
-    } finally {
-      setLoading(false); // Fin du chargement
+    if (!token) {
+      alert("Token non trouvé. Veuillez vous reconnecter.");
+      navigate("/login");
+      return;
     }
-  };
 
+    // Vérification des IDs
+    if (!clinicId || !serviceId) {
+      console.error("ClinicId ou ServiceId manquant dans le localStorage");
+      setPatients([]);
+      return;
+    }
+
+    console.log("🔍 Recherche des patients pour:");
+    console.log("Clinic ID:", clinicId);
+    console.log("Service ID:", serviceId);
+
+    // 1️⃣ Récupérer les rendez-vous filtrés par clinicId et serviceId
+    const rdvRes = await axios.get(
+      `http://localhost:3000/rendezvous/filter?clinicId=${clinicId}&serviceId=${serviceId}`,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    const rdvs = Array.isArray(rdvRes.data) ? rdvRes.data : [];
+    console.log("📅 Rendez-vous trouvés:", rdvs.length);
+
+    if (rdvs.length === 0) {
+      setPatients([]);
+      return;
+    }
+
+    // 2️⃣ Extraire les IDs des patients uniques
+    const patientIds = [...new Set(rdvs.map(rdv => rdv.patient?.id).filter(Boolean))];
+    console.log("👥 IDs patients uniques:", patientIds);
+
+    if (patientIds.length === 0) {
+      setPatients([]);
+      return;
+    }
+
+    // 3️⃣ Récupérer les détails de chaque patient AVEC les données User
+    const patientPromises = patientIds.map(async (patientId) => {
+      try {
+        const res = await axios.get(
+          `http://localhost:3000/users/patient/${patientId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        
+        const patientData = res.data;
+        
+        // Retourner les données combinées Patient + User
+        return {
+          // Données du Patient
+          id: patientData.id,
+          address: patientData.address || "Non spécifiée",
+          dateNaissance: patientData.dateNaissance,
+          clinic: patientData.clinic?.name || "Non spécifiée",
+          
+          // Données de l'User (coordonnées)
+          username: patientData.user?.username || "Non spécifié",
+          email: patientData.user?.email || "Non spécifié", 
+          phone: patientData.user?.phone || "Non spécifié",
+          
+          // Informations supplémentaires si besoin
+          createdAt: patientData.createdAt,
+          updatedAt: patientData.updatedAt
+        };
+      } catch (error) {
+        console.error(`Erreur lors du chargement du patient ${patientId}:`, error);
+        return null;
+      }
+    });
+
+    const patientsData = (await Promise.all(patientPromises)).filter(Boolean);
+    console.log("✅ Patients chargés avec coordonnées:", patientsData.length);
+    
+    setPatients(patientsData);
+  } catch (error) {
+    console.error("Erreur lors du chargement des patients :", error);
+    AlertService.error("Erreur", "Impossible de charger la liste des patients");
+  } finally {
+    setLoading(false);
+  }
+};
   useEffect(() => {
     fetchPatients(); // Chargement au montage
   }, [navigate]);
@@ -71,13 +141,12 @@ export default function Patient() {
   }, []);
 
   // ------------------- Filtrage dynamique -------------------
-  const filteredPatients = patients.filter(
-    (p) =>
-      p.username?.toLowerCase().includes(search.toLowerCase()) ||
-      p.email?.toLowerCase().includes(search.toLowerCase()) ||
-      (p.clinic?.name || "").toLowerCase().includes(search.toLowerCase()) ||
-      (p.service?.name || "").toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredPatients = patients.filter((p) =>
+  p.username?.toLowerCase().includes(search.toLowerCase()) ||
+  p.email?.toLowerCase().includes(search.toLowerCase()) ||
+  (p.clinic || "").toLowerCase().includes(search.toLowerCase())
+);
+
 
   // ------------------- Gestion formulaire -------------------
   const handleChange = (e) => {

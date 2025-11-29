@@ -4,7 +4,7 @@ import axios from "axios"; // Pour les requêtes HTTP
 import Swal from "sweetalert2"; // Pour les alertes et notifications
 // import receptionlist from "/src/assets/receptionlist.png"; // Image optionnelle pour les réceptionnistes
 import "./Receptionist.css"; // Styles CSS spécifiques à ce composant
-
+import receplistImg from "/src/assets/receplist.png";
 export default function Receptionist() {
   const navigate = useNavigate(); // Hook pour naviguer vers d'autres routes
 
@@ -31,7 +31,12 @@ export default function Receptionist() {
   // ------------------- Charger les réceptionnistes depuis le backend -------------------
   const fetchReceptionists = async () => {
     try {
-      const token = localStorage.getItem("token"); // Récupère le token d'authentification
+      const token = localStorage.getItem("token");
+          if (!token) {
+            Swal.fire("Erreur", "Vous devez être connecté !", "warning");
+            navigate("/login");
+            return;
+          }// Récupère le token d'authentification
       if (!token) {
         alert("Token non trouvé. Veuillez vous reconnecter.");
         navigate("/login"); // Redirige vers la page de login
@@ -239,89 +244,111 @@ export default function Receptionist() {
 
   if (loading) return <p>Chargement des réceptionnistes...</p>; // Affiche un loader si nécessaire
 
-  // ------------------- Rendu JSX -------------------
-  return (
-    <div className="main-content">
-      {/* Banner */}
-      <div className="banner">
-        <div className="banner-text">
-          <h2>
-            Bienvenue ! <span>Liste des Réceptionnistes</span>
-          </h2>
-          <p>Gérez les réceptionnistes de vos cliniques.</p>
+return (
+    <div className="receplist-main">
+
+      {/* ---------------------------
+          Banner / En-tête de la page
+      --------------------------- */}
+      <div className="receplist-banner">
+        <div className="receplist-banner-text">
+          <h2>Bienvenue ! <span>Liste des Receptionistes</span></h2>
+          <p>Consultez et gérez les Receptionistes disponibles.</p>
         </div>
-        <div className="banner-image">
-          {/* Image optionnelle */}
+        <div className="receplist-banner-image">
+          {/* <img src={receplistImg} alt="Doctor List" /> */}
         </div>
       </div>
 
-      {/* Search */}
-      <div className="search-section">
-        <input type="text" placeholder="Rechercher un docteur..." value={search} onChange={e => setSearch(e.target.value)} />
+      {/* ---------------------------
+          Recherche de Receptionists
+      --------------------------- */}
+      <div className="receplist-search">
+        <input type="text" placeholder="Rechercher un receptioniste..." value={search} onChange={e => setSearch(e.target.value)} />
         <button>🔍</button>
       </div>
 
-      {/* Liste des réceptionnistes */}
-      <div className="staff-section">
-        <h3 className="section-title">RÉCEPTIONNISTES ({filteredReceptionists.length})</h3>
-        <div className="staff-grid">
-          {filteredReceptionists.map((r) => (
-            <div className="staff-card" key={r.id}>
-              <h4>{r.username}</h4>
-              <p className="role">{r.role}</p>
-              <p className="desc">{r.email}</p>
-              <p className="desc">Téléphone: {r.phone || "—"}</p>
-              <p className="desc">Clinique: {r.receptionist?.clinic?.name || "—"}</p>
-              <p className="desc">Service: {r.receptionist?.service?.name || "—"}</p>
-              <p className="desc">État: {r.etat ? "✅ Actif" : "❌ Inactif"}</p>
-              <div className="doctorlist-modal-actions">
-                <button className="edit-btn-doctor" onClick={() => handleEditReceptionist(r)}> Modifier</button>
-                <button className="delete-btn" onClick={() => handleDeleteReceptionist(r.id)}>Supprimer</button>
-              </div>
-            </div>
-          ))}
+      {/* ---------------------------
+          Liste des cartes Receptionists
+      --------------------------- */}
+      <div className="doctor-container-3d">
+      <div className="receplist-grid">
+        {filteredReceptionists.map(doc => (
+       <div className="receplist-card" key={doc.id}>
+  <div className="receplist-header">
+    <img src={doc.image || receplistImg} alt={doc.username} className="doctor-avatar" />
+    <div>
+      <h3 className="doctor-name">{doc.username || "—"}</h3>
+      <p className="doctor-email">{doc.email || "—"}</p>
+    </div>
+  </div>
 
-          {/* Carte ajout */}
-          <div className="staff-card add-card" onClick={() => setShowModal(true)}>
-            <div className="add-content">
-              <div className="add-icon">+</div>
-              <h4>Ajouter</h4>
-              <p>Ajouter un nouveau réceptionniste.</p>
-            </div>
-          </div>
+  <div className="doctor-info" key={doc.id}>
+    <p><strong>Téléphone:</strong> {doc.phone || "—"}</p>
+    <p><strong>Clinique:</strong> {doc.receptionist?.clinic?.name || "—"}</p>
+    <p><strong>Service:</strong> {doc.receptionist?.service?.name || "—"}</p>
+    <p><strong>État:</strong> {doc.etat ? "✅ Actif" : "❌ Inactif"}</p>
+  </div>
+
+  <div className="doctor-actions">
+ <button className="edit-btn-doctor" onClick={() => handleEditReceptionist(doc)}> Modifier</button>
+<button className="delete-btn" onClick={() => handleDeleteReceptionist(doc.id)}>Supprimer</button>
+  </div>
+</div>
+
+
+        ))}
+
+        {/* ---------------------------
+            Carte pour ajouter un nouveau docteur
+        --------------------------- */}
+        <div className="receplist-card add-card" onClick={() => setShowModal(true)}>
+          <div className="add-icon">+</div>
+          <h4>Ajouter</h4>
+          <p>Ajouter un nouveau Receptioniste à votre clinique.</p>
         </div>
       </div>
-
-      {/* Modal ajout/modification */}
+</div>
+      {/* ---------------------------
+          Modal ajout / modification docteur
+      --------------------------- */}
       {showModal && (
-        <div className="patient-modal-overlay">
-          <div className="patient-modal">
-            <h3>{editReceptionistId ? " Modifier un Réceptionniste" : " Ajouter un Réceptionniste"}</h3>
+        <div className="receplist-modal-overlay">
+          <div className="receplist-modal">
+            <h3>{editReceptionistId ? " Modifier un Receptioniste" : "Ajouter un Receptioniste"}</h3>
             <form onSubmit={handleSaveReceptionist}>
               <input type="text" name="username" placeholder="Nom d'utilisateur" value={formData.username} onChange={handleChange} required />
               <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-              <input type="password" name="password" placeholder={editReceptionistId ? "Laissez vide pour ne pas changer" : "Mot de passe"} value={formData.password} onChange={handleChange} required={!editReceptionistId} />
-              <input type="text" name="phone" placeholder="Téléphone" value={formData.phone} onChange={handleChange} />
+                <input type="text" name="phone" placeholder="Téléphone" value={formData.phone} onChange={handleChange} />
+            {!editReceptionistId && (
+            <input
+              type="password"
+              name="password"
+              placeholder="Mot de passe"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          )}
+            
 
-              {/* Sélection clinique */}
               <select name="clinic_id" value={formData.clinic_id} onChange={handleClinicChange} required>
                 <option value="">-- Choisir une clinique --</option>
-                {clinics.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
+                {clinics.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
 
-              {/* Sélection service */}
               <select name="service_id" value={formData.service_id} onChange={handleChange} required disabled={!services.length}>
                 <option value="">-- Choisir un service --</option>
-                {services.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
+                {services.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
               </select>
 
-              <div className="doctorlist-modal-actions">
-                <button type="submit" className="btn-doctor-save">{editReceptionistId ? "Enregistrer" : "Ajouter"}</button>
+              <div className="receplist-modal-actions">
+                <button type="submit" className="btn-doctor-save">{editReceptionistId? "Enregistrer" : "Ajouter"}</button>
                 <button type="button" className="btn-doctor-cancel" onClick={() => {
                   setShowModal(false);
-                  setFormData({ username: "", email: "", password: "", clinic_id: "", service_id: "", phone: "" });
+                  setFormData({ username: "", email: "", password: "", clinic_id: "", service_id: "", phone: "", specialty: "" });
                   setServices([]);
-                  setEditReceptionistId(null);
+                  setEditDoctorId(null);
                 }}>Annuler</button>
               </div>
             </form>

@@ -11,12 +11,12 @@
 }
 .service-card {
   background: var(--card);
-  padding: 0; /* نحط padding للصورة والـ content منفصل */
+  padding: 0; 
   border-radius: 16px;
   box-shadow: 0 6px 14px rgba(12, 34, 56, 0.06);
   text-align: center;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  overflow: hidden; /* باش الـ image-box ما يخرجش */
+  overflow: hidden; 
   display: flex;
   flex-direction: column;
   height: 180px;
@@ -26,16 +26,16 @@
 }
 
 .service-image-box {
-  width: 100%; /* يغطي عرض الكارت كامل */
-  height: 120px; /* نقدر نربطه مع ارتفاع الكارت، مثلا 120px */
+  width: 100%;
+  height: 120px; 
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f3f4f6; /* default bg, ممكن تبدلو ديناميك */
+  background-color: #f3f4f6; 
 }
-/* Container qui slide down */
+
 .rendezvous-form-slide {
   max-height: 0;
   overflow: hidden;
@@ -117,7 +117,7 @@ body {
   padding: 30px 30px 60px;
   transition: margin-left 0.3s ease;
   overflow-y: auto;
-  margin-left: 0 !;
+  margin-left: 0 ;
 }
 
 @media (max-width: 900px) {
@@ -127,15 +127,13 @@ body {
   }
 }
 
-/* ===============================
-   HERO SECTION (تصغير)
-================================= */
+
 .hero {
-  padding: 40px 20px; /* ↓ قللنا المسافات */
+  padding: 40px 20px;
   max-width: 1500px;
   margin: 0 auto 40px;
-  position: relative; 
-   z-index: 1
+  position: relative;
+  z-index: 1;
 }
 
 .hero-inner {
@@ -143,7 +141,7 @@ body {
   gap: 16px;
   align-items: center;
   background: var(--accent);
-  padding: 30px 25px; /* ↓ قللنا padding */
+  padding: 30px 25px;
   border-radius: 16px;
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
 }
@@ -154,7 +152,7 @@ body {
 
 .hero-left h1 {
   margin: 0;
-  font-size: 26px; /* ↓ كان 34px */
+  font-size: 26px;
   color: #0f172a;
   line-height: 1.25;
 }
@@ -163,25 +161,23 @@ body {
   margin-top: 10px;
   padding-left: 15px;
   color: var(--muted);
-  font-size: 14px; /* ↓ كان 15px */
+  font-size: 14px; 
 }
 
 .hero-features li {
   margin-bottom: 6px;
 }
 
-/* ===============================
-   HERO RIGHT SIDE
-================================= */
+
 .hero-right {
-  width: 180px; /* ↓ كان 220px */
+  width: 180px; 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .doctor-card {
-  width: 120px; /* ↓ كان 160px */
+  width: 120px; 
   height: 120px;
   border-radius: 14px;
   background: linear-gradient(135deg, #ffffff 0%, #e9fffc 100%);
@@ -193,19 +189,19 @@ body {
   box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
 }
 
-/* ===============================
-   SEARCH BAR
-================================= */
+
 .search-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 18px; /* ↓ كان 25px */
+  margin-top: 18px; 
   padding: 0 4px;
+  position: relative;
+  z-index: 5;
 }
 
 .search-input {
   flex: 1;
-  padding: 10px 18px; /* ↓ صغّرنا */
+  padding: 10px 18px; 
   border-radius: 30px;
   border: 2px solid rgba(15, 23, 42, 0.06);
   outline: none;
@@ -235,9 +231,7 @@ body {
   background: #065f5b;
 }
 
-/* ===============================
-   SERVICES SECTION
-================================= */
+
 .services-section {
   max-width: 1200px;
   margin: 60px auto;
@@ -256,15 +250,19 @@ body {
   text-align: center;
   color: var(--muted);
   margin-bottom: 40px;
-  font-size: 15px; /* ↓ كان 15px */
+  font-size: 15px; 
 }
 
 
 .cards-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important; 
+  gap: 26px !important;
+  width: 100% !important;
+  align-items: stretch !important;
 }
+
+
 
 
 
@@ -277,19 +275,7 @@ body {
   font-size: 28px;
   margin-bottom: 10px;
 }
-/* 
-.service-card h3 {
-  margin: 6px 0;
-  font-size: 17px;
-  color: #0f172a;
-}
 
-.service-card p {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
-} */
 .service-card h3,
 .service-card p {
   margin: 10px 12px;
@@ -300,9 +286,7 @@ body {
   box-shadow: 0 12px 26px rgba(31, 166, 163, 0.05);
 }
 
-/* ===============================
-   RESPONSIVE DESIGN
-================================= */
+
 @media (max-width: 800px) {
   .hero-inner {
     flex-direction: column;
@@ -315,5 +299,77 @@ body {
 
   .hero-left h1 {
     font-size: 22px;
+  }
+}
+@media (max-width: 1100px) {
+  .cards-row {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .cards-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .cards-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+.no-service {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 18px 28px;
+  font-size: 19px;
+  font-weight: 500;
+  color: #5b8ccf;
+
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+
+  border: 1px solid rgba(91, 140, 207, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  text-align: center;
+
+  animation: fadeIn 0.8s ease-out, crazyMove 6s ease-in-out infinite;
+}
+
+/* Animation douce d'apparition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes crazyMove {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  20% {
+    transform: translate(calc(-50% + 210px), -50%); 
+  }
+  40% {
+    transform: translate(calc(-50% - 210px), -50%); 
+  }
+  60% {
+    transform: translate(-50%, calc(-50% - 20px)); 
+  }
+  80% {
+    transform: translate(-50%, calc(-50% + 20px)); 
+  }
+  100% {
+    transform: translate(-50%, -50%); 
   }
 }

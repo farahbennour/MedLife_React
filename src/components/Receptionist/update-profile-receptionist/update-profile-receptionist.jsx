@@ -38,12 +38,16 @@ const UpdateProfileReceptionist = () => {
 
   //  Chargement du profil utilisateur au montage du composant
   useEffect(() => {
+    
     // Vérifie si le rôle est admin
+    
     if (role === "admin") setIsAdmin(true);
 
     // Fonction interne pour charger les données utilisateur
     const fetchUser = async () => {
+      
       try {
+        
         // Appel API GET pour récupérer les infos utilisateur
         const res = await axios.get(`http://localhost:3000/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },

@@ -36,6 +36,11 @@ export default function Doctor() {
   const fetchDoctors = async () => {
     try {
       const token = localStorage.getItem("token");
+          if (!token) {
+            Swal.fire("Erreur", "Vous devez être connecté !", "warning");
+            navigate("/login");
+            return;
+          }
       if (!token) return navigate("/login"); // Redirection si non authentifié
       const res = await axios.get("http://localhost:3000/users/doctors/all", {
         headers: { Authorization: `Bearer ${token}` },
@@ -122,11 +127,11 @@ export default function Doctor() {
       if (editDoctorId) {
         // Modification
         await axios.patch(`http://localhost:3000/users/${editDoctorId}`, payload, { headers: { Authorization: `Bearer ${token}` } });
-        Swal.fire({ icon: "success", title: "✅ Succès !", text: "Docteur modifié avec succès !", timer: 2000, showConfirmButton: false });
+        Swal.fire({ icon: "success", title: "Modifié", text: "Docteur modifié avec succès !✅", timer: 2200, showConfirmButton: false });
       } else {
         // Ajout
         await axios.post("http://localhost:3000/users/create-account", { ...payload, role: "doctor" }, { headers: { Authorization: `Bearer ${token}` } });
-        Swal.fire({ icon: "success", title: "✅ Succès", text: "Docteur ajouté avec succès !", timer: 2000, showConfirmButton: false });
+        Swal.fire({ icon: "success", title: " Ajouté !", text: "Docteur ajouté avec succès !✅", timer: 2200, showConfirmButton: false });
       }
       setShowModal(false);
       setFormData({ username: "", email: "", password: "", clinic_id: "", service_id: "", phone: "", specialty: "" });
@@ -181,7 +186,8 @@ export default function Doctor() {
         try {
           const token = localStorage.getItem("token");
           await axios.delete(`http://localhost:3000/users/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-          Swal.fire("Supprimé !", "Le docteur a été supprimé avec succès.", "success");
+            Swal.fire({ icon: "success", title: "Supprimé !", text: "Le docteur a été supprimé avec succès !✅", timer: 2200, showConfirmButton: false });
+        
           fetchDoctors();
         } catch (error) {
           Swal.fire("Erreur !", error.response?.data?.message || "Erreur inconnue", "error");
@@ -219,54 +225,45 @@ export default function Doctor() {
       {/* ---------------------------
           Liste des cartes docteurs
       --------------------------- */}
+      <div className="doctor-container-3d">
       <div className="doctorlist-grid">
         {filteredDoctors.map(doc => (
-          <div className="doctorlist-card" key={doc.id}>
-            <img src={doc.image || doctorlistImg} alt={doc.username} />
-            <h4>{doc.username}</h4>
-            <p className="doctorlist-role">{doc.email}</p>
+       <div className="doctorlist-card" key={doc.id}>
+  <div className="doctorlist-header">
+    <img src={doc.image || doctorlistImg} alt={doc.username} className="doctor-avatar" />
+    <div>
+      <h3 className="doctor-name">{doc.username || "—"}</h3>
+      <p className="doctor-email">{doc.email || "—"}</p>
+    </div>
+  </div>
 
-            <div className="doctorlist-attributes">
-              <div className="doctorlist-attribute">
-                <span className="title">Téléphone:</span>
-                <span className="value">{doc.phone || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">Spécialité:</span>
-                <span className="value">{doc.doctor?.specialty || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">Clinique:</span>
-                <span className="value">{doc.doctor?.clinic?.name || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">Service:</span>
-                <span className="value">{doc.doctor?.service?.name || "—"}</span>
-              </div>
-              <div className="doctorlist-attribute">
-                <span className="title">État:</span>
-                <span className="value">{doc.etat ? "✅ Actif" : "❌ Inactif"}</span>
-              </div>
-            </div>
+  <div className="doctor-info">
+    <p><strong>Téléphone:</strong> {doc.phone || "—"}</p>
+    <p><strong>Spécialité:</strong> {doc.doctor?.specialty || "—"}</p>
+    <p><strong>Clinique:</strong> {doc.doctor?.clinic?.name || "—"}</p>
+    <p><strong>Service:</strong> {doc.doctor?.service?.name || "—"}</p>
+    <p><strong>État:</strong> {doc.etat ? "✅ Actif" : "❌ Inactif"}</p>
+  </div>
 
-            {/* Actions : Modifier / Supprimer */}
-            <div className="doctorlist-actions">
-              <button className="edit-btn-doctor" onClick={() => handleEditDoctor(doc)}>Modifier</button>
-              <button className="delete-btn-doctor" onClick={() => handleDeleteDoctor(doc.id)}>Supprimer</button>
-            </div>
-          </div>
+  <div className="doctor-actions">
+    <button className="edit-btn-doctor" onClick={() => handleEditDoctor(doc)}>Modifier</button>
+    <button className="delete-btn-doctor" onClick={() => handleDeleteDoctor(doc.id)}>Supprimer</button>
+  </div>
+</div>
+
+
         ))}
 
         {/* ---------------------------
             Carte pour ajouter un nouveau docteur
         --------------------------- */}
-        <div className="doctorlist-add-card" onClick={() => setShowModal(true)}>
+        <div className="doctorlist-card add-card" onClick={() => setShowModal(true)}>
           <div className="add-icon">+</div>
           <h4>Ajouter</h4>
           <p>Ajouter un nouveau docteur à votre clinique.</p>
         </div>
       </div>
-
+</div>
       {/* ---------------------------
           Modal ajout / modification docteur
       --------------------------- */}
@@ -277,6 +274,7 @@ export default function Doctor() {
             <form onSubmit={handleSaveDoctor}>
               <input type="text" name="username" placeholder="Nom d'utilisateur" value={formData.username} onChange={handleChange} required />
               <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                <input type="text" name="phone" placeholder="Téléphone" value={formData.phone} onChange={handleChange} />
             {!editDoctorId && (
             <input
               type="password"

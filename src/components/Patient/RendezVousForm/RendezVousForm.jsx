@@ -1,89 +1,83 @@
-// File: RendezVousForm.jsx
-import React, { useEffect, useState, useRef } from "react"; // Import des hooks React
-import axios from "axios"; // Pour les requêtes HTTP
-import Swal from 'sweetalert2'; // Pour les alertes et notifications
-import "./RendezVousForm.css"; // Styles CSS spécifiques
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import Swal from 'sweetalert2';
+import "./RendezVousForm.css";
 
-export default function RendezVousForm({ onClose }) {
+export default function RendezVousForm({ onClose, service: initialService }) {
   // ------------------- États principaux -------------------
-  const [services, setServices] = useState([]); // Liste des services médicaux disponibles
-  const [doctors, setDoctors] = useState([]); // Liste des médecins selon le service sélectionné
-  const [selectedService, setSelectedService] = useState(""); // Service sélectionné
-  const [selectedDoctor, setSelectedDoctor] = useState(""); // Médecin sélectionné
-  const [date, setDate] = useState(""); // Date et heure du rendez-vous
-  const [motif, setMotif] = useState(""); // Motif de consultation
-  const [loading, setLoading] = useState(true); // Indicateur de chargement
-  const [message, setMessage] = useState(""); // Message d'information ou d'erreur
-  const [isSubmitting, setIsSubmitting] = useState(false); // Indique si le formulaire est en cours d'envoi
+  const [services, setServices] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [selectedService, setSelectedService] = useState(initialService?.id || "");
+  const [selectedDoctor, setSelectedDoctor] = useState("");
+  const [date, setDate] = useState("");
+  const [motif, setMotif] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const modalRef = useRef(null); // Référence pour le modal (accessibilité)
-  const cancelButtonRef = useRef(null); // Référence pour le bouton annuler
+  const modalRef = useRef(null);
+  const cancelButtonRef = useRef(null);
+  const token = localStorage.getItem("token");
+  const clinicId = localStorage.getItem("clinicId");
 
-  const token = localStorage.getItem("token"); // Récupération du token d'authentification
+  // ------------------- Date minimale (aujourd'hui) -------------------
+  const [minDate, setMinDate] = useState("");
 
-  // ------------------- Focus et gestion de la touche Échap -------------------
+  useEffect(() => {
+    // Définir la date minimale comme la date et heure actuelles
+    const now = new Date();
+    // Format YYYY-MM-DDTHH:mm pour datetime-local
+    const formattedDate = now.toISOString().slice(0, 16);
+    setMinDate(formattedDate);
+  }, []);
+
+  // ------------------- Focus et touche Échap -------------------
   useEffect(() => {
     const modalElement = modalRef.current;
     if (modalElement) {
-      // Focus sur le premier élément focalisable du modal
       const focusableElements = modalElement.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
-      if (focusableElements.length > 0) {
-        focusableElements[0].focus();
-      }
+      if (focusableElements.length > 0) focusableElements[0].focus();
     }
 
-    // Fonction pour fermer le modal avec Échap
     const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        handleCancel();
-      }
+      if (event.key === 'Escape') handleCancel();
     };
-
     document.addEventListener('keydown', handleEscape);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
+    return () => document.removeEventListener('keydown', handleEscape);
   }, []);
 
-  // ------------------- Récupérer les services disponibles -------------------
+  // ------------------- Récupérer les services -------------------
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const res = await axios.get("http://localhost:3000/users/patient-services", {
           headers: { Authorization: `Bearer ${token}` },
+          params: { clinicId: clinicId }
         });
-        setServices(res.data); // Stocke les services récupérés
+        setServices(res.data);
       } catch (err) {
         console.error(err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Erreur',
-          text: 'Impossible de charger les services',
-          confirmButtonColor: '#2563eb'
-        });
+        Swal.fire({ icon: 'error', title: 'Erreur', text: 'Impossible de charger les services', confirmButtonColor: '#2563eb' });
       } finally {
-        setLoading(false); // Fin du chargement
+        setLoading(false);
       }
     };
     fetchServices();
-  }, [token]);
+  }, [token, clinicId]);
 
-  // ------------------- Récupérer les médecins selon le service sélectionné -------------------
+  // ------------------- Récupérer les médecins selon le service -------------------
   useEffect(() => {
     const fetchDoctors = async () => {
       if (!selectedService) {
-        setDoctors([]); // Si aucun service sélectionné, vide la liste des médecins
+        setDoctors([]);
         return;
       }
-
       try {
         const res = await axios.get(`http://localhost:3000/services/${selectedService}/doctors`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setDoctors(res.data); // Stocke les médecins récupérés
+        setDoctors(res.data);
       } catch (err) {
         console.error(err);
       }
@@ -91,25 +85,39 @@ export default function RendezVousForm({ onClose }) {
     fetchDoctors();
   }, [selectedService, token]);
 
-  // ------------------- Soumission du formulaire -------------------
+  // ------------------- Validation de la date côté client -------------------
+  const validateDate = (selectedDate) => {
+    const selected = new Date(selectedDate);
+    const now = new Date();
+    return selected >= now;
+  };
+
+  // ------------------- Soumission -------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // Bloque le formulaire pendant l'envoi
+    setIsSubmitting(true);
 
-    // Vérification des champs obligatoires
+    // Validation des champs requis
     if (!selectedService || !selectedDoctor || !date || !motif) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Champs incomplets',
-        text: 'Veuillez remplir tous les champs',
-        confirmButtonColor: '#2563eb'
+      Swal.fire({ icon: 'warning', title: 'Champs incomplets', text: 'Veuillez remplir tous les champs', confirmButtonColor: '#2563eb' });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Validation de la date côté client
+    if (!validateDate(date)) {
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Date invalide', 
+        text: 'Veuillez sélectionner une date et heure futures', 
+        confirmButtonColor: '#ef4444' 
       });
       setIsSubmitting(false);
       return;
     }
 
     try {
-      const res = await axios.post(
+      await axios.post(
         "http://localhost:3000/rendezvous",
         {
           serviceId: selectedService,
@@ -119,7 +127,7 @@ export default function RendezVousForm({ onClose }) {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      
+
       Swal.fire({
         icon: 'success',
         title: 'Succès!',
@@ -127,9 +135,7 @@ export default function RendezVousForm({ onClose }) {
         confirmButtonColor: '#10b981',
         confirmButtonText: 'OK'
       }).then(() => {
-        // 🔹 Fermer le formulaire et retourner au dashboard
         if(onClose) onClose();
-        // 🔹 Reset champs si nécessaire
         setSelectedService("");
         setSelectedDoctor("");
         setDate("");
@@ -138,18 +144,24 @@ export default function RendezVousForm({ onClose }) {
 
     } catch (err) {
       console.error(err);
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur',
-        text: 'Erreur lors de la création du rendez-vous',
-        confirmButtonColor: '#ef4444'
+      let errorMessage = 'Erreur lors de la création du rendez-vous';
+      
+      // Gestion spécifique des erreurs de date du serveur
+      if (err.response?.data?.message?.includes('date') || err.response?.data?.message?.includes('passé')) {
+        errorMessage = 'La date sélectionnée est invalide. Veuillez choisir une date future.';
+      }
+      
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Erreur', 
+        text: errorMessage, 
+        confirmButtonColor: '#ef4444' 
       });
     } finally {
-      setIsSubmitting(false); // Débloque le formulaire
+      setIsSubmitting(false);
     }
   };
 
-  // ------------------- Annuler le formulaire -------------------
   const handleCancel = () => {
     Swal.fire({
       title: 'Êtes-vous sûr?',
@@ -162,132 +174,67 @@ export default function RendezVousForm({ onClose }) {
       cancelButtonText: 'Non, continuer',
       reverseButtons: true
     }).then((result) => {
-      if (result.isConfirmed && onClose) {
-        onClose(); // Fermer le formulaire et retourner au dashboard
-      }
+      if (result.isConfirmed && onClose) onClose();
     });
   };
 
-  // ------------------- Affichage du loader -------------------
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p>Chargement des services...</p>
-      </div>
-    );
-  }
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Chargement des services...</p>
+    </div>
+  );
 
-  // ------------------- Rendu du formulaire -------------------
   return (
-    <div 
-      className="rendezvous-form" 
-      ref={modalRef} // Référence pour le modal
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-    >
-      {/* Bouton pour fermer le modal */}
-      <button 
-        className="close-button"
-        onClick={handleCancel}
-        aria-label="Fermer le formulaire de rendez-vous"
-        disabled={isSubmitting}
-        ref={cancelButtonRef}
-      >
-        ×
-      </button>
-      
+    <div className="rendezvous-form" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button className="close-button" onClick={handleCancel} aria-label="Fermer le formulaire" disabled={isSubmitting} ref={cancelButtonRef}>×</button>
       <h2 id="modal-title">Prendre un Rendez-vous</h2>
 
       <form onSubmit={handleSubmit}>
-        {/* Sélection du service et du médecin */}
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="service-select">Service médical</label>
-            <select
-              id="service-select"
-              value={selectedService}
-              onChange={(e) => setSelectedService(e.target.value)}
-              disabled={isSubmitting}
-            >
+            <select id="service-select" value={selectedService} onChange={(e) => setSelectedService(e.target.value)} disabled={isSubmitting}>
               <option value="">Sélectionnez un service</option>
-              {services.map((service) => (
-                <option key={service.id} value={service.id}>
-                  {service.name}
-                </option>
-              ))}
+              {services.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
             </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="doctor-select">Médecin</label>
-            <select
-              id="doctor-select"
-              value={selectedDoctor}
-              onChange={(e) => setSelectedDoctor(e.target.value)}
-              disabled={!selectedService || isSubmitting} // Désactive si pas de service sélectionné
-            >
+            <select id="doctor-select" value={selectedDoctor} onChange={(e) => setSelectedDoctor(e.target.value)} disabled={!selectedService || isSubmitting}>
               <option value="">Choisissez votre médecin</option>
-              {doctors.map((doc) => (
-                <option key={doc.id} value={doc.id}>
-                  Dr. {doc.user?.username || doc.user?.email}
-                </option>
-              ))}
+              {doctors.map(doc => <option key={doc.id} value={doc.id}>Dr. {doc.user?.username || doc.user?.email}</option>)}
             </select>
           </div>
         </div>
 
-        {/* Date et motif */}
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="date-input">Date et heure</label>
-            <input
-              id="date-input"
-              type="datetime-local"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              disabled={isSubmitting}
+            <input 
+              id="date-input" 
+              type="datetime-local" 
+              value={date} 
+              onChange={(e) => setDate(e.target.value)} 
+              min={minDate}
+              disabled={isSubmitting} 
+              required
             />
+            <small className="date-hint">
+              ⚠️ Les dates passées ne sont pas autorisées
+            </small>
           </div>
-
           <div className="form-group">
             <label htmlFor="motif-input">Motif de consultation</label>
-            <input
-              id="motif-input"
-              type="text"
-              value={motif}
-              onChange={(e) => setMotif(e.target.value)}
-              placeholder="Décrivez brièvement le motif de votre visite"
-              disabled={isSubmitting}
-            />
+            <input id="motif-input" type="text" value={motif} onChange={(e) => setMotif(e.target.value)} placeholder="Décrivez brièvement le motif" disabled={isSubmitting} />
           </div>
         </div>
 
-        {/* Actions */}
         <div className="form-actions">
-          <button 
-            type="button" 
-            className="cancel-btn"
-            onClick={handleCancel}
-            disabled={isSubmitting}
-          >
-            Annuler
-          </button>
-          
-          <button 
-            type="submit" 
-            className="submit-btn" 
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <span className="loading" aria-hidden="true"></span>
-                Traitement en cours...
-              </>
-            ) : (
-              "Confirmer le rendez-vous"
-            )}
+          <button type="button" className="cancel-btn" onClick={handleCancel} disabled={isSubmitting}>Annuler</button>
+          <button type="submit" className="submit-btn" disabled={isSubmitting}>
+            {isSubmitting ? "Traitement en cours..." : "Confirmer le rendez-vous"}
           </button>
         </div>
       </form>
