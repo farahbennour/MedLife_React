@@ -165,7 +165,7 @@ export default function DashbordPatient() {
       --------------------------- */}
       <header className="hero">
         <div className="hero-inner">
-          <div className="hero-left">
+          <div className="hero-left-patient">
             <h1>Faites confiance aux meilleurs spécialistes certifiés</h1>
             <ul className="hero-features">
               <li>Trouvez un spécialiste médical</li>

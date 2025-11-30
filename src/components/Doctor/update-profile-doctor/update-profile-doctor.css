@@ -12,6 +12,7 @@
   box-shadow: 0 4px 20px rgba(132, 191, 255, 0.25);
   font-family: 'Times New Roman', Times, serif;
   color: #333;
+  margin-right: 20%;
 }
 
 /* Heading */
@@ -150,6 +151,7 @@
     width: 95%;
     padding: 20px 15px;
     margin: 20px auto;
+
   }
 
   .update-profiledoctor-container h2 {
